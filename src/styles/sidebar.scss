@@ -1,5 +1,4 @@
 #app {
-
   .main-container {
     min-height: 100%;
     transition: margin-left .28s;
@@ -10,7 +9,7 @@
   .sidebar-container {
     transition: width 0.28s;
     width: $sideBarWidth !important;
-    background-color: $menuBg;
+    background-color: $menuBg;  // 侧边栏整体容器颜色
     height: 100%;
     position: fixed;
     font-size: 0px;
@@ -20,7 +19,6 @@
     z-index: 1001;
     overflow: hidden;
 
-    // reset element-ui css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
@@ -83,10 +81,10 @@
     & .nest-menu .el-submenu>.el-submenu__title,
     & .el-submenu .el-menu-item {
       min-width: $sideBarWidth !important;
-      background-color: $subMenuBg !important;
+      background-color: $subMenuBg !important;  // 侧边栏内部颜色
 
       &:hover {
-        background-color: $subMenuHover !important;
+        background-color: $subMenuHover !important; // 光标选中侧边栏内部颜色
       }
     }
   }
@@ -200,12 +198,10 @@
   .nest-menu .el-submenu>.el-submenu__title,
   .el-menu-item {
     &:hover {
-      // you can use $subMenuHover
       background-color: $menuHover !important;
     }
   }
 
-  // the scroll bar appears when the subMenu is too long
   >.el-menu--popup {
     max-height: 100vh;
     overflow-y: auto;
