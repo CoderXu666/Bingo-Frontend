@@ -1,18 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router) // 用于路由跳转
-import Layout from '@/layout'
+// import Layout from '@/layout'
 
 /**
  * 路由跳转js
  */
 export const constantRoutes = [
-  {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-
   {
     path: '/404',
     component: () => import('@/views/404'),
@@ -22,22 +16,22 @@ export const constantRoutes = [
   /* ------------------------------------------------------------------------------------------------------------ */
   {
     path: '/', // 访问路径（点击后会进入跳转路径）
-    component: Layout, // 说明是组件（侧边栏）
+    // component: Layout, // 说明是组件（侧边栏）
     redirect: '/dashboard', // 跳转路径链接
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'), // 具体跳转到哪个页面
-      meta: { title: '只因娱乐', icon: 'dashboard' }  // 侧边栏名字 + 图标
+      meta: { title: '我的鸡友', icon: 'dashboard' }  // 侧边栏名字 + 图标
     }]
   },
 
   {
     path: '/example',
-    component: Layout,
+    // component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: '坤坤商城', icon: 'el-icon-s-help' },
+    meta: { title: '只因娱乐', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
@@ -56,7 +50,20 @@ export const constantRoutes = [
 
   {
     path: '/form',
-    component: Layout,
+    // component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: '坤坤商城', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/form',
+    // component: Layout,
     children: [
       {
         path: 'index',
@@ -69,20 +76,7 @@ export const constantRoutes = [
 
   {
     path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: '我的鸡友', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
+    // component: Layout,
     children: [
       {
         path: 'index',

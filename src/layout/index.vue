@@ -12,15 +12,15 @@
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
   name: 'Layout',
+  // 布局用自己的
   components: {
-    Navbar,
-    Sidebar,
-    AppMain
+    // Navbar,
+    // Sidebar,
+    // AppMain
   },
   mixins: [ResizeMixin],
   computed: {
