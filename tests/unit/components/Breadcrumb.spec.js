@@ -56,7 +56,7 @@ describe('Breadcrumb.vue', () => {
     router
   })
   it('dashboard', () => {
-    router.push('/dashboard')
+    router.push('/first')
     const len = wrapper.findAll('.el-breadcrumb__inner').length
     expect(len).toBe(1)
   })

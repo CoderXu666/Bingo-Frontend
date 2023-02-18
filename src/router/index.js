@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router) // 用于路由跳转
-// import Layout from '@/layout'
 
 /**
  * 路由跳转js
@@ -13,19 +12,14 @@ export const constantRoutes = [
     hidden: true
   },
 
-  /* ------------------------------------------------------------------------------------------------------------ */
+  // 跳转到首页
   {
-    path: '/', // 访问路径（点击后会进入跳转路径）
-    // component: Layout, // 说明是组件（侧边栏）
-    redirect: '/dashboard', // 跳转路径链接
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'), // 具体跳转到哪个页面
-      meta: { title: '我的鸡友', icon: 'dashboard' }  // 侧边栏名字 + 图标
-    }]
+    path: '/',
+    component: () => import('@/views/first/index'),
+    hidden: true
   },
 
+  /* ------------------------------------------------------侧边栏录有------------------------------------------------------ */
   {
     path: '/example',
     // component: Layout,
@@ -99,7 +93,7 @@ export const constantRoutes = [
   //   children: [
   //     {
   //       path: 'menu1',
-  //       component: () => import('@/views/nested/menu1/index'), // Parent router-view
+  //       component: () => import('@/views/nested/menu1/first'), // Parent router-view
   //       name: 'Menu1',
   //       meta: { title: 'Menu1' },
   //       children: [
@@ -139,7 +133,7 @@ export const constantRoutes = [
   //     },
   //     {
   //       path: 'menu2',
-  //       component: () => import('@/views/nested/menu2/index'),
+  //       component: () => import('@/views/nested/menu2/first'),
   //       name: 'Menu2',
   //       meta: { title: 'menu2' }
   //     }
