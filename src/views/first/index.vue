@@ -3,40 +3,57 @@
     <!--  上边栏  -->
     <el-header class="header-cls">
       <div>
+        <!--    LOGO    -->
+        <el-image
+          style="width: 120px; height: 60px;cursor: pointer"
+          :src="logoUrl"
+          :fit="fit"
+        ></el-image>
+
+        <!--    加入我们    -->
+        <span>
+          <el-link type="primary" class="join-us">如何成为【全民制作人】</el-link>
+        </span>
+
         <!--   头像   -->
-        <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
+        <span>
+          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl">
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </el-avatar>
+        </span>
+
         <!--   icon   -->
         <div class="icon-cls-list">
           <el-col :span="4">
-            <i class="el-icon-headset"></i>
+            <i class="icon-cls el-icon-headset" @click="playMusic()"></i>
             <div class="div-icon-font">
               BJM
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="el-icon-collection"></i>
+            <i class="icon-cls el-icon-collection"></i>
             <div class="div-icon-font">
               作品
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="el-icon-coin"></i>
+            <i class="icon-cls el-icon-coin"></i>
             <div class="div-icon-font">
               充值
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="el-icon-medal"></i>
+            <i class="icon-cls el-icon-medal"></i>
             <div class="div-icon-font">
               会员
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="el-icon-bell"></i>
+            <i class="icon-cls el-icon-bell"></i>
             <div class="div-icon-font">
               通鸡
             </div>
@@ -46,7 +63,7 @@
     </el-header>
 
     <!--   主体   -->
-    <div class="main-cls" style="background-color: pink">
+    <div class="main-cls">
       <el-main>
         <el-row :gutter="20">
           <!--    侧边目录    -->
@@ -62,6 +79,26 @@
         </el-row>
       </el-main>
     </div>
+
+
+    <!--  头像下拉框  -->
+    <!--    <div>-->
+    <!--      <el-dropdown>-->
+    <!--      <span class="el-dropdown-link">-->
+    <!--        下拉菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+    <!--      </span>-->
+    <!--        <el-dropdown-menu slot="dropdown">-->
+    <!--          <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>-->
+    <!--          <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>-->
+    <!--          <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>-->
+    <!--          <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>-->
+    <!--          <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>-->
+    <!--        </el-dropdown-menu>-->
+    <!--      </el-dropdown>-->
+    <!--    </div>-->
+
+    <!--  BJM  -->
+    <audio controls="controls" hidden src="../../assets/bg_music/鸡你太美.mp3" ref="audio"></audio>
   </el-container>
 </template>
 
@@ -69,7 +106,22 @@
 export default {
   data() {
     return {
-      avatarUrl: 'https://img.99danji.com/uploadfile/2022/0804/20220804024449599.png'
+      avatarUrl: 'https://img.99danji.com/uploadfile/2022/0804/20220804024449599.png',
+      logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
+      fit: 'fill'
+    }
+  },
+
+  methods: {
+    /**
+     * 播放BJM音乐
+     */
+    playMusic() {
+      this.$refs.audio.currentTime = 0
+      this.$refs.audio.play()
+      setTimeout(() => {
+        this.$refs.audio.pause()
+      }, 30000)
     }
   }
 }
@@ -79,9 +131,8 @@ export default {
 <style>
 /*上边栏*/
 .header-cls {
-  /*background-image: url("../../assets/ikun_pic/1676790800558.png");*/
   height: 80px;
-  background-color: lavenderblush;
+  background-color: #fbf0fa;
 }
 
 /*头像样式*/
@@ -89,11 +140,19 @@ export default {
   margin-top: 5px;
   float: right;
   margin-right: 70px;
+  cursor: pointer;
+}
+
+/*加入我们*/
+.join-us {
+  font-size: 16px;
+  margin-bottom: 50px;
+  margin-left: 70px;
 }
 
 /*gif图片整张平铺到首页div中*/
 .main-cls {
-  background-image: url("../../assets/ikun_pic/index.gif");
+  background-image: url("https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/index.gif");
   background-size: 100% 100%;
 }
 
@@ -106,8 +165,9 @@ export default {
 }
 
 /*icon*/
-i {
+.icon-cls {
   padding-left: 50px;
+  cursor: pointer;
 }
 
 /*icon下文字*/
@@ -115,6 +175,16 @@ i {
   margin-left: 51px;
   width: 40px;
   margin-top: -1px;
-  font-size: 10px
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409EFF;
+}
+
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 </style>
