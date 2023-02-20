@@ -5,7 +5,7 @@
       <div>
         <!--    LOGO    -->
         <el-image
-          style="width: 120px; height: 60px;cursor: pointer"
+          style="width: 150px; height: 60px;cursor: pointer"
           :src="logoUrl"
           :fit="fit"
         ></el-image>
@@ -15,12 +15,41 @@
           <el-link type="primary" class="join-us">如何成为【全民制作人】</el-link>
         </span>
 
-        <!--   头像   -->
-        <span>
-          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl">
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </el-avatar>
-        </span>
+        <!--   头像下拉框(已登录)   -->
+        <el-dropdown style="float: right">
+          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
+          <div>
+
+          </div>
+          <div>
+
+          </div>
+          <el-dropdown-menu slot="dropdown" style="width: 200px;height: 300px;border-radius: 20px">
+            <div style="margin-top: 22px">
+              <el-dropdown-item icon="el-icon-user">与好友进行鸡情畅聊</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-picture-outline">制作你的专属表情包</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-shopping-cart-2">购买鸡哥原味背带裤</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-phone-outline">疯狂call打你的鸽鸽</el-dropdown-item>
+            </div>
+            <el-button type="primary" style="margin-top: 20px; margin-left: 45px">立即登录</el-button>
+          </el-dropdown-menu>
+        </el-dropdown>
+
+        <!--   头像下拉框(未登录)   -->
+        <el-dropdown style="float: right">
+          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
+          <el-dropdown-menu slot="dropdown" style="width: 200px;height: 300px;border-radius: 20px">
+            <div style="margin-top: 15px; margin-left: 23px">登陆后你可以：</div>
+            <div style="margin-top: 22px">
+              <el-dropdown-item icon="el-icon-user">与好友进行鸡情畅聊</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-picture-outline">制作你的专属表情包</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-shopping-cart-2">购买鸡哥原味背带裤</el-dropdown-item>
+              <el-dropdown-item icon="el-icon-phone-outline">疯狂call打你的鸽鸽</el-dropdown-item>
+            </div>
+            <el-button type="primary" style="margin-top: 20px; margin-left: 45px">立即登录</el-button>
+          </el-dropdown-menu>
+        </el-dropdown>
+
 
         <!--   icon   -->
         <div class="icon-cls-list">
@@ -80,23 +109,6 @@
       </el-main>
     </div>
 
-
-    <!--  头像下拉框  -->
-    <!--    <div>-->
-    <!--      <el-dropdown>-->
-    <!--      <span class="el-dropdown-link">-->
-    <!--        下拉菜单<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-    <!--      </span>-->
-    <!--        <el-dropdown-menu slot="dropdown">-->
-    <!--          <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>-->
-    <!--          <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>-->
-    <!--          <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>-->
-    <!--          <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>-->
-    <!--          <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>-->
-    <!--        </el-dropdown-menu>-->
-    <!--      </el-dropdown>-->
-    <!--    </div>-->
-
     <!--  BJM  -->
     <audio controls="controls" hidden src="../../assets/bg_music/鸡你太美.mp3" ref="audio"></audio>
   </el-container>
@@ -132,7 +144,7 @@ export default {
 /*上边栏*/
 .header-cls {
   height: 80px;
-  background-color: #fbf0fa;
+  background-color: #FDF3FDFF;
 }
 
 /*头像样式*/
