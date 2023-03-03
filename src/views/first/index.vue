@@ -156,7 +156,7 @@
                   <td>
                     <div>
                       <el-rate
-                        v-model="star"
+                        v-model="adviceData.score"
                         show-text
                         :texts=starText
                       >
@@ -171,14 +171,14 @@
                 type="textarea"
                 :rows="6"
                 placeholder="请输入您的建议"
-                v-model="textAdvice"
+                v-model="adviceData.advice"
                 style="width: 350px"
               >
               </el-input>
             </div>
             <div style="text-align: center; margin-top: 10px">
               <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="submitAdvice(this.adviceData)">提 交</el-button>
+                <el-button type="primary" @click="submitAdvice(adviceData)">提 交</el-button>
               </span>
             </div>
           </div>
@@ -269,20 +269,21 @@ import saveApi from '@/api/first'
 export default {
 
   data() {
+    // 这里面数据不能互相赋值
     return {
       avatarUrl: 'https://img.99danji.com/uploadfile/2022/0804/20220804024449599.png',
       logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
       fit: 'fill',
       centerDialogVisible: false,
-      star: null,
+      // star: '',
       starText: ['苏珊，小黑子', '油饼食不食', '你干嘛，哎嗨油', 'crach on you', '鸡你太美'],
-      textAdvice: '',
+      // textAdvice: '',
       memberVisible: false,
       currentDate: new Date(),
       adviceData: {
-        advice: this.textAdvice,
-        score: this.star,
-        userName: ''
+        score: '',
+        advice: '',
+        userName: 'qq'
       }
     }
   },
@@ -303,12 +304,12 @@ export default {
      */
     submitAdvice(data) {
       saveApi.saveAdvice(data)
-        .then(data => {
-          // 弹框，显示提交成功
+        .then(res => {
+          console.log(data)
           this.centerDialogVisible = false
         })
-        .catch(e => {
-          console.log(e)
+        .catch(error => {
+          console.log(error)
         })
     }
   }
