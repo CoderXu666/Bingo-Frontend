@@ -12,6 +12,15 @@ export default {
       method: 'post',
       data: data
     })
+  },
+  findUserStatistics(userName) {
+    return request({
+      url: `/user/find_by_username`,
+      method: 'get',
+      params: {
+        userName: userName
+      }
+    })
   }
 }
 

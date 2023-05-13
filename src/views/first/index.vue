@@ -16,44 +16,74 @@
         </span>
 
         <!--   头像下拉框(已登录)   -->
-        <el-dropdown style="float: right">
-          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
-          <el-dropdown-menu slot="dropdown" style="width: 240px;height: 300px;border-radius: 20px">
-            <div style="margin-left: 22px;margin-right: 10px;margin-top: 20px">
-              <el-row :gutter="24">
-                <el-col :span="8">
-                  <div class="grid-content" style="font-family: 'Arial Black'">3</div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="grid-content" style="font-family: 'Arial Black'">300W</div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="grid-content" style="font-family: 'Arial Black'">300W</div>
-                </el-col>
-              </el-row>
-            </div>
-            <div style="margin-left: 24px;margin-right: 10px;margin-top: -10px">
-              <el-row :gutter="24">
-                <el-col :span="8" class="parent">
-                  <div class="grid-content-font bg-purple">粉丝</div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="grid-content-font bg-purple">关注</div>
-                </el-col>
-                <el-col :span="8">
-                  <div class="grid-content-font bg-purple">获赞</div>
-                </el-col>
-              </el-row>
-            </div>
-            <div style="margin-top:30px">
-              <el-dropdown-item class="dropdown-item" icon="el-icon-user">我的主页</el-dropdown-item>
-              <el-dropdown-item class="dropdown-item" icon="el-icon-picture-outline">我的喜欢</el-dropdown-item>
-              <el-dropdown-item class="dropdown-item" icon="el-icon-shopping-cart-2">我的订单</el-dropdown-item>
-              <el-dropdown-item class="dropdown-item" icon="el-icon-error">退出鸡圈</el-dropdown-item>
-            </div>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <!--        <el-dropdown style="float: right">-->
+        <!--          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>-->
+        <!--             <el-dropdown-menu slot="dropdown" style="width: 240px;height: 300px;border-radius: 20px">-->
+        <!--               <div style="margin-left: 22px;margin-right: 10px;margin-top: 20px">-->
+        <!--                 <el-row :gutter="24">-->
+        <!--                   <el-col :span="8">-->
+        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
+        <!--                       {{ fans }}-->
+        <!--                     </div>-->
+        <!--                   </el-col>-->
+        <!--                   <el-col :span="8">-->
+        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
+        <!--                       {{ follow }}-->
+        <!--                     </div>-->
+        <!--                   </el-col>-->
+        <!--                   <el-col :span="8">-->
+        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
+        <!--                       {{ likes }}-->
+        <!--                     </div>-->
+        <!--                   </el-col>-->
+        <!--                 </el-row>-->
+        <!--               </div>-->
+        <!--               <div style="margin-left: 24px;margin-right: 10px;margin-top: -10px">-->
+        <!--                 <el-row :gutter="24">-->
+        <!--                   <el-col :span="8" class="parent">-->
+        <!--                     <div class="grid-content-font bg-purple">粉丝</div>-->
+        <!--                   </el-col>-->
+        <!--                   <el-col :span="8">-->
+        <!--                     <div class="grid-content-font bg-purple">关注</div>-->
+        <!--                   </el-col>-->
+        <!--                   <el-col :span="8">-->
+        <!--                     <div class="grid-content-font bg-purple">获赞</div>-->
+        <!--                   </el-col>-->
+        <!--                 </el-row>-->
+        <!--               </div>-->
+        <!--               <div style="margin-top:30px">-->
+        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-user">我的主页</el-dropdown-item>-->
+        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-picture-outline">我的喜欢</el-dropdown-item>-->
+        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-shopping-cart-2">我的订单</el-dropdown-item>-->
+        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-error">退出鸡圈</el-dropdown-item>-->
+        <!--               </div>-->
+        <!--             </el-dropdown-menu>-->
+        <!--         </el-dropdown>-->
 
+        <el-dropdown style="float: right">
+          <span @click="dialogFormVisible = true">
+            <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
+          </span>
+          <!--          <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
+          <div>
+            <el-dialog :center="true" style="text-align: center;" width="35%" title="欢迎登录" :visible.sync="dialogFormVisible">
+              <el-form :model="form" style="height: 200px; margin-top: 35px; margin-left: 180px">
+                <div style="margin-top: 20px; width: ">
+                  <el-input placeholder="请输入账号" v-model="userId" style="width: 280px"></el-input>
+                </div>
+                <div style="margin-top: 20px;">
+                  <el-input placeholder="请输入密码" v-model="passWord" show-password style="width: 280px"></el-input>
+                </div>
+                <div style="margin-top: 20px;">
+                  <el-input placeholder="请输入验证码" v-model="verifCode" style="width: 150px"></el-input>
+                </div>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="dialogFormVisible = false">登 录</el-button>
+              </div>
+            </el-dialog>
+          </div>
+        </el-dropdown>
         <!--        &lt;!&ndash;   头像下拉框(未登录)   &ndash;&gt;-->
         <!--        <el-dropdown style="float: right;">-->
         <!--          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>-->
@@ -116,7 +146,7 @@
           <!--    侧边目录    -->
           <el-col :span="2">
             <div style="margin-top: 290px; margin-bottom: 310px">
-              <el-button class="btn_menu" round style="margin-bottom: 10px;margin-left: 10px">我的鸡友</el-button>
+              <el-button class="btn_menu" round style="margin-bottom: 10px;margin-left: 10px">我的好友</el-button>
               <el-button class="btn_menu" round style="margin-bottom: 10px">荔枝社区</el-button>
               <el-button class="btn_menu" round style="margin-bottom: 10px">美坤秀秀</el-button>
               <el-button class="btn_menu" round style="margin-bottom: 10px">鸡瓜视频</el-button>
@@ -271,7 +301,8 @@ export default {
   data() {
     // 这里面数据不能互相赋值
     return {
-      avatarUrl: 'https://img.99danji.com/uploadfile/2022/0804/20220804024449599.png',
+      // avatarUrl: '.../../assets/member/7a23f52a562d0b7a5fc56690748448a.png',png
+      avatarUrl: 'https://img1.baidu.com/it/u=1276647781,768140777&fm=253&fmt=auto&app=138&f=JPG?w=555&h=500',
       logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
       fit: 'fill',
       centerDialogVisible: false,
@@ -283,8 +314,30 @@ export default {
       adviceData: {
         score: '',
         advice: '',
-        userName: 'qq'
-      }
+        userName: ''
+      },
+
+      // 关注、粉丝、点赞数
+      fans: '',
+      follow: '',
+      likes: '',
+      // 登录
+      dialogTableVisible: false,
+      dialogFormVisible: false,
+      userId: '',
+      passWord: '',
+      verifCode: '',
+      form: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth: '120px'
     }
   },
 
@@ -305,13 +358,28 @@ export default {
     submitAdvice(data) {
       saveApi.saveAdvice(data)
         .then(res => {
-          console.log(data)
           this.centerDialogVisible = false
+        })
+        .catch(error => {
+        })
+    },
+    // 根据用户名 获取用户信息 粉丝 点赞 关注
+    findUserStatistics(useName) {
+      saveApi.findUserStatistics(useName)
+        .then(res => {
+          this.avatarUrl = res.data.headUrl
+          this.follow = res.data.followCount
+          this.fans = res.data.fanCount
+          this.likes = res.data.likeCount
+          console.log(res)
         })
         .catch(error => {
           console.log(error)
         })
     }
+  },
+  created() {
+    this.findUserStatistics('xzb')
   }
 }
 </script>
