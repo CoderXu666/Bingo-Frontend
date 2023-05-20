@@ -12,7 +12,7 @@
 
         <!--    加入我们    -->
         <span>
-          <el-link type="primary" class="join-us" @click="centerDialogVisible = true">如何成为【全民制作人】</el-link>
+          <el-link type="primary" class="join-us" @click="centerDialogVisible = true">如何成为 Committer</el-link>
         </span>
 
         <!--   头像下拉框(已登录)   -->
@@ -66,7 +66,8 @@
           </span>
           <!--          <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>-->
           <div>
-            <el-dialog :center="true" style="text-align: center;" width="35%" title="欢迎登录" :visible.sync="dialogFormVisible">
+            <el-dialog :center="true" style="text-align: center;" width="35%" title="欢迎登录"
+                       :visible.sync="dialogFormVisible">
               <el-form :model="form" style="height: 200px; margin-top: 35px; margin-left: 180px">
                 <div style="margin-top: 20px; width: ">
                   <el-input placeholder="请输入账号" v-model="userId" style="width: 280px"></el-input>
@@ -103,21 +104,18 @@
         <!--   icon   -->
         <div class="icon-cls-list">
           <el-col :span="4">
-            <i class="icon-cls el-icon-headset" @click="playMusic()"></i>
             <div class="div-icon-font">
               BJM
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="icon-cls el-icon-collection"></i>
             <div class="div-icon-font">
               作品
             </div>
           </el-col>
 
           <el-col :span="4">
-            <i class="icon-cls el-icon-coin"></i>
             <div class="div-icon-font">
               充值
             </div>
@@ -130,9 +128,8 @@
             </div>
           </el-col>
           <el-col :span="4">
-            <i class="icon-cls el-icon-bell"></i>
             <div class="div-icon-font">
-              通鸡
+              通知
             </div>
           </el-col>
         </div>
@@ -142,22 +139,11 @@
     <!--   主体   -->
     <div class="main-cls">
       <el-main>
-        <el-row :gutter="20">
-          <!--    侧边目录    -->
-          <el-col :span="2">
-            <div style="margin-top: 290px; margin-bottom: 310px">
-              <el-button class="btn_menu" round style="margin-bottom: 10px;margin-left: 10px">我的好友</el-button>
-              <el-button class="btn_menu" round style="margin-bottom: 10px">荔枝社区</el-button>
-              <el-button class="btn_menu" round style="margin-bottom: 10px">美坤秀秀</el-button>
-              <el-button class="btn_menu" round style="margin-bottom: 10px">鸡瓜视频</el-button>
-              <el-button class="btn_menu" round style="margin-bottom: 10px">鸡东商城</el-button>
-            </div>
-          </el-col>
-        </el-row>
+
       </el-main>
     </div>
 
-    <!--  加入我们弹出页  -->
+    <!--  Join Us Page  -->
     <el-dialog
       title="如何成为全民制作人"
       :visible.sync="centerDialogVisible"
@@ -301,7 +287,6 @@ export default {
   data() {
     // 这里面数据不能互相赋值
     return {
-      // avatarUrl: '.../../assets/member/7a23f52a562d0b7a5fc56690748448a.png',png
       avatarUrl: 'https://img1.baidu.com/it/u=1276647781,768140777&fm=253&fmt=auto&app=138&f=JPG?w=555&h=500',
       logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
       fit: 'fill',
@@ -341,17 +326,11 @@ export default {
     }
   },
 
+  created() {
+    this.findUserStatistics('xzb')
+  },
+
   methods: {
-    /**
-     * 播放BJM音乐
-     */
-    playMusic() {
-      this.$refs.audio.currentTime = 0
-      this.$refs.audio.play()
-      setTimeout(() => {
-        this.$refs.audio.pause()
-      }, 30000)
-    },
     /**
      *保存建议和评分
      */
@@ -360,10 +339,11 @@ export default {
         .then(res => {
           this.centerDialogVisible = false
         })
-        .catch(error => {
-        })
     },
-    // 根据用户名 获取用户信息 粉丝 点赞 关注
+
+    /**
+     * query user information based on user id
+     */
     findUserStatistics(useName) {
       saveApi.findUserStatistics(useName)
         .then(res => {
@@ -377,21 +357,16 @@ export default {
           console.log(error)
         })
     }
-  },
-  created() {
-    this.findUserStatistics('xzb')
   }
 }
 </script>
 
 <style>
-/*上边栏*/
 .header-cls {
   height: 80px;
   background-color: #FDF3FDFF;
 }
 
-/*头像样式*/
 .avatar-cls {
   margin-top: 5px;
   float: right;
@@ -399,20 +374,17 @@ export default {
   cursor: pointer;
 }
 
-/*加入我们*/
 .join-us {
   font-size: 16px;
   margin-bottom: 50px;
   margin-left: 70px;
 }
 
-/*gif图片整张平铺到首页div中*/
 .main-cls {
   background-image: url("https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/index.gif");
   background-size: 100% 100%;
 }
 
-/*图标div*/
 .icon-cls-list {
   margin-top: 10px;
   float: right;
@@ -420,34 +392,17 @@ export default {
   font-size: 30px;
 }
 
-/*icon*/
 .icon-cls {
   padding-left: 50px;
   cursor: pointer;
 }
 
-/*icon下文字*/
 .div-icon-font {
   margin-left: 52px;
   width: 40px;
   margin-top: -1px;
   font-size: 10px;
   cursor: pointer;
-}
-
-.dropdown-item {
-  margin-left: 50px;
-}
-
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-  padding-top: 10px;
-}
-
-.member-time {
-  font-size: 13px;
-  color: #999;
 }
 
 .member-bottom {
