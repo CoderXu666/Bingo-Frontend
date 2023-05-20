@@ -136,7 +136,7 @@
     </el-header>
 
     <!--   Main   -->
-    <div class="main-cls" style="background-image: '@/assets/img/img.png'">
+    <div class="main-cls" style="background-image: this.bgImage">
       <el-main>
 
       </el-main>
@@ -144,7 +144,7 @@
 
     <!--  Frame  -->
     <div>
-      <!--   Join US   -->
+      <!--   1.Join US   -->
       <el-dialog
         title="加入我们"
         :visible.sync="centerDialogVisible"
@@ -217,7 +217,7 @@
         </div>
       </el-dialog>
 
-      <!--  VIP  -->
+      <!--  2.VIP  -->
       <el-dialog
         style="font-weight: bold"
         title="VIKN"
@@ -287,6 +287,7 @@ export default {
     return {
       avatarUrl: 'https://img1.baidu.com/it/u=1276647781,768140777&fm=253&fmt=auto&app=138&f=JPG?w=555&h=500',
       logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
+      bgImage: '@/assets/img/img.png',
       fit: 'fill',
       centerDialogVisible: false,
       // star: '',
@@ -379,7 +380,9 @@ export default {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-size: 100% 100%;
+  background-image: url('@/assets/img/img.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .icon-cls-list {

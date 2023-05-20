@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: '全民制作人',
+  title: 'Bingo',
 
   /**
    * @type {boolean} true | false
