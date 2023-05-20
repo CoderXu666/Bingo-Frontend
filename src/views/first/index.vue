@@ -12,7 +12,7 @@
 
         <!--  Join Us Page  -->
         <span>
-          <el-link type="primary" class="join-us" @click="centerDialogVisible = true">如何成为 Committer</el-link>
+          <el-link type="primary" class="join-us" @click="centerDialogVisible = true">成为 Committer</el-link>
         </span>
 
         <!--   头像下拉框(已登录)   -->
@@ -291,7 +291,7 @@ export default {
       fit: 'fill',
       centerDialogVisible: false,
       // star: '',
-      starText: ['苏珊，小黑子', '油饼食不食', '你干嘛，哎嗨油', 'crach on you', '鸡你太美'],
+      starText: ['苏珊，小黑子', '油饼食不食', '你干嘛，哎嗨油', 'cruch on you', '鸡你太美'],
       // textAdvice: '',
       memberVisible: false,
       currentDate: new Date(),
@@ -380,7 +380,7 @@ export default {
   height: 100vh;
   margin: 0;
   padding: 0;
-  background-image: url('@/assets/img/img.png');
+  background-image: url('../../assets/img/first.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -403,6 +403,23 @@ export default {
   margin-top: -1px;
   font-size: 10px;
   cursor: pointer;
+  animation: none;
+}
+
+.div-icon-font:hover {
+  animation: jump 1s 1;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .member-bottom {
