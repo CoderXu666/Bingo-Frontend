@@ -1,12 +1,12 @@
 <template>
   <el-container>
-    <!--  Head Bar  -->
+    <!--  Head  -->
     <el-header class="header-cls">
       <div>
         <!--    LOGO    -->
         <el-image
           style="width: 150px; height: 60px;cursor: pointer"
-          :src="logoUrl"
+          src=""
           :fit="fit"
         ></el-image>
 
@@ -99,7 +99,6 @@
         <!--          </el-dropdown-menu>-->
         <!--        </el-dropdown>-->
 
-
         <!--   icon   -->
         <div class="icon-cls-list">
           <el-col :span="4">
@@ -135,12 +134,43 @@
       </div>
     </el-header>
 
-    <!--   Main   -->
-    <div class="main-cls" style="background-image: this.bgImage">
+    <!--  Search  -->
+    <div class="search-cls" style="height: 70vh;">
+      <!--   Title   -->
+      <div style="margin-top: 6%;">
+        111111
+      </div>
+      <!--   Input   -->
+      <div style="margin-top: 6%;">
+        <el-input placeholder="请输入内容" class="input-with-select" style="width: 60%;">
+          <el-select slot="prepend" placeholder="请选择">
+            <el-option label="餐厅名" value="1"></el-option>
+            <el-option label="订单号" value="2"></el-option>
+            <el-option label="用户电话" value="3"></el-option>
+          </el-select>
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+      </div>
+    </div>
+
+    <!--   Body   -->
+    <el-main class="main-cls" style="background-image: this.bgImage">
       <el-main>
 
       </el-main>
-    </div>
+    </el-main>
+
+    <!--  Footer  -->
+    <el-footer style="background-color: #323335;height: 180px">
+      <el-row>
+        <el-col :span="12" class="left-content">
+          1111111111111111111
+        </el-col>
+        <el-col :span="12" class="right-content">
+          11111111111111111111
+        </el-col>
+      </el-row>
+    </el-footer>
 
     <!--  Frame  -->
     <div>
@@ -286,12 +316,12 @@ export default {
     // 这里面数据不能互相赋值
     return {
       avatarUrl: 'https://img1.baidu.com/it/u=1276647781,768140777&fm=253&fmt=auto&app=138&f=JPG?w=555&h=500',
-      logoUrl: 'https://xuzhibin-bucket.oss-cn-beijing.aliyuncs.com/%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90/logo.png',
-      bgImage: '@/assets/img/img.png',
+      bgImage: '@/assets/img/first.jpg',
+      logoUrl: '',
       fit: 'fill',
       centerDialogVisible: false,
       // star: '',
-      starText: ['苏珊，小黑子', '油饼食不食', '你干嘛，哎嗨油', 'cruch on you', '鸡你太美'],
+      starText: ['苏珊，小黑子', '油饼食不食', '你干嘛，哎嗨油', 'crush on you', '鸡你太美'],
       // textAdvice: '',
       memberVisible: false,
       currentDate: new Date(),
@@ -325,10 +355,6 @@ export default {
     }
   },
 
-  created() {
-    this.findUserStatistics('xzb')
-  },
-
   methods: {
     /**
      * save advice
@@ -358,8 +384,8 @@ export default {
 
 <style>
 .header-cls {
-  height: 80px;
-  background-color: #FDF3FDFF;
+  height: 100px;
+  background-color: #303133;
 }
 
 .avatar-cls {
@@ -375,12 +401,16 @@ export default {
   margin-left: 70px;
 }
 
+.search-cls {
+  background-color: #5a5e66;
+}
+
 .main-cls {
   width: 100vw;
-  height: 100vh;
+  height: 70vh;
   margin: 0;
   padding: 0;
-  background-image: url('../../assets/img/first.jpg');
+  background-color: #292A2D;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -404,6 +434,7 @@ export default {
   font-size: 10px;
   cursor: pointer;
   animation: none;
+  color: white;
 }
 
 .div-icon-font:hover {
