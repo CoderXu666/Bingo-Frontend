@@ -1,166 +1,35 @@
 <template>
   <el-container>
-    <!--  Head  -->
-    <el-header class="header-cls">
-      <div>
-        <!--    LOGO    -->
-        <el-image
-          style="width: 150px; height: 60px;cursor: pointer"
-          src=""
-          :fit="fit"
-        ></el-image>
+    <!--  1.Head  -->
+    <el-header class="header-cls" style="height: 68px">
+      <!--   logo   -->
+      <el-image style="width: 150px;cursor: pointer;height: 68px" src="" :fit="fit"></el-image>
+      <!--   join Us   -->
+      <el-link type="primary" class="join-us" @click="centerDialogVisible = true">成为 Committer</el-link>
+      <!--   icon   -->
 
-        <!--  Join Us Page  -->
-        <span>
-          <el-link type="primary" class="join-us" @click="centerDialogVisible = true">成为 Committer</el-link>
-        </span>
-
-        <!--   头像下拉框(已登录)   -->
-        <!--        <el-dropdown style="float: right">-->
-        <!--          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>-->
-        <!--             <el-dropdown-menu slot="dropdown" style="width: 240px;height: 300px;border-radius: 20px">-->
-        <!--               <div style="margin-left: 22px;margin-right: 10px;margin-top: 20px">-->
-        <!--                 <el-row :gutter="24">-->
-        <!--                   <el-col :span="8">-->
-        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
-        <!--                       {{ fans }}-->
-        <!--                     </div>-->
-        <!--                   </el-col>-->
-        <!--                   <el-col :span="8">-->
-        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
-        <!--                       {{ follow }}-->
-        <!--                     </div>-->
-        <!--                   </el-col>-->
-        <!--                   <el-col :span="8">-->
-        <!--                     <div class="grid-content" style="font-family: 'Arial Black'">-->
-        <!--                       {{ likes }}-->
-        <!--                     </div>-->
-        <!--                   </el-col>-->
-        <!--                 </el-row>-->
-        <!--               </div>-->
-        <!--               <div style="margin-left: 24px;margin-right: 10px;margin-top: -10px">-->
-        <!--                 <el-row :gutter="24">-->
-        <!--                   <el-col :span="8" class="parent">-->
-        <!--                     <div class="grid-content-font bg-purple">粉丝</div>-->
-        <!--                   </el-col>-->
-        <!--                   <el-col :span="8">-->
-        <!--                     <div class="grid-content-font bg-purple">关注</div>-->
-        <!--                   </el-col>-->
-        <!--                   <el-col :span="8">-->
-        <!--                     <div class="grid-content-font bg-purple">获赞</div>-->
-        <!--                   </el-col>-->
-        <!--                 </el-row>-->
-        <!--               </div>-->
-        <!--               <div style="margin-top:30px">-->
-        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-user">我的主页</el-dropdown-item>-->
-        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-picture-outline">我的喜欢</el-dropdown-item>-->
-        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-shopping-cart-2">我的订单</el-dropdown-item>-->
-        <!--                 <el-dropdown-item class="dropdown-item" icon="el-icon-error">退出鸡圈</el-dropdown-item>-->
-        <!--               </div>-->
-        <!--             </el-dropdown-menu>-->
-        <!--         </el-dropdown>-->
-
-        <el-dropdown style="float: right">
-          <span @click="dialogFormVisible = true">
-            <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>
-          </span>
-          <div>
-            <el-dialog :center="true" style="text-align: center;" width="35%" title="欢迎登录"
-                       :visible.sync="dialogFormVisible">
-              <el-form :model="form" style="height: 200px; margin-top: 35px; margin-left: 180px">
-                <div style="margin-top: 20px;">
-                  <el-input placeholder="请输入账号" v-model="userId" style="width: 280px"></el-input>
-                </div>
-                <div style="margin-top: 20px;">
-                  <el-input placeholder="请输入密码" v-model="passWord" show-password style="width: 280px"></el-input>
-                </div>
-                <div style="margin-top: 20px;">
-                  <el-input placeholder="请输入验证码" v-model="verifCode" style="width: 150px"></el-input>
-                </div>
-              </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="dialogFormVisible = false">登 录</el-button>
-              </div>
-            </el-dialog>
-          </div>
-        </el-dropdown>
-        <!--        &lt;!&ndash;   头像下拉框(未登录)   &ndash;&gt;-->
-        <!--        <el-dropdown style="float: right;">-->
-        <!--          <el-avatar class="avatar-cls" :size="50" :src="avatarUrl"></el-avatar>-->
-        <!--          <el-dropdown-menu slot="dropdown" style="width: 200px;height: 300px;border-radius: 20px">-->
-        <!--            <div style="margin-top: 15px; margin-left: 23px">登陆后你可以：</div>-->
-        <!--            <div style="margin-top: 22px">-->
-        <!--              <el-dropdown-item icon="el-icon-user">与好友进行鸡情畅聊</el-dropdown-item>-->
-        <!--              <el-dropdown-item icon="el-icon-picture-outline">制作你的专属表情包</el-dropdown-item>-->
-        <!--              <el-dropdown-item icon="el-icon-shopping-cart-2">购买鸡哥原味背带裤</el-dropdown-item>-->
-        <!--              <el-dropdown-item icon="el-icon-phone-outline">疯狂call打你的鸽鸽</el-dropdown-item>-->
-        <!--            </div>-->
-        <!--            <el-button type="primary" style="margin-top: 20px; margin-left: 45px">立即登录</el-button>-->
-        <!--          </el-dropdown-menu>-->
-        <!--        </el-dropdown>-->
-
-        <!--   icon   -->
-        <div class="icon-cls-list">
-          <el-col :span="4">
-            <div class="div-icon-font">
-              BJM
-            </div>
-          </el-col>
-
-          <el-col :span="4">
-            <div class="div-icon-font">
-              作品
-            </div>
-          </el-col>
-
-          <el-col :span="4">
-            <div class="div-icon-font">
-              充值
-            </div>
-          </el-col>
-
-          <el-col :span="4">
-            <i class="icon-cls el-icon-medal" @click="memberVisible = true"></i>
-            <div class="div-icon-font">
-              会员
-            </div>
-          </el-col>
-          <el-col :span="4">
-            <div class="div-icon-font">
-              通知
-            </div>
-          </el-col>
-        </div>
-      </div>
+      <!--   avatar   -->
+      <el-avatar style="float: right;cursor: pointer;margin-top: 0.6%;margin-right: 6%" :size="50" :src="avatarUrl"></el-avatar>
     </el-header>
 
-    <!--  Search  -->
-    <div class="search-cls" style="height: 70vh;">
-      <!--   Title   -->
-      <div style="margin-top: 6%;">
-        111111
-      </div>
-      <!--   Input   -->
-      <div style="margin-top: 6%;">
-        <el-input placeholder="请输入内容" class="input-with-select" style="width: 60%;">
-          <el-select slot="prepend" placeholder="请选择">
-            <el-option label="餐厅名" value="1"></el-option>
-            <el-option label="订单号" value="2"></el-option>
-            <el-option label="用户电话" value="3"></el-option>
-          </el-select>
-          <el-button slot="append" icon="el-icon-search"></el-button>
-        </el-input>
+    <!--  2.Search  -->
+    <div class="search-cls" style="height: 74vh">
+      <div style="margin:11% auto;width: 50%;border: 1px solid red">
+        <h1 style="border: 1px solid red;color: whitesmoke;font-family: 'Arial Rounded MT Bold'">
+          Bingo：致力于打造最好的年轻人社交平台
+        </h1>
+        <el-input style="margin-top: 6%;border-radius: 20%" placeholder="请输入内容"></el-input>
       </div>
     </div>
 
-    <!--   Body   -->
-    <el-main class="main-cls" style="background-image: this.bgImage">
+    <!--  3.Body  -->
+    <el-main class="main-cls">
       <el-main>
 
       </el-main>
     </el-main>
 
-    <!--  Footer  -->
+    <!--  4.Footer  -->
     <el-footer style="background-color: #323335;height: 180px">
       <el-row>
         <el-col :span="12" class="left-content">
@@ -172,7 +41,7 @@
       </el-row>
     </el-footer>
 
-    <!--  Frame  -->
+    <!--  Other Frames -->
     <div>
       <!--   1.Join US   -->
       <el-dialog
@@ -315,7 +184,7 @@ export default {
   data() {
     // 这里面数据不能互相赋值
     return {
-      avatarUrl: 'https://img1.baidu.com/it/u=1276647781,768140777&fm=253&fmt=auto&app=138&f=JPG?w=555&h=500',
+      avatarUrl: '',
       bgImage: '@/assets/img/first.jpg',
       logoUrl: '',
       fit: 'fill',
@@ -384,15 +253,7 @@ export default {
 
 <style>
 .header-cls {
-  height: 100px;
   background-color: #303133;
-}
-
-.avatar-cls {
-  margin-top: 5px;
-  float: right;
-  margin-right: 70px;
-  cursor: pointer;
 }
 
 .join-us {
@@ -416,9 +277,8 @@ export default {
 }
 
 .icon-cls-list {
-  margin-top: 10px;
+  margin-top: 1%;
   float: right;
-  margin-right: 30px;
   font-size: 30px;
 }
 
@@ -431,7 +291,7 @@ export default {
   margin-left: 52px;
   width: 40px;
   margin-top: -1px;
-  font-size: 10px;
+  font-size: 13px;
   cursor: pointer;
   animation: none;
   color: white;
