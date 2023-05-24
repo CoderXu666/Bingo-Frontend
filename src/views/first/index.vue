@@ -3,9 +3,23 @@
     <!--  1.Head  -->
     <el-header class="header-cls" style="height: 68px">
       <!--   logo   -->
-      <el-image style="width: 150px;cursor: pointer;height: 68px;margin-left: 4%" src="" :fit="fit"></el-image>
-      <!--   about me   -->
-      <el-link type="primary" class="join-us">关于作者</el-link>
+      <el-image style="float: left;width: 150px;cursor: pointer;height: 68px;margin-left: -1.4%" src=""
+                :fit="fit"></el-image>
+
+      <!--   list   -->
+      <el-menu
+        style="width:28.3%;float: left;margin-top: 6px"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="transparent"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1" style="margin-left: 2%">处理中心</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%">消息中心</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%">消息中心</el-menu-item>
+        <el-menu-item index="4" style="margin-left: 2%">订单管理</el-menu-item>
+      </el-menu>
+
       <!--   avatar   -->
       <el-avatar style="float: right;cursor: pointer;margin-top: 0.6%;margin-right: 6%" :size="50" :src="avatarUrl">
       </el-avatar>
