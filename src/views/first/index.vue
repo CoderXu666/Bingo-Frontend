@@ -5,7 +5,6 @@
       <!--   logo   -->
       <el-image style="float: left;width: 150px;cursor: pointer;height: 68px;margin-left: -1.4%" src=""
                 :fit="fit"></el-image>
-
       <!--   list   -->
       <el-menu
         style="width:30%;float: left;margin-top: 6px"
@@ -13,10 +12,10 @@
         background-color="transparent"
         text-color="#fff"
         active-text-color="grey">
-        <el-menu-item index="1" style="margin-left: 7%">社区广场</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%">狂欢派对</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%">好物商城</el-menu-item>
-        <el-menu-item index="4" style="margin-left: 2%">订单管理</el-menu-item>
+        <el-menu-item index="1" style="margin-left: 7%;color: darkgrey">社区广场</el-menu-item>
+        <el-menu-item index="2" style="margin-left: 2%;color: darkgrey">狂欢派对</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%;color: darkgrey">视频直播</el-menu-item>
+        <el-menu-item index="4" style="margin-left: 2%;color: darkgrey">好物商城</el-menu-item>
       </el-menu>
 
       <!--   avatar   -->
@@ -44,7 +43,7 @@
     <div class="search-cls" style="height: 74vh">
       <div style="margin:11% auto;width: 50%">
         <h1 style="color: whitesmoke;font-family: 'Arial Rounded MT Bold';margin: auto;padding-left: 9%">
-          Bingo：致力于打造最好的年轻人社交平台
+          Bingo：致力打造好玩的年轻人社交平台
         </h1>
         <div style="margin-top: 54px;opacity: 0.5;">
           <el-input id="search-input" v-model=this.searchContent placeholder="搜索你想要知道的一切内容......">
