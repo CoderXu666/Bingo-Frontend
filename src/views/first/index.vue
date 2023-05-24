@@ -8,34 +8,34 @@
 
       <!--   list   -->
       <el-menu
-        style="width:28.3%;float: left;margin-top: 6px"
+        style="width:30%;float: left;margin-top: 6px"
         mode="horizontal"
-        @select="handleSelect"
         background-color="transparent"
         text-color="#fff"
-        active-text-color="#ffd04b">
-        <el-menu-item index="1" style="margin-left: 2%">处理中心</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%">消息中心</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%">消息中心</el-menu-item>
+        active-text-color="grey">
+        <el-menu-item index="1" style="margin-left: 7%">社区广场</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%">狂欢派对</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%">好物商城</el-menu-item>
         <el-menu-item index="4" style="margin-left: 2%">订单管理</el-menu-item>
       </el-menu>
 
       <!--   avatar   -->
-      <el-avatar style="float: right;cursor: pointer;margin-top: 0.6%;margin-right: 6%" :size="50" :src="avatarUrl">
-      </el-avatar>
+      <el-avatar style="float: right;cursor: pointer;margin-top: 0.6%;margin-right: 5%" :size="50"
+                 :src="avatarUrl"></el-avatar>
+
       <!--   icon   -->
-      <div style="float: right;margin-right: 4.5%;margin-top: 1.5%">
+      <div style="float: right;margin-right: 3%;margin-top: 1.5%">
         <el-badge class="item" :value="null">
           <el-button size="mini">通知</el-button>
         </el-badge>
       </div>
-      <div style="float: right;margin-right: 3%;margin-top: 1.5%">
+      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
         <el-button size="mini">会员</el-button>
       </div>
-      <div style="float: right;margin-right: 3%;margin-top: 1.5%">
+      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
         <el-button size="mini">作品</el-button>
       </div>
-      <div style="float: right;margin-right: 3%;margin-top: 1.5%">
+      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
         <el-button size="mini">发布</el-button>
       </div>
     </el-header>
