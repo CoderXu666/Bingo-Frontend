@@ -8,7 +8,7 @@
 <script>
   var socket;
   // 判断当前浏览器是否支持webSocket
-  if(window.WebSocket){
+  if (window.WebSocket) {
     socket = new WebSocket("ws://localhost:9099/ws")
     // 相当于channel的read事件，ev 收到服务器回送的消息
     socket.onmessage = function (ev) {
@@ -18,7 +18,7 @@
     // 相当于连接开启
     socket.onopen = function (ev) {
       var rt = document.getElementById("responseText");
-      rt.value =  "连接开启了..."
+      rt.value = "连接开启了..."
       socket.send(
         JSON.stringify({
           // 连接成功将，用户ID传给服务端
@@ -31,7 +31,7 @@
       var rt = document.getElementById("responseText");
       rt.value = rt.value + "\n" + "连接关闭了...";
     }
-  }else{
+  } else {
     alert("当前浏览器不支持webSocket")
   }
 
