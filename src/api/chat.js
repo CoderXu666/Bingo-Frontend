@@ -6,7 +6,7 @@ export default {
    */
   sendMessage(data) {
     return request({
-      url: '/push/pushOne',
+      url: '/chat/send_one',
       method: 'post',
       data: data
     })

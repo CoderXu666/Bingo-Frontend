@@ -1,6 +1,6 @@
 <template>
   <div style="margin-left: 100px">
-    <div style="width: 500px; height: 500px; border: 1px solid black"></div>
+    <div id="content" style="width: 500px; height: 500px; border: 1px solid black"></div>
     <el-input v-model="inputMessage" placeholder="请输入内容"></el-input>
     <el-button @click="sendMessage(inputMessage)">发送</el-button>
   </div>
@@ -12,7 +12,8 @@ import chatApi from '@/api/chat'
 export default {
   data() {
     return {
-      inputMessage: ''
+      inputMessage: '',
+      userId: 'xuzhibin'
     }
   },
 
@@ -38,22 +39,19 @@ export default {
         var socket = new WebSocket('ws://localhost:9099/ws')
 
         /**
-         * 建立连接
+         * 建立连接，把用户信息传递过去，服务端进行保存
          */
         socket.onopen = () => {
-          console.log('聊天室连接成功...')
+          // 连接成功将用户ID传给服务端
+          const userInfo = JSON.stringify({ userId: this.userId })
+          socket.send(userInfo)
         }
 
         /**
          * 接收服务端消息
          */
         socket.onmessage = (msg) => {
-          socket.send(
-            JSON.stringify({
-              // 连接成功将，用户ID传给服务端
-              uid: '123456'
-            })
-          )
+          document.getElementById('content').append(msg.data)
         }
 
         /**
@@ -71,12 +69,12 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      // 数据先写死
+      // 封装发送的用户数据
       var message = {
-        msg: '你好啊',
-        userId: '123456'
+        msg: this.inputMessage,
+        userId: this.userId
       }
-      chatApi.sendMessage(message).then(msg => {
+      chatApi.sendMessage(message).then(res => {
         console.log('消息发送成功')
       })
     },
