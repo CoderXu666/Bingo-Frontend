@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 Vue.use(Router)
 
 /**
@@ -9,6 +10,15 @@ export const constantRoutes = [
   {
     path: '/404',
     component: () => import('@/views/404'),
+    hidden: true
+  },
+
+  /**
+   * 好友聊天页面
+   */
+  {
+    path: '/chat',
+    component: () => import('@/views/chat/chat'),
     hidden: true
   },
 
@@ -24,11 +34,11 @@ export const constantRoutes = [
   /**
    * 404 Page
    */
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
