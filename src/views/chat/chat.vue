@@ -17,12 +17,16 @@ export default {
     }
   },
 
+  /**
+   * 查询好友列表
+   */
   created() {
 
   },
 
   /**
    * 初始化WebSocket聊天室
+   * 与Netty服务器建立WebSocket实时通讯连接
    */
   mounted() {
     this.initWebSocket()
@@ -39,12 +43,10 @@ export default {
         var socket = new WebSocket('ws://localhost:9099/ws')
 
         /**
-         * 建立连接，把用户信息传递过去，服务端进行保存
+         * 建立连接瞬间，将userId传递过去，Netty进行客户端数据保存
          */
         socket.onopen = () => {
-          // 连接成功将用户ID传给服务端
-          const userInfo = JSON.stringify({ userId: this.userId })
-          socket.send(userInfo)
+          socket.send(JSON.stringify({userId: this.userId}))
         }
 
         /**
@@ -75,7 +77,7 @@ export default {
         userId: this.userId
       }
       chatApi.sendMessage(message).then(res => {
-        console.log('消息发送成功')
+        this.inputMessage = ''
       })
     },
   }
