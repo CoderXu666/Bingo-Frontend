@@ -18,7 +18,7 @@ export const constantRoutes = [
    */
   {
     path: '/chat',
-    component: () => import('@/views/chat/chat'),
+    component: () => import('@/views/im/chat'),
     hidden: true
   },
 

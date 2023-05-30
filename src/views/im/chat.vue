@@ -79,7 +79,7 @@ export default {
       chatApi.sendMessage(message).then(res => {
         this.inputMessage = ''
       })
-    },
+    }
   }
 }
 </script>
