@@ -39,7 +39,7 @@ export default {
     initWebSocket() {
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
-        // 初始化WebSocket连接
+        // 当前用户Channel与Netty服务器建立连接
         var socket = new WebSocket('ws://localhost:9099/ws')
 
         /**
@@ -50,7 +50,7 @@ export default {
         }
 
         /**
-         * 接收服务端消息
+         * 接收服务端消息（展示到页面上）
          */
         socket.onmessage = (msg) => {
           document.getElementById('content').append(msg.data)
@@ -77,6 +77,7 @@ export default {
         userId: this.userId
       }
       chatApi.sendMessage(message).then(res => {
+        // 清空输入框
         this.inputMessage = ''
       })
     }

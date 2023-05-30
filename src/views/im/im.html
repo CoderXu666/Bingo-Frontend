@@ -19,69 +19,61 @@
 <p>
 
   <script>
-    // ===================以下是socket=======================
     var user = Math.round(Math.random() * 1000) + ""
-    var socketUrl = "ws://127.0.0.1:8080/msgServer/" + user;
+    var socketUrl = "ws://localhost:8080/msgServer/" + user;
     var socket = null
     var socketRead = false
     window.onload = function () {
-
       socket = new WebSocket(socketUrl)
+      /**
+       * 建立连接
+       */
       socket.onopen = function () {
-        console.log("成功连接到服务器...")
         socketRead = true
+        console.log("连接成功...")
       }
+      /**
+       * 断开连接
+       */
       socket.onclose = function (e) {
-        console.log('与服务器连接关闭: ' + e.code)
         socketRead = false
       }
-
+      /**
+       * 收到WebSocket服务端发送的数据
+       */
       socket.onmessage = function (res) {
         var evt = JSON.parse(res.data)
-        console.log(evt)
         if (evt.type === 'offer') {
-          console.log("接收到offer,设置offer,发送answer....")
           onOffer(evt);
         } else if (evt.type === 'answer' && peerStarted) {
-          console.log('接收到answer,设置answer SDP');
           onAnswer(evt);
         } else if (evt.type === 'candidate' && peerStarted) {
-          console.log('接收到ICE候选者..');
           onCandidate(evt);
         } else if (evt.type === 'bye' && peerStarted) {
-          console.log("WebRTC通信断开");
           stop();
         }
       }
     }
 
-    // ===================以上是socket=======================
-
-    var localVideo = document.getElementById('local-video');
-    var remoteVideo = document.getElementById('remote-video');
-    var localStream = null;
-    var peerConnection = null;
-    var peerStarted = false;
-    var mediaConstraints = {
+    let localVideo = document.getElementById('local-video');
+    let remoteVideo = document.getElementById('remote-video');
+    let localStream = null;
+    let peerConnection = null;
+    let peerStarted = false;
+    let mediaConstraints = {
       'mandatory': {
         'OfferToReceiveAudio': false,
         'OfferToReceiveVideo': true
       }
     };
 
-    //----------------------交换信息 -----------------------
-
     function onOffer(evt) {
-      console.log("接收到offer...")
-      console.log(evt);
       setOffer(evt);
       sendAnswer(evt);
       peerStarted = true
     }
 
     function onAnswer(evt) {
-      console.log("接收到Answer...")
-      console.log(evt);
       setAnswer(evt);
     }
 
@@ -90,33 +82,25 @@
         sdpMLineIndex: evt.sdpMLineIndex,
         sdpMid: evt.sdpMid, candidate: evt.candidate
       });
-      console.log("接收到Candidate...")
-      console.log(candidate);
       peerConnection.addIceCandidate(candidate);
     }
 
     function sendSDP(sdp) {
       var text = JSON.stringify(sdp);
-      console.log('发送sdp.....')
-      console.log(text); // "type":"offer"....
-      // textForSendSDP.value = text;
-      // 通过socket发送sdp
       socket.send(text)
     }
 
     function sendCandidate(candidate) {
       var text = JSON.stringify(candidate);
-      console.log(text);// "type":"candidate","sdpMLineIndex":0,"sdpMid":"0","candidate":"....
       socket.send(text)// socket发送
     }
 
     //---------------------- 视频处理 -----------------------
     function startVideo() {
       navigator.webkitGetUserMedia({video: true, audio: false},
-        function (stream) { //success
+        function (stream) {
           localStream = stream;
           localVideo.srcObject = stream;
-          //localVideo.src = window.URL.createObjectURL(stream);
           localVideo.play();
           localVideo.volume = 0;
         },
@@ -161,8 +145,6 @@
 
       // 当接收到远程视频流时，使用本地video元素进行显示
       function onRemoteStreamAdded(event) {
-        console.log("添加远程视频流");
-        // remoteVideo.src = window.URL.createObjectURL(event.stream);
         remoteVideo.srcObject = event.stream;
       }
 
