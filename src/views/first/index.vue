@@ -11,10 +11,10 @@
         mode="horizontal"
         background-color="transparent"
       >
-        <el-menu-item index="1" style="margin-left: 6%;color: lightskyblue">社区广场</el-menu-item>
-        <el-menu-item index="2" style="margin-left: 2%;color: lightskyblue">狂欢派对</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%;color: lightskyblue">好物商城</el-menu-item>
-        <el-menu-item index="4" style="margin-left: 2%;color: lightskyblue">关于作者</el-menu-item>
+        <el-menu-item index="1" style="margin-left: 6%;color: #9FC6FF">社区广场</el-menu-item>
+        <el-menu-item index="2" style="margin-left: 2%;color: #9FC6FF">狂欢派对</el-menu-item>
+        <el-menu-item index="3" style="margin-left: 2%;color: #9FC6FF">好物商城</el-menu-item>
+        <el-menu-item index="4" style="margin-left: 2%;color: #9FC6FF">关于作者</el-menu-item>
       </el-menu>
 
       <!--   avatar   -->
@@ -22,19 +22,31 @@
                  :src="avatarUrl"></el-avatar>
 
       <!--   icon   -->
-      <div style="float: right;margin-right: 3%;margin-top: 1.5%">
+      <div style="float: right;margin-right: 3%;margin-top: 1%">
         <el-badge class="item" :value="null">
-          <el-button size="mini">通知</el-button>
+          <svg class="iconfont">
+            <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
+          </svg>
+          <div style="color: #9FC6FF;font-size: 14px">通知</div>
         </el-badge>
       </div>
-      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
-        <el-button size="mini">好友</el-button>
+      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+        </svg>
+        <div style="color: #9FC6FF;font-size: 14px">好友</div>
       </div>
-      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
-        <el-button size="mini">会员</el-button>
+      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
+        </svg>
+        <div style="color: #9FC6FF;font-size: 14px">会员</div>
       </div>
-      <div style="float: right;margin-right: 2%;margin-top: 1.5%">
-        <el-button size="mini">作品</el-button>
+      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
+        </svg>
+        <div style="color: #9FC6FF;font-size: 14px">作品</div>
       </div>
     </el-header>
 
@@ -121,6 +133,7 @@
 <script>
 
 export default {
+
   data() {
     return {
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
@@ -169,6 +182,11 @@ export default {
   background-color: #292A2D;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.iconfont {
+  width: 1.6em;
+  height: 1.6em;
 }
 
 @keyframes jump {

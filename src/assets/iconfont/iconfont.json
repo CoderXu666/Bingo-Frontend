@@ -1,0 +1,37 @@
+{
+  "id": "4097951",
+  "name": "Bingo社交",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "16385550",
+      "name": "专区",
+      "font_class": "biaoqianA01_zhuanqu-53",
+      "unicode": "eaab",
+      "unicode_decimal": 60075
+    },
+    {
+      "icon_id": "16385553",
+      "name": "我的",
+      "font_class": "biaoqianA01_wode-55",
+      "unicode": "eaad",
+      "unicode_decimal": 60077
+    },
+    {
+      "icon_id": "16386591",
+      "name": "消息",
+      "font_class": "biaoqiankuozhan_xiaoxi-152",
+      "unicode": "eb10",
+      "unicode_decimal": 60176
+    },
+    {
+      "icon_id": "16395354",
+      "name": "项目",
+      "font_class": "biaoqiankuozhan_xiangmu-292",
+      "unicode": "eb95",
+      "unicode_decimal": 60309
+    }
+  ]
+}
