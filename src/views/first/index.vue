@@ -90,10 +90,16 @@
 
         <el-row>
           <el-col :span="18" class="left-content" style="border: 1px solid red">
-            <span style="margin-right: 1%">1111</span>
-            <span style="margin-right: 1%">1111</span>
-            <span style="margin-right: 1%">1111</span>
-            <span style="margin-right: 2%">1111</span>
+            <el-col :span="6">
+              <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
+              <span style="display: inline-block">
+                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
+                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
+              </span>
+            </el-col>
+            <el-col :span="6">111</el-col>
+            <el-col :span="6">111</el-col>
+            <el-col :span="6">111</el-col>
           </el-col>
           <el-col :span="6" class="right-content" style="border: 1px solid red">
             11111111111111111111
@@ -196,6 +202,7 @@ export default {
 .icon-div:hover {
   animation: jump 1s;
 }
+
 @keyframes jump {
   0% {
     transform: translateY(0);
