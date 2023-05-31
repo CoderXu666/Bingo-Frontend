@@ -22,31 +22,31 @@
                  :src="avatarUrl"></el-avatar>
 
       <!--   icon   -->
-      <div style="float: right;margin-right: 3%;margin-top: 1%">
+      <div class="icon-div">
         <el-badge class="item" :value="null">
           <svg class="iconfont">
             <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
           </svg>
-          <div style="color: #9FC6FF;font-size: 14px">通知</div>
+          <div class="icon-font">通知</div>
         </el-badge>
       </div>
-      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+      <div class="icon-div">
         <svg class="iconfont">
           <use xlink:href="#icon-biaoqianA01_wode-55"></use>
         </svg>
-        <div style="color: #9FC6FF;font-size: 14px">好友</div>
+        <div class="icon-font">好友</div>
       </div>
-      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+      <div class="icon-div">
         <svg class="iconfont">
           <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
         </svg>
-        <div style="color: #9FC6FF;font-size: 14px">会员</div>
+        <div class="icon-font">会员</div>
       </div>
-      <div style="float: right;margin-right: 2.4%;margin-top: 1%">
+      <div class="icon-div">
         <svg class="iconfont">
           <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
         </svg>
-        <div style="color: #9FC6FF;font-size: 14px">作品</div>
+        <div class="icon-font">作品</div>
       </div>
     </el-header>
 
@@ -139,7 +139,7 @@ export default {
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
       fit: 'fill',
       searchType: '帖子',
-      searchContent: '',
+      searchContent: ''
     }
   },
 
@@ -184,11 +184,18 @@ export default {
   background-repeat: no-repeat;
 }
 
-.iconfont {
-  width: 1.6em;
-  height: 1.6em;
+/*包含整个icon的div*/
+.icon-div {
+  float: right;
+  margin-right: 3.0%;
+  margin-top: 0.85%;
+  cursor: pointer;
 }
 
+/*元素跳动*/
+.icon-div:hover {
+  animation: jump 1s;
+}
 @keyframes jump {
   0% {
     transform: translateY(0);
@@ -199,5 +206,17 @@ export default {
   100% {
     transform: translateY(0);
   }
+}
+
+/*icon下方的文字*/
+.icon-font {
+  color: #9FC6FF;
+  font-size: 12px
+}
+
+/*icon本身*/
+.iconfont {
+  width: 1.7em;
+  height: 1.7em;
 }
 </style>
