@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <!--  1.Head  -->
+    <!--  1.导航栏  -->
     <el-header class="header-cls" style="height: 68px">
       <!--   logo   -->
       <el-image style="float: left;width: 150px;cursor: pointer;height: 68px;margin-left: -1.4%" src=""
@@ -73,98 +73,96 @@
       </div>
     </div>
 
-    <!--  3.Post & Topic  -->
+    <!--  3.帖子 & 主题  -->
     <el-main class="main-cls">
       <div style="margin: auto;width: 80%; border: 1px solid red;">
         <!--    第一行    -->
-        <el-row>
-          <el-col :span="20" class="left-content" style="border: 1px solid red">
-            <span style="background-color: lightskyblue;height: 23px;display: inline-block;"></span>
-            <span style="margin-right: 1%; color: lightskyblue">广场动态</span>
-            <span style="margin-right: 1%; color: lightskyblue">换一批</span>
-            <span style="margin-right: 1%; color: lightskyblue">查看更多</span>
-          </el-col>
-          <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue">
+        <el-col :span="20" class="left-content" style="border: 1px solid red">
+          <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
+          <span style="margin-right: 1%; color: lightskyblue">广场动态</span>
+          <span style="margin-right: 1%; color: lightskyblue">换一批</span>
+          <span style="margin-right: 1%; color: lightskyblue">查看更多</span>
+        </el-col>
+        <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
+          <span style="height: 23px;">
             本周热榜
-          </el-col>
-        </el-row>
+          </span>
+        </el-col>
         <!--    第二行    -->
-        <el-row>
-          <el-col :span="20" class="left-content" style="border: 1px solid red">
-            <el-col :span="6">
-              <span style="display: inline-block">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-              <span style="display: inline-block;margin-top: 6%">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-            </el-col>
-            <el-col :span="6">
-              <span style="display: inline-block">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-              <span style="display: inline-block;margin-top: 6%">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-            </el-col>
+        <el-col :span="20" class="left-content" style="border: 1px solid red">
+          <el-col :span="6">
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好</div>
+              <div class="post-picture">11111</div>
+            </span>
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
+          </el-col>
+          <el-col :span="6">
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
+          </el-col>
 
-            <el-col :span="6">
-              <span style="display: inline-block">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-              <span style="display: inline-block;margin-top: 6%">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-            </el-col>
-            <el-col :span="6">
-              <span style="display: inline-block">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-              <span style="display: inline-block;margin-top: 6%">
-                <el-avatar :size="50" :src="circleUrl" style="position: relative;"></el-avatar>
-                <span style="position: absolute;margin-left: 1%;margin-top: 6px; color: #9FC6FF;">徐志斌</span>
-                <span style="position: absolute;margin-left: 1%;margin-top: 30px; color: #9FC6FF;">3天前</span>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 80px">大家好，大连有没有同城好友啊！一起玩啊！</div>
-                <div style="border: 1px solid red;margin-left: 50px;width: 76%;height: 230px">11111</div>
-              </span>
-            </el-col>
+          <el-col :span="6">
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
           </el-col>
-          <el-col :span="4" class="right-content" style="border: 1px solid red">
-            11111111111111111111
+          <el-col :span="6">
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
+            <span class="post-cls">
+              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
+              <span class="post-name">徐志斌</span>
+              <span class="post-date">3天前</span>
+              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
+              <div class="post-picture">11111</div>
+            </span>
           </el-col>
-        </el-row>
+        </el-col>
+        <el-col :span="4" class="right-content" style="border: 1px solid red">
+          11111111111111111111
+        </el-col>
       </div>
     </el-main>
 
-    <!--  4.Party &   -->
+    <!--  4.排队 -->
     <el-main class="main-cls" style="background-color: #304156">
       <el-row>
         <el-col :span="18" class="left-content">
@@ -176,7 +174,7 @@
       </el-row>
     </el-main>
 
-    <!--  4.Footer  -->
+    <!--  5.底边栏  -->
     <el-footer style="background-color: #323335;height: 180px">
       <el-row>
         <el-col :span="12" class="left-content">
@@ -244,6 +242,49 @@ export default {
   background-color: #292A2D;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+/*帖子*/
+.post-cls {
+  display: inline-block;
+  margin-top: 3%;
+}
+
+/*帖子名*/
+.post-name {
+  position: absolute;
+  margin-left: 1%;
+  margin-top: 6px;
+  color: #9FC6FF;
+}
+
+/*帖子头像*/
+.post-avatar {
+  position: relative;
+}
+
+/*帖子文字内容*/
+.post-content {
+  border: 1px solid red;
+  margin-left: 50px;
+  width: 76%;
+  height: 80px
+}
+
+/*帖子配图*/
+.post-picture {
+  border: 1px solid red;
+  margin-left: 50px;
+  width: 76%;
+  height: 230px;
+}
+
+/*帖子日期*/
+.post-date {
+  position: absolute;
+  margin-left: 1%;
+  margin-top: 30px;
+  color: #9FC6FF;
 }
 
 /*包含整个icon的div*/
