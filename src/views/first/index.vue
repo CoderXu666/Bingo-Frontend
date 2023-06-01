@@ -1,29 +1,24 @@
 <template>
   <el-container>
     <!--  1.导航栏  -->
-    <el-header class="header-cls" style="height: 68px">
+    <el-header class="header-cls">
       <!--   logo   -->
-      <el-image style="float: left;width: 150px;cursor: pointer;height: 68px;margin-left: -1.4%" src=""
-                :fit="fit"></el-image>
-      <!--   list   -->
+      <el-image class="header-logo" src="" :fit="fit"></el-image>
+      <!--   左目录   -->
       <el-menu
-        style="width:29.5%;float: left;margin-top: 6px;border-bottom: none;"
+        class="header-left-menu"
         mode="horizontal"
-        background-color="transparent"
-      >
+        background-color="transparent">
         <el-menu-item index="1" style="margin-left: 6%;color: #9FC6FF">社区广场</el-menu-item>
         <el-menu-item index="2" style="margin-left: 2%;color: #9FC6FF">狂欢派对</el-menu-item>
         <el-menu-item index="3" style="margin-left: 2%;color: #9FC6FF">好物商城</el-menu-item>
         <el-menu-item index="4" style="margin-left: 2%;color: #9FC6FF">关于作者</el-menu-item>
       </el-menu>
-
-      <!--   avatar   -->
-      <el-avatar style="float: right;cursor: pointer;margin-top: 0.6%;margin-right: 5%" :size="50"
-                 :src="avatarUrl"></el-avatar>
-
+      <!--   头像   -->
+      <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
       <!--   icon   -->
       <div class="icon-div">
-        <el-badge class="item" :value="null">
+        <el-badge class="item" :value="2">
           <svg class="iconfont">
             <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
           </svg>
@@ -31,10 +26,12 @@
         </el-badge>
       </div>
       <div class="icon-div">
-        <svg class="iconfont">
-          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
-        </svg>
-        <div class="icon-font">好友</div>
+        <el-badge class="item" :value="1">
+          <svg class="iconfont">
+            <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+          </svg>
+          <div class="icon-font">好友</div>
+        </el-badge>
       </div>
       <div class="icon-div">
         <svg class="iconfont">
@@ -84,7 +81,8 @@
           <span style="margin-right: 1%; color: lightskyblue">查看更多</span>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
-          <span style="height: 23px;">
+          <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
+          <span style="display: inline-block">
             本周热榜
           </span>
         </el-col>
@@ -208,11 +206,35 @@ export default {
 </script>
 
 <style>
+/*上边栏Logo*/
+.header-logo {
+  float: left;width: 150px;
+  cursor: pointer;
+  height: 68px;
+  margin-left: -1.4%;
+}
+
+/*上边栏-左侧-目录*/
+.header-left-menu {
+  width:29.5%;float: left;
+  margin-top: 6px;
+  border-bottom: none !important;
+}
+
+/*上边栏-头像*/
+.header-avatar {
+  float: right;
+  cursor: pointer;
+  margin-top: 0.6%;
+  margin-right: 5%;
+}
+
 #search-input {
   height: 55px;
 }
 
 .header-cls {
+  height: 68px !important;
   background-color: #303133;
 }
 
