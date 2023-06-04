@@ -16,7 +16,7 @@
       </el-menu>
       <!--   头像   -->
       <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
-      <!--   icon   -->
+      <!--   右目录   -->
       <div class="icon-div">
         <el-badge class="item" :value="2">
           <svg class="iconfont">
@@ -47,16 +47,16 @@
       </div>
     </el-header>
 
-    <!--  2.Search  -->
+    <!--  2.搜索板块  -->
     <div class="search-cls">
-      <!--   background video   -->
+      <!--   背景视频   -->
       <video src='@/assets/video/background.mp4' autoplay muted loop></video>
       <div style="margin:11.6% auto;width: 50%">
-        <!--    title    -->
+        <!--    标题    -->
         <h1 style="color: whitesmoke;font-family: 'Arial Rounded MT Bold';margin: auto;padding-left: 9%">
           Bingo：致力打造有趣的年轻人社交平台
         </h1>
-        <!--    input    -->
+        <!--    搜索框    -->
         <div style="margin-top: 55px;opacity: 0.8;">
           <el-input id="search-input" v-model=searchContent placeholder="搜索你想要知道的一切......">
             <el-select slot="prepend" v-model=searchType :placeholder=searchType style="width: 80px;">
@@ -64,15 +64,15 @@
               <el-option label="视频" value="2"></el-option>
               <el-option label="商品" value="3"></el-option>
             </el-select>
-            <el-button slot="append" icon="el-icon-search" @click=""></el-button>
+            <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
       </div>
     </div>
 
-    <!--  3.帖子 & 主题  -->
+    <!--  3.帖子 & 话题 & 推荐好友 -->
     <el-main class="main-cls">
-      <div style="margin: auto;width: 80%; border: 1px solid red;">
+      <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 1%;">
         <!--    第一行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
           <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
@@ -82,9 +82,7 @@
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
           <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
-          <span style="display: inline-block">
-            本周热榜
-          </span>
+          <span style="display: inline-block"></span>
         </el-col>
         <!--    第二行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
@@ -176,10 +174,14 @@
     <el-footer style="background-color: #323335;height: 180px">
       <el-row>
         <el-col :span="12" class="left-content">
-          1111111111111111111
+          <div style="border: 1px solid red;width: 70%;height: 180px">
+            1111
+          </div>
         </el-col>
         <el-col :span="12" class="right-content">
-          11111111111111111111
+          <div style="border: 1px solid red">
+            1111
+          </div>
         </el-col>
       </el-row>
     </el-footer>
@@ -256,9 +258,10 @@ export default {
   z-index: -1;
 }
 
+/*第二部分*/
 .main-cls {
   width: 100vw;
-  height: 90vh;
+  height: 100vh;
   margin: 0;
   padding: 0;
   background-color: #292A2D;
@@ -269,7 +272,7 @@ export default {
 /*帖子*/
 .post-cls {
   display: inline-block;
-  margin-top: 3%;
+  margin-top: 4%;
 }
 
 /*帖子名*/
@@ -298,7 +301,7 @@ export default {
   border: 1px solid red;
   margin-left: 50px;
   width: 76%;
-  height: 230px;
+  height: 234px;
 }
 
 /*帖子日期*/

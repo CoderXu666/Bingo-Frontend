@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 /**
- * create an axios instance
+ * Axios配置
  */
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 /**
- * Router
+ * Vue-Router
  */
 export const constantRoutes = [
   {
