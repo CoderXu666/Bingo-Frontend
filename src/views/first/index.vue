@@ -70,9 +70,14 @@
       </div>
     </div>
 
-    <!--  3.帖子 & 话题 & 推荐好友 -->
+    <!--    3.两界之间    -->
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-240%,-50%);width: 260px;height: 100px">111</div>
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-60%,-50%);width: 260px;height: 100px">111</div>
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(120%,-50%);width: 260px;height: 100px">111</div>
+
+    <!--  4.帖子 & 话题 & 推荐好友 -->
     <el-main class="main-cls">
-      <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 1%;">
+      <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 4%;">
         <!--    第一行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
           <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
@@ -276,7 +281,7 @@ export default {
 /*第二部分*/
 .main-cls {
   width: 100vw;
-  height: 100vh;
+  height: 108vh;
   margin: 0;
   padding: 0;
   background-color: #292A2D;
