@@ -86,71 +86,17 @@
         </el-col>
         <!--    第二行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
-          <el-col :span="6">
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好</div>
-              <div class="post-picture">11111</div>
-            </span>
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-          </el-col>
-          <el-col :span="6">
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-          </el-col>
-
-          <el-col :span="6">
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-          </el-col>
-          <el-col :span="6">
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-            <span class="post-cls">
-              <el-avatar class="post-avatar" :size="50" :src="circleUrl"></el-avatar>
-              <span class="post-name">徐志斌</span>
-              <span class="post-date">3天前</span>
-              <div class="post-content">大家好，大连有没有同城好友啊！一起玩啊！</div>
-              <div class="post-picture">11111</div>
-            </span>
-          </el-col>
+          <template v-for="item in postList">
+            <el-col :span="6" :key="item.id">
+              <span class="post-cls">
+                <el-avatar class="post-avatar" :size="50" :src="item.circleUrl"></el-avatar>
+                <span class="post-name">{{ item.name }}</span>
+                <span class="post-date">{{ item.date }}</span>
+                <div class="post-content">{{ item.content }}</div>
+                <div class="post-picture">{{ item.picture }}</div>
+              </span>
+            </el-col>
+          </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
           11111111111111111111
@@ -199,7 +145,74 @@ export default {
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
       fit: 'fill',
       searchType: '帖子',
-      searchContent: ''
+      searchContent: '',
+
+      postList: [
+        {
+          id: 1,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl1'
+        },
+        {
+          id: 2,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 3,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 4,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 5,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 6,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 7,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        },
+        {
+          id: 8,
+          name: '徐志斌',
+          date: '3天前',
+          content: '大家好，大连有没有同城好友啊！一起玩啊！',
+          picture: '11111',
+          circleUrl: 'path/to/circleUrl2'
+        }
+      ]
     }
   },
 
@@ -210,7 +223,8 @@ export default {
 <style>
 /*上边栏Logo*/
 .header-logo {
-  float: left;width: 150px;
+  float: left;
+  width: 150px;
   cursor: pointer;
   height: 68px;
   margin-left: -1.4%;
@@ -218,7 +232,8 @@ export default {
 
 /*上边栏-左侧-目录*/
 .header-left-menu {
-  width:29.5%;float: left;
+  width: 29.5%;
+  float: left;
   margin-top: 6px;
   border-bottom: none !important;
 }
@@ -241,7 +256,7 @@ export default {
 }
 
 .search-cls {
-  height: 74vh;
+  height: 70vh;
   position: relative;
   overflow: hidden;
 }
