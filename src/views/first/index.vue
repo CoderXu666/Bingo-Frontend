@@ -51,33 +51,36 @@
     <div class="search-cls">
       <!--   背景视频   -->
       <video src='@/assets/video/background.mp4' autoplay muted loop></video>
-      <div style="margin:11.6% auto;width: 50%">
+      <div style="margin:11.5% auto;width: 50%">
         <!--    标题    -->
-        <h1 style="color: whitesmoke;font-family: 'Arial Rounded MT Bold';margin: auto;padding-left: 9%">
-          Bingo：致力打造有趣的年轻人社交平台
+        <h1 class="search-big-title">
+          Bingo：有趣的年轻人社交平台
         </h1>
+        <div class="search-small-title">
+          你好，我叫徐志斌，这是我开源的 Bingo 社交平台项目，欢迎加入我们一起Coding
+        </div>
         <!--    搜索框    -->
-        <div style="margin-top: 55px;opacity: 0.8;">
+        <div style="margin-top: 40px;opacity: 0.6;">
           <el-input id="search-input" v-model=searchContent placeholder="搜索你想要知道的一切......">
             <el-select slot="prepend" v-model=searchType :placeholder=searchType style="width: 80px;">
               <el-option label="帖子" value="1"></el-option>
               <el-option label="视频" value="2"></el-option>
               <el-option label="商品" value="3"></el-option>
             </el-select>
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button class="search-btn" slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
       </div>
     </div>
 
     <!--    3.两界之间    -->
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-230%,-50%);width: 260px;height: 90px">
+    <div class="mid-one">
       111
     </div>
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-50%,-50%);width: 260px;height: 90px">
+    <div class="mid-two">
       111
     </div>
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(130%,-50%);width: 260px;height: 90px">
+    <div class="mid-three">
       111
     </div>
 
@@ -262,8 +265,27 @@ export default {
   transform: scale(1.4) translateY(5px); /* 鼠标悬停时图片放大1.1倍 */
 }
 
+/*搜索大标题*/
+.search-big-title {
+  color: whitesmoke;
+  font-family: 'Arial Rounded MT Bold';
+  margin: auto;
+  padding-left: 21%
+}
+
+/*搜索小标题*/
+.search-small-title {
+  color: whitesmoke;
+  font-family: Arial;
+  margin: auto;
+  padding-left: 10%;
+  margin-top: 2.5%;
+  font-size: 19px
+}
+
+/*搜索框*/
 #search-input {
-  height: 55px;
+  height: 59px;
 }
 
 .header-cls {
@@ -277,6 +299,7 @@ export default {
   overflow: hidden;
 }
 
+/*背景视频*/
 .search-cls video {
   position: absolute;
   top: 50%;
@@ -287,6 +310,42 @@ export default {
   width: auto;
   height: auto;
   z-index: -1;
+}
+
+/*中间-左侧*/
+.mid-one {
+  background-color: #323335;
+  border-radius: 20px;
+  height: 90px;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-210%, -50%);
+  width: 280px;
+}
+
+/*中间-中间*/
+.mid-two {
+  background-color: #323335;
+  border-radius: 20px;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 90px
+}
+
+/*中间-右侧*/
+.mid-three {
+  background-color: #323335;
+  border-radius: 20px;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(110%, -50%);
+  width: 280px;
+  height: 90px
 }
 
 /*第二部分*/
