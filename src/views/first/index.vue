@@ -1,5 +1,7 @@
 <template>
   <el-container>
+    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+
     <!--  1.导航栏  -->
     <el-header class="header-cls">
       <!--   logo   -->
@@ -9,10 +11,12 @@
         class="header-left-menu"
         mode="horizontal"
         background-color="transparent">
-        <el-menu-item index="1" style="margin-left: 6%;color: #9FC6FF">社区广场</el-menu-item>
-        <el-menu-item index="2" style="margin-left: 2%;color: #9FC6FF">狂欢派对</el-menu-item>
-        <el-menu-item index="3" style="margin-left: 2%;color: #9FC6FF">好物商城</el-menu-item>
-        <el-menu-item index="4" style="margin-left: 2%;color: #9FC6FF">关于作者</el-menu-item>
+        <el-menu-item index="1" class="header-left-menu-font" style="margin-left: 4%">
+          社区广场
+        </el-menu-item>
+        <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
+        <el-menu-item index="3" class="header-left-menu-font">好物商城</el-menu-item>
+        <el-menu-item index="4" class="header-left-menu-font">关于作者</el-menu-item>
       </el-menu>
       <!--   头像   -->
       <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
@@ -57,13 +61,14 @@
           Bingo：有趣的年轻人社交平台
         </h1>
         <div class="search-small-title">
-          你好，我叫徐志斌，这是我开源的 Bingo 社交平台项目，欢迎加入我们一起Coding
+          你好，我是徐志斌，这是我个人开源项目 Bingo 社交平台，欢迎加入我们一起Coding
         </div>
         <!--    搜索框    -->
-        <div style="margin-top: 40px;opacity: 0.6;">
+        <div style="margin-top: 40px;opacity: 0.7;">
           <el-input id="search-input" v-model=searchContent placeholder="搜索你想要知道的一切......">
             <el-select slot="prepend" v-model=searchType :placeholder=searchType style="width: 80px;">
               <el-option label="帖子" value="1"></el-option>
+              <el-option label="话题" value="3"></el-option>
               <el-option label="视频" value="2"></el-option>
               <el-option label="商品" value="3"></el-option>
             </el-select>
@@ -252,6 +257,13 @@ export default {
   border-bottom: none !important;
 }
 
+/*上边栏-左侧-目录文字*/
+.header-left-menu-font {
+  color: #9FC6FF !important;
+  margin-left: 2%;
+  font-size: 17px
+}
+
 /*上边栏-头像*/
 .header-avatar {
   float: right;
@@ -269,7 +281,6 @@ export default {
 .search-big-title {
   color: whitesmoke;
   font-family: 'Arial Rounded MT Bold';
-  margin: auto;
   padding-left: 21%
 }
 
@@ -277,7 +288,6 @@ export default {
 .search-small-title {
   color: whitesmoke;
   font-family: Arial;
-  margin: auto;
   padding-left: 10%;
   margin-top: 2.5%;
   font-size: 19px
