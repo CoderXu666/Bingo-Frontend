@@ -71,9 +71,15 @@
     </div>
 
     <!--    3.两界之间    -->
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-240%,-50%);width: 260px;height: 100px">111</div>
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-60%,-50%);width: 260px;height: 100px">111</div>
-    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(120%,-50%);width: 260px;height: 100px">111</div>
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-230%,-50%);width: 260px;height: 90px">
+      111
+    </div>
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(-50%,-50%);width: 260px;height: 90px">
+      111
+    </div>
+    <div style="border: 1px solid red;background-color: red;position:absolute;top: 80%;left: 50%;transform: translate(130%,-50%);width: 260px;height: 90px">
+      111
+    </div>
 
     <!--  4.帖子 & 话题 & 推荐好友 -->
     <el-main class="main-cls">
@@ -249,6 +255,11 @@ export default {
   cursor: pointer;
   margin-top: 0.6%;
   margin-right: 5%;
+  transition: transform 0.2s, margin-top 0.2s;
+}
+
+.header-avatar:hover {
+  transform: scale(1.4) translateY(5px); /* 鼠标悬停时图片放大1.1倍 */
 }
 
 #search-input {
