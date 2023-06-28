@@ -50,17 +50,24 @@
     </el-header>
 
     <!-- 2.聊天框 -->
-    <div style="border: 1px solid red;background-color: #292A2D">
-      <div style="border: 1px solid red;width: 70%;height: 750px;margin: auto;background-color: #323335">
-        <el-row :gutter="20">
+    <div style="border: 1px solid;background-color: #292A2D">
+      <div style="border: 1px solid;width: 70%;height: 750px;margin: auto;background-color: #323335">
+        <el-row :gutter="1">
           <el-col :span="6">
-            <div class="grid-content bg-purple">
-              1111
+            <!--      好友列表      -->
+            <div class="grid-content bg-purple" style="height: 750px">
+              <div style="border: 1px solid red;height: 62px">
+                <el-avatar shape="square" :size="60" :src="squareUrl">111</el-avatar>
+                <span style="position: absolute; top: 1.6%;margin-left: 1%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">11111</span>
+                <span style="margin-left: 4%;font-size: 15px;display: inline-block;padding-bottom: 1px">1111111</span>
+              </div>
             </div>
           </el-col>
           <el-col :span="18">
-            <div class="grid-content bg-purple">
-              2222
+            <div class="grid-content bg-purple" style="height: 750px">
+              <div style="border: 1px solid red;height: 62px">
+
+              </div>
             </div>
           </el-col>
         </el-row>
