@@ -1,8 +1,71 @@
 <template>
-  <div style="margin-left: 100px">
-    <div id="content" style="width: 500px; height: 500px; border: 1px solid black"></div>
-    <el-input v-model="inputMessage" placeholder="请输入内容"></el-input>
-    <el-button @click="sendMessage(inputMessage)">发送</el-button>
+  <div>
+    <!--  1.导航栏  -->
+    <el-header class="header-cls">
+      <!--   logo   -->
+      <el-image class="header-logo" src=""></el-image>
+      <!--   左目录   -->
+      <el-menu
+        class="header-left-menu"
+        mode="horizontal"
+        background-color="transparent">
+        <el-menu-item index="1" class="header-left-menu-font" style="margin-left: 4%">
+          社区广场
+        </el-menu-item>
+        <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
+        <el-menu-item index="3" class="header-left-menu-font">好物商城</el-menu-item>
+        <el-menu-item index="4" class="header-left-menu-font">关于作者</el-menu-item>
+      </el-menu>
+      <!--   头像   -->
+      <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
+      <!--   右目录   -->
+      <div class="icon-div">
+        <el-badge class="item" :value="2">
+          <svg class="iconfont">
+            <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
+          </svg>
+          <div class="icon-font">通知</div>
+        </el-badge>
+      </div>
+      <div class="icon-div">
+        <el-badge class="item" :value="1">
+          <svg class="iconfont">
+            <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+          </svg>
+          <div class="icon-font">好友</div>
+        </el-badge>
+      </div>
+      <div class="icon-div">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
+        </svg>
+        <div class="icon-font">会员</div>
+      </div>
+      <div class="icon-div">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
+        </svg>
+        <div class="icon-font">作品</div>
+      </div>
+    </el-header>
+
+    <!-- 2.聊天框 -->
+    <div style="border: 1px solid red;background-color: #292A2D">
+      <div style="border: 1px solid red;width: 70%;height: 750px;margin: auto;background-color: #323335">
+        <el-row :gutter="20">
+          <el-col :span="6">
+            <div class="grid-content bg-purple">
+              1111
+            </div>
+          </el-col>
+          <el-col :span="18">
+            <div class="grid-content bg-purple">
+              2222
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -13,7 +76,7 @@ export default {
   data() {
     return {
       inputMessage: '',
-      userId: 'xuzhibin'
+      userId: 'xuzhibin',
     }
   },
 
@@ -25,8 +88,7 @@ export default {
   },
 
   /**
-   * 初始化WebSocket聊天室
-   * 与Netty服务器建立WebSocket实时通讯连接
+   * 初始化WebSocket服务器：与Netty服务器建立WebSocket实时通讯连接
    */
   mounted() {
     this.initWebSocket()
@@ -80,11 +142,145 @@ export default {
         // 清空输入框
         this.inputMessage = ''
       })
+    },
+
+    setActiveFriend(friendId) {
+      this.activeFriendId = friendId
     }
   }
 }
 </script>
 
 <style>
+/*上边栏Logo*/
+.header-logo {
+  float: left;
+  width: 150px;
+  cursor: pointer;
+  height: 68px;
+  margin-left: -1.4%;
+}
 
+/*上边栏-左侧-目录*/
+.header-left-menu {
+  width: 29.5%;
+  float: left;
+  margin-top: 6px;
+  border-bottom: none !important;
+}
+
+/*上边栏-左侧-目录文字*/
+.header-left-menu-font {
+  color: #9FC6FF !important;
+  margin-left: 2%;
+  font-size: 17px
+}
+
+/*上边栏-头像*/
+.header-avatar {
+  float: right;
+  cursor: pointer;
+  margin-top: 0.6%;
+  margin-right: 5%;
+  transition: transform 0.2s, margin-top 0.2s;
+}
+
+.header-avatar:hover {
+  transform: scale(1.4) translateY(5px); /* 鼠标悬停时图片放大1.1倍 */
+}
+
+.header-cls {
+  height: 68px !important;
+  background-color: #303133;
+}
+
+/*背景视频*/
+.search-cls video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+
+/*包含整个icon的div*/
+.icon-div {
+  float: right;
+  margin-right: 3.0%;
+  margin-top: 0.85%;
+  cursor: pointer;
+}
+
+/*元素跳动*/
+.icon-div:hover {
+  animation: jump 1s;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/*icon下方的文字*/
+.icon-font {
+  color: #9FC6FF;
+  font-size: 12px
+}
+
+/*icon本身*/
+.iconfont {
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.chat-footer el-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.user-profile .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.friend-item .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-header .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-footer el-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.bg-purple {
+  background: #d3dce6;
+}
+
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
 </style>
