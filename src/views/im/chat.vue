@@ -50,22 +50,43 @@
     </el-header>
 
     <!-- 2.聊天框 -->
-    <div style="border: 1px solid;background-color: #292A2D">
-      <div style="border: 1px solid;width: 70%;height: 750px;margin: auto;background-color: #323335">
+    <div style="background-color: #292A2D">
+      <div style="width: 70%;height: 750px;margin: auto;background-color: #323335">
         <el-row :gutter="1">
           <el-col :span="6">
-            <!--      好友列表      -->
-            <div class="grid-content bg-purple" style="height: 750px">
-              <div style="border: 1px solid red;height: 62px">
-                <el-avatar shape="square" :size="60" :src="squareUrl">111</el-avatar>
-                <span style="position: absolute; top: 1.6%;margin-left: 1%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">11111</span>
-                <span style="margin-left: 4%;font-size: 15px;display: inline-block;padding-bottom: 1px">1111111</span>
+            <!--  好友列表 -->
+            <div class="grid-content bg-purple" style="height: 756px">
+              <!--  上边栏 -->
+              <div style="background-color: red;height: 66px">
+                <input style="background-color: lightskyblue">
+              </div>
+              <!--  好友列表  -->
+              <div class="friend-item" v-for="item in userList" :key="item.id" style="height: 66px;border: 1px;cursor: pointer;">
+                <el-avatar style="float: left;" shape="square" :size="63" :src="item.avatarUrl"></el-avatar>
+                <div
+                  style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">
+                  {{ item.nickName }}
+                </div>
+                <div style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999">11:02</div>
+                <div style="padding-top: 40px;margin-left: 22.6%;font-size: 13px;color: #999999;">
+                  {{ item.nickName }}：{{ item.lastContent }}
+                </div>
               </div>
             </div>
           </el-col>
+          <!--  聊天内容  -->
           <el-col :span="18">
-            <div class="grid-content bg-purple" style="height: 750px">
-              <div style="border: 1px solid red;height: 62px">
+            <div class="grid-content bg-purple" style="height: 756px">
+              <!--  top  -->
+              <div style="border: 1px solid red;height: 66px">
+
+              </div>
+              <!--  mid  -->
+              <div style="border: 1px solid red;height: 500px">
+
+              </div>
+              <!--  bottom  -->
+              <div style="border: 1px solid red;height: 190px">
 
               </div>
             </div>
@@ -84,6 +105,28 @@ export default {
     return {
       inputMessage: '',
       userId: 'xuzhibin',
+      userList: [
+        {
+          avatarUrl: require('@/assets/avatar/wen.jpg'),
+          nickName: '小温',
+          lastContent: '徐志哈，别睡了，起来学习'
+        },
+        {
+          avatarUrl: require('@/assets/avatar/zhou.jpg'),
+          nickName: '葵葵',
+          lastContent: '马路上全是腿！我没开玩笑！'
+        },
+        {
+          avatarUrl: require('@/assets/avatar/dan.jpg'),
+          nickName: '王老师',
+          lastContent: '老徐，记得请我喝咖啡'
+        },
+        {
+          avatarUrl: require('@/assets/avatar/ru.jpg'),
+          nickName: '艳茹',
+          lastContent: '地震啦'
+        },
+      ]
     }
   },
 
@@ -150,10 +193,6 @@ export default {
         this.inputMessage = ''
       })
     },
-
-    setActiveFriend(friendId) {
-      this.activeFriendId = friendId
-    }
   }
 }
 </script>
@@ -289,5 +328,15 @@ export default {
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
+}
+
+.friend-item {
+  height: 66px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.friend-item:hover {
+  filter: grayscale(100%);
 }
 </style>
