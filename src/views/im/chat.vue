@@ -51,11 +51,11 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 70%;height: 750px;margin: auto;background-color: #323335">
+      <div style="width: 70%;height: 750px;margin: auto;background-color: white">
         <el-row :gutter="1">
           <el-col :span="6">
             <!--  好友列表 -->
-            <div class="grid-content bg-purple" style="height: 756px">
+            <div style="height: 756px">
               <!--  上边栏 -->
               <div style="background-color: red;height: 66px">
                 <input style="background-color: lightskyblue">
@@ -78,8 +78,8 @@
           <el-col :span="18">
             <div class="grid-content bg-purple" style="height: 756px">
               <!--  top  -->
-              <div style="border: 1px solid red;height: 66px">
-
+              <div style="border: 1px solid red; height: 66px; display: flex; align-items: center; justify-content: center;">
+                <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
               </div>
               <!--  mid  -->
               <div style="border: 1px solid red;height: 500px">
@@ -105,6 +105,7 @@ export default {
     return {
       inputMessage: '',
       userId: 'xuzhibin',
+      currentUserName: '小温',
       userList: [
         {
           avatarUrl: require('@/assets/avatar/wen.jpg'),
@@ -113,7 +114,7 @@ export default {
         },
         {
           avatarUrl: require('@/assets/avatar/zhou.jpg'),
-          nickName: '葵葵',
+          nickName: '牛子瑜',
           lastContent: '马路上全是腿！我没开玩笑！'
         },
         {
@@ -125,7 +126,7 @@ export default {
           avatarUrl: require('@/assets/avatar/ru.jpg'),
           nickName: '艳茹',
           lastContent: '地震啦'
-        },
+        }
       ]
     }
   },
@@ -321,10 +322,6 @@ export default {
   margin-right: 10px;
 }
 
-.bg-purple {
-  background: #d3dce6;
-}
-
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
@@ -332,7 +329,7 @@ export default {
 
 .friend-item {
   height: 66px;
-  border: 1px solid #ccc;
+  border: 1px solid;
   cursor: pointer;
 }
 
