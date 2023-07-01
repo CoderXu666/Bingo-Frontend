@@ -51,7 +51,7 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 70%;height: 760px;margin: auto;background-color: antiquewhite">
+      <div style="width: 80%;height: 760px;margin: auto;background-color: antiquewhite">
         <el-row :gutter="1">
           <el-col :span="6">
             <!--  好友列表 -->

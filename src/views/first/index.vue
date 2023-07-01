@@ -103,28 +103,30 @@
           <template v-for="item in postList">
             <el-col :span="6" :key="item.id">
               <span class="post-cls">
-                <div>
+                <div style="background-color: #323335;margin-left: 4%">
                   <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
                   <span class="post-name">{{ item.name }}</span>
                   <span class="post-date">{{ item.date }}</span>
                   <el-button
                     style="float: right;margin-right: 8%;margin-top: 2%;background-color: antiquewhite;color: black"
-                    size="small">关注</el-button>
-                </div>
-                <div class="post-content">{{ item.content }}</div>
-                <div class="post-picture">
-                  <!--         使用的图片      -->
-                  <div>
-                    <el-image
-                      style="height: 100px; width: 100px"
-                      :src=item.picture
-                      fit="fill">
-                    </el-image>
-                  </div>
-                  <div style="">
-                    <i class="el-icon-share"></i>
-                    <i class="el-icon-share"></i>
-                    <i class="el-icon-share"></i>
+                    size="small">
+                    关注
+                  </el-button>
+                  <div class="post-content">{{ item.content }}</div>
+                  <div class="post-picture">
+                    <!--  使用的图片  -->
+                    <div>
+                      <el-image
+                        style="height: 100px; width: 100px"
+                        :src=item.picture
+                        fit="fill">
+                      </el-image>
+                    </div>
+                    <div style="">
+                      <i class="el-icon-share"></i>
+                      <i class="el-icon-share"></i>
+                      <i class="el-icon-share"></i>
+                    </div>
                   </div>
                 </div>
               </span>
@@ -301,7 +303,6 @@ export default {
 </script>
 
 <style>
-/*上边栏Logo*/
 .header-logo {
   float: left;
   width: 150px;
@@ -310,7 +311,6 @@ export default {
   margin-left: -1.4%;
 }
 
-/*上边栏-左侧-目录*/
 .header-left-menu {
   width: 29.5%;
   float: left;
@@ -318,14 +318,12 @@ export default {
   border-bottom: none !important;
 }
 
-/*上边栏-左侧-目录文字*/
 .header-left-menu-font {
   color: antiquewhite !important;
   margin-left: 2%;
   font-size: 17px
 }
 
-/*上边栏-头像*/
 .header-avatar {
   float: right;
   cursor: pointer;
@@ -335,17 +333,15 @@ export default {
 }
 
 .header-avatar:hover {
-  transform: scale(1.4) translateY(5px); /* 鼠标悬停时图片放大1.1倍 */
+  transform: scale(1.4) translateY(5px);
 }
 
-/*搜索大标题*/
 .search-big-title {
   color: whitesmoke;
   font-family: 'Arial Rounded MT Bold';
   padding-left: 21%
 }
 
-/*搜索小标题*/
 .search-small-title {
   color: whitesmoke;
   font-family: Arial;
@@ -354,7 +350,6 @@ export default {
   font-size: 19px
 }
 
-/*搜索框*/
 #search-input {
   height: 59px;
 }
@@ -370,7 +365,6 @@ export default {
   overflow: hidden;
 }
 
-/*背景视频*/
 .search-cls video {
   position: absolute;
   top: 50%;
@@ -383,7 +377,6 @@ export default {
   z-index: -1;
 }
 
-/*中间-左侧*/
 .mid-one {
   background-color: #323335;
   border-radius: 20px;
@@ -395,7 +388,6 @@ export default {
   width: 280px;
 }
 
-/*中间-中间*/
 .mid-two {
   background-color: #323335;
   border-radius: 20px;
@@ -407,7 +399,6 @@ export default {
   height: 90px
 }
 
-/*中间-右侧*/
 .mid-three {
   background-color: #323335;
   border-radius: 20px;
@@ -419,7 +410,6 @@ export default {
   height: 90px
 }
 
-/*第二部分*/
 .main-cls {
   width: 100vw;
   margin: 0;
@@ -429,13 +419,11 @@ export default {
   background-repeat: no-repeat;
 }
 
-/*帖子*/
 .post-cls {
   display: inline-block;
   margin-top: 4%;
 }
 
-/*帖子名*/
 .post-name {
   position: absolute;
   margin-left: 1%;
@@ -444,32 +432,28 @@ export default {
   cursor: pointer;
 }
 
-/*帖子头像*/
 .post-avatar {
   position: relative;
   cursor: pointer;
 }
 
-/*帖子文字内容*/
 .post-content {
   color: antiquewhite;
   border: 1px solid red;
-  margin-left: 50px;
-  width: 76%;
+  margin-left: 6%;
+  width: 90%;
   height: 80px;
   font-size: 14px;
   font-family: "Arial Rounded MT Bold";
 }
 
-/*帖子配图*/
 .post-picture {
   border: 1px solid red;
-  margin-left: 50px;
-  width: 76%;
+  margin-left: 6%;
+  width: 90%;
   height: 234px;
 }
 
-/*帖子日期*/
 .post-date {
   position: absolute;
   margin-left: 1%;
@@ -478,7 +462,6 @@ export default {
   font-size: small;
 }
 
-/*包含整个icon的div*/
 .icon-div {
   float: right;
   margin-right: 3.0%;
@@ -486,7 +469,6 @@ export default {
   cursor: pointer;
 }
 
-/*元素跳动*/
 .icon-div:hover {
   animation: jump 1s;
 }
@@ -503,13 +485,11 @@ export default {
   }
 }
 
-/*icon下方的文字*/
 .icon-font {
   color: antiquewhite;
   font-size: 12px
 }
 
-/*icon本身*/
 .iconfont {
   width: 1.7em;
   height: 1.7em;
