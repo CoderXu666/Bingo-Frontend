@@ -3,13 +3,13 @@
     <!--  1.导航栏  -->
     <el-header class="header-cls">
       <!--   logo   -->
-      <el-image class="header-logo" src=""></el-image>
+      <el-image class="header-logo" src="" :fit="fit"></el-image>
       <!--   左目录   -->
       <el-menu
         class="header-left-menu"
         mode="horizontal"
         background-color="transparent">
-        <el-menu-item index="1" class="header-left-menu-font" style="margin-left: 4%">
+        <el-menu-item index="1" class="header-left-menu-font">
           社区广场
         </el-menu-item>
         <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
@@ -51,13 +51,13 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 70%;height: 750px;margin: auto;background-color: white">
+      <div style="width: 70%;height: 760px;margin: auto;background-color: white">
         <el-row :gutter="1">
           <el-col :span="6">
             <!--  好友列表 -->
             <div style="height: 756px">
               <!--  上边栏 -->
-              <div style="background-color: red;height: 66px">
+              <div style="background-color: red;height: 60px">
                 <input style="background-color: lightskyblue">
               </div>
               <!--  好友列表  -->
@@ -76,18 +76,30 @@
           </el-col>
           <!--  聊天内容  -->
           <el-col :span="18">
-            <div class="grid-content bg-purple" style="height: 756px">
+            <div class="grid-content bg-purple" style="height: 760px">
               <!--  top  -->
-              <div style="border: 1px solid red; height: 66px; display: flex; align-items: center; justify-content: center;">
+              <div style="border: 1px solid red; height: 60px; display: flex; align-items: center; justify-content: center;">
                 <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
               </div>
               <!--  mid  -->
-              <div style="border: 1px solid red;height: 500px">
+              <div style="border: 1px solid red;height: 480px">
 
               </div>
               <!--  内容输入框  -->
-              <div style="border: 1px solid red;height: 190px">
-                
+              <div style="border: 1px solid red;height: 220px">
+                <!-- 表情包 -->
+                <div style="border: 1px solid red;height: 20%">
+                  <span style="margin-left: 2%">emoji</span>
+                  <span style="margin-left: 2%">表情包</span>
+                  <span style="margin-left: 2%">语音</span>
+                  <span style="margin-left: 2%">视频</span>
+                </div>
+                <el-input
+                  id="chat-input-id"
+                  placeholder="请输入内容"
+                  v-model="chatContent">
+                </el-input>
+                <el-button size="small" style="float: right;margin-right: 2%;margin-top: 0.5%">发送</el-button>
               </div>
             </div>
           </el-col>
@@ -106,6 +118,7 @@ export default {
       inputMessage: '',
       userId: 'xuzhibin',
       currentUserName: '小温',
+      chatContent: '',
       userList: [
         {
           avatarUrl: require('@/assets/avatar/wen.jpg'),
@@ -114,7 +127,7 @@ export default {
         },
         {
           avatarUrl: require('@/assets/avatar/zhou.jpg'),
-          nickName: '牛子瑜',
+          nickName: '葵葵',
           lastContent: '马路上全是腿！我没开玩笑！'
         },
         {
@@ -335,5 +348,9 @@ export default {
 
 .friend-item:hover {
   filter: grayscale(100%);
+}
+
+#chat-input-id {
+  height: 130px;
 }
 </style>

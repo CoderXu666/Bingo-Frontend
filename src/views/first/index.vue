@@ -1,7 +1,5 @@
 <template>
   <el-container>
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
-
     <!--  1.导航栏  -->
     <el-header class="header-cls">
       <!--   logo   -->
@@ -11,7 +9,7 @@
         class="header-left-menu"
         mode="horizontal"
         background-color="transparent">
-        <el-menu-item index="1" class="header-left-menu-font" style="margin-left: 4%">
+        <el-menu-item index="1" class="header-left-menu-font">
           社区广场
         </el-menu-item>
         <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
@@ -89,7 +87,7 @@
       111
     </div>
 
-    <!--  4.帖子 & 话题 & 推荐好友 -->
+    <!--  4.帖子 & 话题 -->
     <el-main class="main-cls">
       <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 4%;">
         <!--    第一行    -->
@@ -101,7 +99,7 @@
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
           <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
-          <span style="display: inline-block">本周热门话题</span>
+          <span style="display: inline-block;margin: auto">本周热门话题</span>
         </el-col>
         <!--    第二行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
@@ -112,35 +110,20 @@
                   <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
                   <span class="post-name">{{ item.name }}</span>
                   <span class="post-date">{{ item.date }}</span>
-                  <el-button type="primary" style="float: right;margin-right: 8%;margin-top: 2%;" size="small">关注</el-button>
+                  <el-button type="primary" style="float: right;margin-right: 8%;margin-top: 2%;"
+                             size="small">关注</el-button>
                 </div>
                 <div class="post-content">{{ item.content }}</div>
                 <div class="post-picture">
                   <!--         使用的图片      -->
                   <div>
                     <el-image
-                      style="width: 100px; height: 100px"
+                      style="height: 100px; width: 100px"
                       :src=item.picture
                       fit="fill">
                     </el-image>
-                      <el-image
-                        style="width: 100px; height: 100px"
-                        :src=item.picture
-                        fit="fill">
-                    </el-image>
-                      <el-image
-                        style="width: 100px; height: 100px"
-                        :src=item.picture
-                        fit="fill">
-                    </el-image>
-                      <el-image
-                        style="width: 100px; height: 100px"
-                        :src=item.picture
-                        fit="fill">
-                    </el-image>
                   </div>
-
-                  <div style="float: bottom;margin-bottom: 0px">
+                  <div style="">
                     <i class="el-icon-share"></i>
                     <i class="el-icon-share"></i>
                     <i class="el-icon-share"></i>
@@ -151,8 +134,29 @@
           </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
-          <div style="width: 100px">
-
+          <div style="color: orange ">
+            <div style="padding-top: 7%;margin-left: 5%">
+              <div>1.最让你难忘事情</div>
+              <br>
+              <div>2.最想对年轻的你说什么</div>
+              <br>
+              <div>3.你最后悔的事情是什么</div>
+              <br>
+              <div>4.到底什么是友情</div>
+              <br>
+              <div>5.到底什么是友情</div>
+              <br>
+              <div>6.到底什么是友情</div>
+              <br>
+              <div>7.到底什么是友情</div>
+              <br>
+              <div>8.到底什么是友情</div>
+              <br>
+              <div>9.到底什么是友情</div>
+              <br>
+              <div>10.到底什么是友情</div>
+              <br>
+            </div>
           </div>
         </el-col>
       </div>
@@ -412,7 +416,6 @@ export default {
 /*第二部分*/
 .main-cls {
   width: 100vw;
-  height: 108vh;
   margin: 0;
   padding: 0;
   background-color: #292A2D;
@@ -446,6 +449,7 @@ export default {
   margin-left: 50px;
   width: 76%;
   height: 80px;
+  font-size: 14px;
   font-family: "Arial Rounded MT Bold";
 }
 
