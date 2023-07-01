@@ -61,7 +61,11 @@
                 <input style="background-color: antiquewhite">
               </div>
               <!--  好友列表  -->
-              <div class="friend-item" v-for="item in userList" :key="item.id" style="height: 66px;border: 1px;cursor: pointer;">
+              <div class="friend-item"
+                   v-for="item in userList"
+                   :key="item.id"
+                   @mouseover="hoverEffect($event, true)"
+                   @mouseout="hoverEffect($event, false)">
                 <el-avatar style="float: left;" shape="square" :size="63" :src="item.avatarUrl"></el-avatar>
                 <div
                   style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">
@@ -78,7 +82,8 @@
           <el-col :span="18">
             <div class="grid-content bg-purple" style="height: 760px">
               <!--  top  -->
-              <div style="border: 1px solid red; height: 60px; display: flex; align-items: center; justify-content: center;">
+              <div
+                style="border: 1px solid red; height: 60px; display: flex; align-items: center; justify-content: center;">
                 <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
               </div>
               <!--  mid  -->
@@ -128,7 +133,7 @@ export default {
         {
           avatarUrl: require('@/assets/avatar/zhou.jpg'),
           nickName: '葵葵',
-          lastContent: '马路上全是腿！我没开玩笑！'
+          lastContent: '路上全是腿,没开玩笑！'
         },
         {
           avatarUrl: require('@/assets/avatar/dan.jpg'),
@@ -194,6 +199,17 @@ export default {
     },
 
     /**
+     * 鼠标聚焦置灰
+     */
+    hoverEffect(event, isHover) {
+      if (isHover) {
+        event.currentTarget.classList.add('hover')
+      } else {
+        event.currentTarget.classList.remove('hover')
+      }
+    },
+
+    /**
      * 发送消息给指定用户
      */
     sendMessage() {
@@ -212,7 +228,6 @@ export default {
 </script>
 
 <style>
-/*上边栏Logo*/
 .header-logo {
   float: left;
   width: 150px;
@@ -221,7 +236,6 @@ export default {
   margin-left: -1.4%;
 }
 
-/*上边栏-左侧-目录*/
 .header-left-menu {
   width: 29.5%;
   float: left;
@@ -229,14 +243,12 @@ export default {
   border-bottom: none !important;
 }
 
-/*上边栏-左侧-目录文字*/
 .header-left-menu-font {
   color: antiquewhite !important;
   margin-left: 2%;
   font-size: 17px
 }
 
-/*上边栏-头像*/
 .header-avatar {
   float: right;
   cursor: pointer;
@@ -254,7 +266,6 @@ export default {
   background-color: #303133;
 }
 
-/*背景视频*/
 .search-cls video {
   position: absolute;
   top: 50%;
@@ -267,7 +278,6 @@ export default {
   z-index: -1;
 }
 
-/*包含整个icon的div*/
 .icon-div {
   float: right;
   margin-right: 3.0%;
@@ -275,7 +285,6 @@ export default {
   cursor: pointer;
 }
 
-/*元素跳动*/
 .icon-div:hover {
   animation: jump 1s;
 }
@@ -292,13 +301,11 @@ export default {
   }
 }
 
-/*icon下方的文字*/
 .icon-font {
   color: antiquewhite;
   font-size: 12px
 }
 
-/*icon本身*/
 .iconfont {
   width: 1.7em;
   height: 1.7em;
@@ -309,45 +316,18 @@ export default {
   margin-right: 10px;
 }
 
-.user-profile .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
+.friend-item {
+  height: 66px;
+  cursor: pointer;
 }
 
-.friend-item .avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.chat-header .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.chat-footer el-input {
-  flex: 1;
-  margin-right: 10px;
+.friend-item:hover {
+  background-color: #ccc;
 }
 
 .grid-content {
   border-radius: 4px;
   min-height: 36px;
-}
-
-.friend-item {
-  height: 66px;
-  border: 1px solid;
-  cursor: pointer;
-}
-
-.friend-item:hover {
-  filter: grayscale(100%);
 }
 
 #chat-input-id {
