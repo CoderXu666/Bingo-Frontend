@@ -88,44 +88,49 @@
     <el-main class="main-cls">
       <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 4%;">
         <!--    第一行    -->
-        <el-col :span="20" class="left-content" style="border: 1px solid red">
-          <span style="background-color: antiquewhite;height: 27px;display: inline-block;"></span>
+        <el-col :span="20" class="left-content" style="border: 1px solid red;padding-left: 0.5%">
           <span style="margin-right: 1%; color: antiquewhite">广场动态</span>
           <span style="margin-right: 1%; color: antiquewhite">换一批</span>
           <span style="margin-right: 1%; color: antiquewhite">查看更多</span>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red; color: antiquewhite;">
-          <span style="background-color: antiquewhite;height: 27px;display: inline-block;"></span>
-          <span style="display: inline-block;margin: auto">本周热门话题</span>
+          <span style="display: inline-block;margin-left: 4%">当前热门话题</span>
         </el-col>
         <!--    第二行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
           <template v-for="item in postList">
             <el-col :span="6" :key="item.id">
               <span class="post-cls">
-                <div style="background-color: #323335;margin-left: 4%">
-                  <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
-                  <span class="post-name">{{ item.name }}</span>
-                  <span class="post-date">{{ item.date }}</span>
-                  <el-button
-                    style="float: right;margin-right: 8%;margin-top: 2%;background-color: antiquewhite;color: black"
-                    size="small">
-                    关注
-                  </el-button>
-                  <div class="post-content">{{ item.content }}</div>
-                  <div class="post-picture">
-                    <!--  使用的图片  -->
-                    <div>
-                      <el-image
-                        style="height: 100px; width: 100px"
-                        :src=item.picture
-                        fit="fill">
-                      </el-image>
-                    </div>
-                    <div style="">
-                      <i class="el-icon-share"></i>
-                      <i class="el-icon-share"></i>
-                      <i class="el-icon-share"></i>
+                <div style="background-color: #323335;margin-left: 2%;margin-right: 2%">
+                  <div style="padding-top: 4%">
+                    <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
+                    <span class="post-name">{{ item.name }}</span>
+                    <span class="post-date">{{ item.date }}</span>
+                    <el-button
+                      style="float: right;
+                      margin-right: 5%;
+                      margin-top: 2%;
+                      background-color: antiquewhite;
+                      color: black"
+                      size="small"
+                    >
+                      关注
+                    </el-button>
+                    <div class="post-content">{{ item.content }}</div>
+                    <div class="post-picture">
+                      <!--  使用的图片  -->
+                      <div>
+                        <el-image
+                          style="height: 100px; width: 100px"
+                          :src=item.picture
+                          fit="fill">
+                        </el-image>
+                      </div>
+                      <div style="">
+                        <i class="el-icon-share"></i>
+                        <i class="el-icon-share"></i>
+                        <i class="el-icon-share"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -134,29 +139,17 @@
           </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
-          <div style="color: antiquewhite ">
-            <div style="padding-top: 7%;margin-left: 5%">
-              <div>1.最让你难忘事情</div>
-              <br>
-              <div>2.最想对年轻的你说什么</div>
-              <br>
-              <div>3.你最后悔的事情是什么</div>
-              <br>
-              <div>4.到底什么是友情</div>
-              <br>
-              <div>5.到底什么是友情</div>
-              <br>
-              <div>6.到底什么是友情</div>
-              <br>
-              <div>7.到底什么是友情</div>
-              <br>
-              <div>8.到底什么是友情</div>
-              <br>
-              <div>9.到底什么是友情</div>
-              <br>
-              <div>10.到底什么是友情</div>
-              <br>
-            </div>
+          <div style="color: antiquewhite;margin-top: 7%;margin-left: 5%;background-color: #323335;">
+            <div>1.最让你难忘事情</div>
+            <div>2.最想对年轻的你说什么</div>
+            <div>3.你最后悔的事情是什么</div>
+            <div>4.到底什么是友情</div>
+            <div>5.到底什么是友情</div>
+            <div>6.到底什么是友情</div>
+            <div>7.到底什么是友情</div>
+            <div>8.到底什么是友情</div>
+            <div>9.到底什么是友情</div>
+            <div>10.到底什么是友情</div>
           </div>
         </el-col>
       </div>
@@ -318,12 +311,6 @@ export default {
   border-bottom: none !important;
 }
 
-.header-left-menu-font {
-  color: antiquewhite !important;
-  margin-left: 2%;
-  font-size: 17px
-}
-
 .header-avatar {
   float: right;
   cursor: pointer;
@@ -337,13 +324,13 @@ export default {
 }
 
 .search-big-title {
-  color: whitesmoke;
+  color: antiquewhite;
   font-family: 'Arial Rounded MT Bold';
   padding-left: 21%
 }
 
 .search-small-title {
-  color: whitesmoke;
+  color: antiquewhite;
   font-family: Arial;
   padding-left: 10%;
   margin-top: 2.5%;
@@ -424,6 +411,12 @@ export default {
   margin-top: 4%;
 }
 
+.header-left-menu-font {
+  color: antiquewhite !important;
+  margin-left: 2%;
+  font-size: 17px
+}
+
 .post-name {
   position: absolute;
   margin-left: 1%;
@@ -433,6 +426,7 @@ export default {
 }
 
 .post-avatar {
+  margin-left: 4%;
   position: relative;
   cursor: pointer;
 }
