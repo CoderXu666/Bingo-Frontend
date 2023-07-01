@@ -101,24 +101,59 @@
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
           <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
-          <span style="display: inline-block"></span>
+          <span style="display: inline-block">本周热门话题</span>
         </el-col>
         <!--    第二行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
           <template v-for="item in postList">
             <el-col :span="6" :key="item.id">
               <span class="post-cls">
-                <el-avatar class="post-avatar" :size="50" :src="item.circleUrl"></el-avatar>
-                <span class="post-name">{{ item.name }}</span>
-                <span class="post-date">{{ item.date }}</span>
+                <div>
+                  <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
+                  <span class="post-name">{{ item.name }}</span>
+                  <span class="post-date">{{ item.date }}</span>
+                  <el-button type="primary" style="float: right;margin-right: 8%;margin-top: 2%;" size="small">关注</el-button>
+                </div>
                 <div class="post-content">{{ item.content }}</div>
-                <div class="post-picture">{{ item.picture }}</div>
+                <div class="post-picture">
+                  <!--         使用的图片      -->
+                  <div>
+                    <el-image
+                      style="width: 100px; height: 100px"
+                      :src=item.picture
+                      fit="fill">
+                    </el-image>
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        :src=item.picture
+                        fit="fill">
+                    </el-image>
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        :src=item.picture
+                        fit="fill">
+                    </el-image>
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        :src=item.picture
+                        fit="fill">
+                    </el-image>
+                  </div>
+
+                  <div style="float: bottom;margin-bottom: 0px">
+                    <i class="el-icon-share"></i>
+                    <i class="el-icon-share"></i>
+                    <i class="el-icon-share"></i>
+                  </div>
+                </div>
               </span>
             </el-col>
           </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
-          11111111111111111111
+          <div style="width: 100px">
+
+          </div>
         </el-col>
       </div>
     </el-main>
@@ -172,64 +207,80 @@ export default {
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl1'
+          picture: [
+            require('@/assets/avatar/liuhuaqiang.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 2,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/zhangruonan.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 3,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/jiabing.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 4,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/zhangruonan.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 5,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/gaoqiqiang.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 6,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/zhangruonan.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 7,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/jiabing.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
         {
           id: 8,
           name: '徐志斌',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
-          picture: '11111',
-          circleUrl: 'path/to/circleUrl2'
+          picture: [
+            require('@/assets/avatar/gaoqiqiang.png')
+          ],
+          avatarUrl: require('@/assets/avatar/avatar.jpg')
         }
       ]
     }
@@ -380,7 +431,7 @@ export default {
   position: absolute;
   margin-left: 1%;
   margin-top: 6px;
-  color: #9FC6FF;
+  color: antiquewhite;
 }
 
 /*帖子头像*/
@@ -390,10 +441,12 @@ export default {
 
 /*帖子文字内容*/
 .post-content {
+  color: antiquewhite;
   border: 1px solid red;
   margin-left: 50px;
   width: 76%;
-  height: 80px
+  height: 80px;
+  font-family: "Arial Rounded MT Bold";
 }
 
 /*帖子配图*/
@@ -409,7 +462,8 @@ export default {
   position: absolute;
   margin-left: 1%;
   margin-top: 30px;
-  color: #9FC6FF;
+  color: antiquewhite;
+  font-size: small;
 }
 
 /*包含整个icon的div*/

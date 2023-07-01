@@ -85,9 +85,9 @@
               <div style="border: 1px solid red;height: 500px">
 
               </div>
-              <!--  bottom  -->
+              <!--  内容输入框  -->
               <div style="border: 1px solid red;height: 190px">
-
+                
               </div>
             </div>
           </el-col>
