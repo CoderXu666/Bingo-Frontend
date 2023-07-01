@@ -78,13 +78,10 @@
 
     <!--    3.两界之间    -->
     <div class="mid-one">
-      111
     </div>
     <div class="mid-two">
-      111
     </div>
     <div class="mid-three">
-      111
     </div>
 
     <!--  4.帖子 & 话题 -->
@@ -92,13 +89,13 @@
       <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 4%;">
         <!--    第一行    -->
         <el-col :span="20" class="left-content" style="border: 1px solid red">
-          <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
-          <span style="margin-right: 1%; color: lightskyblue">广场动态</span>
-          <span style="margin-right: 1%; color: lightskyblue">换一批</span>
-          <span style="margin-right: 1%; color: lightskyblue">查看更多</span>
+          <span style="background-color: antiquewhite;height: 27px;display: inline-block;"></span>
+          <span style="margin-right: 1%; color: antiquewhite">广场动态</span>
+          <span style="margin-right: 1%; color: antiquewhite">换一批</span>
+          <span style="margin-right: 1%; color: antiquewhite">查看更多</span>
         </el-col>
-        <el-col :span="4" class="right-content" style="border: 1px solid red; color: lightskyblue;">
-          <span style="background-color: lightskyblue;height: 27px;display: inline-block;"></span>
+        <el-col :span="4" class="right-content" style="border: 1px solid red; color: antiquewhite;">
+          <span style="background-color: antiquewhite;height: 27px;display: inline-block;"></span>
           <span style="display: inline-block;margin: auto">本周热门话题</span>
         </el-col>
         <!--    第二行    -->
@@ -110,8 +107,9 @@
                   <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
                   <span class="post-name">{{ item.name }}</span>
                   <span class="post-date">{{ item.date }}</span>
-                  <el-button type="primary" style="float: right;margin-right: 8%;margin-top: 2%;"
-                             size="small">关注</el-button>
+                  <el-button
+                    style="float: right;margin-right: 8%;margin-top: 2%;background-color: antiquewhite;color: black"
+                    size="small">关注</el-button>
                 </div>
                 <div class="post-content">{{ item.content }}</div>
                 <div class="post-picture">
@@ -134,7 +132,7 @@
           </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
-          <div style="color: orange ">
+          <div style="color: antiquewhite ">
             <div style="padding-top: 7%;margin-left: 5%">
               <div>1.最让你难忘事情</div>
               <br>
@@ -162,7 +160,7 @@
       </div>
     </el-main>
 
-    <!--  4.排队 -->
+    <!--  4.派对Party -->
     <el-main class="main-cls" style="background-color: #304156">
       <el-row>
         <el-col :span="18" class="left-content">
@@ -209,6 +207,7 @@ export default {
         {
           id: 1,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好',
           picture: [
@@ -219,6 +218,7 @@ export default {
         {
           id: 2,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -229,6 +229,7 @@ export default {
         {
           id: 3,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -239,6 +240,7 @@ export default {
         {
           id: 4,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -249,6 +251,7 @@ export default {
         {
           id: 5,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -259,6 +262,7 @@ export default {
         {
           id: 6,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -269,6 +273,7 @@ export default {
         {
           id: 7,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -279,6 +284,7 @@ export default {
         {
           id: 8,
           name: '徐志斌',
+          region: '辽宁大连',
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！',
           picture: [
@@ -314,7 +320,7 @@ export default {
 
 /*上边栏-左侧-目录文字*/
 .header-left-menu-font {
-  color: #9FC6FF !important;
+  color: antiquewhite !important;
   margin-left: 2%;
   font-size: 17px
 }
@@ -385,7 +391,7 @@ export default {
   position: absolute;
   top: 80%;
   left: 50%;
-  transform: translate(-210%, -50%);
+  transform: translate(-200%, -50%);
   width: 280px;
 }
 
@@ -435,11 +441,13 @@ export default {
   margin-left: 1%;
   margin-top: 6px;
   color: antiquewhite;
+  cursor: pointer;
 }
 
 /*帖子头像*/
 .post-avatar {
   position: relative;
+  cursor: pointer;
 }
 
 /*帖子文字内容*/
@@ -497,7 +505,7 @@ export default {
 
 /*icon下方的文字*/
 .icon-font {
-  color: #9FC6FF;
+  color: antiquewhite;
   font-size: 12px
 }
 

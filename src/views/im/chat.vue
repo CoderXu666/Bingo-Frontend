@@ -51,14 +51,14 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 70%;height: 760px;margin: auto;background-color: white">
+      <div style="width: 70%;height: 760px;margin: auto;background-color: antiquewhite">
         <el-row :gutter="1">
           <el-col :span="6">
             <!--  好友列表 -->
             <div style="height: 756px">
               <!--  上边栏 -->
               <div style="background-color: red;height: 60px">
-                <input style="background-color: lightskyblue">
+                <input style="background-color: antiquewhite">
               </div>
               <!--  好友列表  -->
               <div class="friend-item" v-for="item in userList" :key="item.id" style="height: 66px;border: 1px;cursor: pointer;">
@@ -82,11 +82,11 @@
                 <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
               </div>
               <!--  mid  -->
-              <div style="border: 1px solid red;height: 480px">
+              <div style="border: 1px solid red;height: 460px">
 
               </div>
               <!--  内容输入框  -->
-              <div style="border: 1px solid red;height: 220px">
+              <div style="border: 1px solid red;height: 240px">
                 <!-- 表情包 -->
                 <div style="border: 1px solid red;height: 20%">
                   <span style="margin-left: 2%">emoji</span>
@@ -231,7 +231,7 @@ export default {
 
 /*上边栏-左侧-目录文字*/
 .header-left-menu-font {
-  color: #9FC6FF !important;
+  color: antiquewhite !important;
   margin-left: 2%;
   font-size: 17px
 }
@@ -246,7 +246,7 @@ export default {
 }
 
 .header-avatar:hover {
-  transform: scale(1.4) translateY(5px); /* 鼠标悬停时图片放大1.1倍 */
+  transform: scale(1.4) translateY(5px);
 }
 
 .header-cls {
@@ -294,7 +294,7 @@ export default {
 
 /*icon下方的文字*/
 .icon-font {
-  color: #9FC6FF;
+  color: antiquewhite;
   font-size: 12px
 }
 
@@ -351,6 +351,9 @@ export default {
 }
 
 #chat-input-id {
-  height: 130px;
+  height: 150px;
+  text-align: left;
+  padding: 0;
+  line-height: normal;
 }
 </style>
