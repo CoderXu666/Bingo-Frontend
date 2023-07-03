@@ -101,7 +101,7 @@
           <template v-for="item in postList">
             <el-col :span="6" :key="item.id">
               <span class="post-cls">
-                <div style="background-color: #323335;margin-left: 2%;margin-right: 2%;">
+                <div style="background-color: #323335;margin-left: 2%;margin-right: 2%;border-radius: 10px">
                   <div style="padding-top: 4%">
                     <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
                     <span class="post-name">{{ item.name }}</span>
@@ -139,7 +139,7 @@
           </template>
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
-          <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;">
+          <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
             <div class="topic-cls">1.最让你难忘事情</div>
             <div class="topic-cls">2.最想对年轻的你说什么</div>
             <div class="topic-cls">3.你最后悔的事情是什么</div>
