@@ -140,16 +140,16 @@
         </el-col>
         <el-col :span="4" class="right-content" style="border: 1px solid red">
           <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;">
-            <div>1.最让你难忘事情</div>
-            <div>2.最想对年轻的你说什么</div>
-            <div>3.你最后悔的事情是什么</div>
-            <div>4.到底什么是友情</div>
-            <div>5.到底什么是友情</div>
-            <div>6.到底什么是友情</div>
-            <div>7.到底什么是友情</div>
-            <div>8.到底什么是友情</div>
-            <div>9.到底什么是友情</div>
-            <div>10.到底什么是友情</div>
+            <div class="topic-cls">1.最让你难忘事情</div>
+            <div class="topic-cls">2.最想对年轻的你说什么</div>
+            <div class="topic-cls">3.你最后悔的事情是什么</div>
+            <div class="topic-cls">4.到底什么是友情</div>
+            <div class="topic-cls">5.到底什么是友情</div>
+            <div class="topic-cls">6.到底什么是友情</div>
+            <div class="topic-cls">7.到底什么是友情</div>
+            <div class="topic-cls">8.到底什么是友情</div>
+            <div class="topic-cls">9.到底什么是友情</div>
+            <div class="topic-cls">10.到底什么是友情</div>
           </div>
         </el-col>
       </div>
@@ -373,6 +373,12 @@ export default {
   left: 50%;
   transform: translate(-200%, -50%);
   width: 280px;
+}
+
+.topic-cls {
+  padding-bottom: 5%;
+  padding-top: 5%;
+  margin-left: 5%;
 }
 
 .mid-two {
