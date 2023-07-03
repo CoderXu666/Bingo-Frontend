@@ -3,7 +3,7 @@
     <!--  1.导航栏  -->
     <el-header class="header-cls">
       <!--   logo   -->
-      <el-image class="header-logo" src="" :fit="fit"></el-image>
+      <el-image class="header-logo" :src="logoUrl" :fit="fit"></el-image>
       <!--   左目录   -->
       <el-menu
         class="header-left-menu"
@@ -86,18 +86,18 @@
 
     <!--  4.帖子 & 话题 -->
     <el-main class="main-cls">
-      <div style="margin: auto;width: 80%; border: 1px solid red;margin-top: 4%;">
+      <div style="margin: auto;width: 80%;margin-top: 4%;">
         <!--    第一行    -->
-        <el-col :span="20" class="left-content" style="border: 1px solid red;padding-left: 0.5%">
+        <el-col :span="20" class="left-content" style="padding-left: 0.5%">
           <span style="margin-right: 1%; color: antiquewhite">广场动态</span>
           <span style="margin-right: 1%; color: antiquewhite">换一批</span>
           <span style="margin-right: 1%; color: antiquewhite">查看更多</span>
         </el-col>
-        <el-col :span="4" class="right-content" style="border: 1px solid red; color: antiquewhite;">
+        <el-col :span="4" class="right-content" style="color: antiquewhite;">
           <span style="display: inline-block;margin-left: 4%">当前热门话题</span>
         </el-col>
         <!--    第二行    -->
-        <el-col :span="20" class="left-content" style="border: 1px solid red">
+        <el-col :span="20" class="left-content">
           <template v-for="item in postList">
             <el-col :span="6" :key="item.id">
               <span class="post-cls">
@@ -138,7 +138,7 @@
             </el-col>
           </template>
         </el-col>
-        <el-col :span="4" class="right-content" style="border: 1px solid red">
+        <el-col :span="4" class="right-content">
           <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
             <div class="topic-cls">1.最让你难忘事情</div>
             <div class="topic-cls">2.最想对年轻的你说什么</div>
@@ -176,7 +176,7 @@
           </div>
         </el-col>
         <el-col :span="12" class="right-content">
-          <div style="border: 1px solid red">
+          <div>
             1111
           </div>
         </el-col>
@@ -193,6 +193,7 @@ export default {
 
   data() {
     return {
+      logoUrl: require('@/assets/logo/logo.png'),
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
       fit: 'fill',
       searchType: '帖子',
@@ -439,7 +440,6 @@ export default {
 
 .post-content {
   color: antiquewhite;
-  border: 1px solid red;
   margin-left: 6%;
   width: 90%;
   height: 80px;
@@ -448,7 +448,6 @@ export default {
 }
 
 .post-picture {
-  border: 1px solid red;
   margin-left: 6%;
   width: 90%;
   height: 234px;
