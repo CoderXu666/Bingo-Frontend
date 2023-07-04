@@ -164,14 +164,18 @@
         <!--    热门视频    -->
         <el-col :span="18" style="padding-left: 0.5%">
           <div style="border: 1px solid red;height: 500px">
-
+            <el-col :span="6" v-for="item in videoList">
+              <div style="border: 1px solid red;height: 210px">
+                <video ref="videoPlayer" controls>
+                  <source :src="item.videoUrl" type="video/mp4">
+                </video>
+              </div>
+            </el-col>
           </div>
         </el-col>
         <!--    短视频客户端    -->
         <el-col :span="6">
-          <div style="border: 1px solid red;height: 500px">
-
-          </div>
+          <div style="border: 1px solid red;height: 500px"></div>
         </el-col>
       </div>
     </el-main>
@@ -205,8 +209,6 @@
         </el-col>
       </el-row>
     </el-footer>
-
-    <!--  5.Frames -->
   </el-container>
 </template>
 
@@ -214,15 +216,46 @@
 
 export default {
 
+  mounted() {
+    this.$refs.videoPlayer.addEventListener('ended', this.handleVideoEnded);
+  },
+
   data() {
     return {
-      testUrl: require('@/assets/avatar/liuhuaqiang.png'),
+      videoUrl: require('@/assets/video/background.mp4'),
 
       logoUrl: require('@/assets/logo/logo.png'),
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
       fit: 'fill',
       searchType: '帖子',
       searchContent: '',
+
+      videoList: [
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        },
+        {
+          videoUrl: ''
+        }
+      ],
 
       postList: [
         {
