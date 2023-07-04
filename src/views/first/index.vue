@@ -86,18 +86,18 @@
 
     <!--  4.帖子 & 话题 -->
     <el-main class="topic-body-cls">
-      <div style="margin: auto;width: 80%;margin-top: 4%;">
+      <div style="margin: auto;width: 80%">
         <!--    第一行    -->
-        <el-col :span="20" class="left-content" style="padding-left: 0.5%">
+        <el-col :span="18" style="padding-left: 0.5%">
           <span style="margin-right: 1%; color: antiquewhite">广场动态</span>
           <span style="margin-right: 1%; color: antiquewhite">换一批</span>
           <span style="margin-right: 1%; color: antiquewhite">查看更多</span>
         </el-col>
-        <el-col :span="4" class="right-content" style="color: antiquewhite;">
+        <el-col :span="6" style="color: antiquewhite;">
           <span style="display: inline-block;margin-left: 4%">当前热门话题</span>
         </el-col>
         <!--    第二行    -->
-        <el-col :span="20">
+        <el-col :span="18">
           <el-col v-for="item in postList" :span="6" :key="item.id">
             <span class="post-cls">
               <div style="background-color: #323335;margin-left: 2%;margin-right: 2%;border-radius: 10px">
@@ -134,7 +134,7 @@
             </span>
           </el-col>
         </el-col>
-        <el-col :span="4" class="right-content">
+        <el-col :span="6" class="right-content">
           <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
             <div class="topic-cls">1.最让你难忘事情</div>
             <div class="topic-cls">2.最想对年轻的你说什么</div>
@@ -151,12 +151,37 @@
       </div>
     </el-main>
 
+    <!--  4.热门视频、短视频客户端  -->
+    <el-main class="video-body-cls">
+      <div style="margin: auto;width: 80%">
+        <el-col :span="18" style="padding-left: 0.5%">
+          <span style="margin-right: 1%; color: antiquewhite">热门视频</span>
+        </el-col>
+        <el-col :span="6" style="color: antiquewhite;">
+          <span style="display: inline-block;margin-left: 4%">随便看看</span>
+        </el-col>
+
+        <!--    热门视频    -->
+        <el-col :span="18" style="padding-left: 0.5%">
+          <div style="border: 1px solid red;height: 500px">
+
+          </div>
+        </el-col>
+        <!--    短视频客户端    -->
+        <el-col :span="6">
+          <div style="border: 1px solid red;height: 500px">
+
+          </div>
+        </el-col>
+      </div>
+    </el-main>
+
     <!--  4.派对Party -->
     <el-main class="party-body-cls">
       <div style="margin: auto;width: 80%;">
         <el-row>
           <el-col :span="20">
-            1111111111111111111
+            22222222222
           </el-col>
           <el-col :span="4">
             11111111111111111111
@@ -191,6 +216,8 @@ export default {
 
   data() {
     return {
+      testUrl: require('@/assets/avatar/liuhuaqiang.png'),
+
       logoUrl: require('@/assets/logo/logo.png'),
       avatarUrl: require('@/assets/avatar/avatar.jpg'),
       fit: 'fill',
@@ -410,11 +437,14 @@ export default {
 
 .topic-body-cls {
   width: 100vw;
-  margin: 0;
-  padding: 0;
+  padding-top: 4%;
   background-color: #292A2D;
-  background-size: cover;
-  background-repeat: no-repeat;
+}
+
+.video-body-cls {
+  width: 100vw;
+  background-color: #292A2D;
+  padding-top: 1.5%;
 }
 
 .party-body-cls {
