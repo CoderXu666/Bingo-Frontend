@@ -53,8 +53,8 @@
     <div style="background-color: #292A2D">
       <div style="width: 80%;height: 760px;margin: auto;background-color: antiquewhite">
         <el-row :gutter="1">
+          <!--  好友列表 -->
           <el-col :span="6">
-            <!--  好友列表 -->
             <div style="height: 756px">
               <!--  上边栏 -->
               <div style="background-color: red;height: 60px">
@@ -218,11 +218,12 @@ export default {
         msg: this.inputMessage,
         userId: this.userId
       }
-      chatApi.sendMessage(message).then(res => {
-        // 清空输入框
-        this.inputMessage = ''
-      })
-    },
+      chatApi.sendMessage(message)
+        .then(res => {
+          // 清空输入框
+          this.inputMessage = ''
+        })
+    }
   }
 }
 </script>

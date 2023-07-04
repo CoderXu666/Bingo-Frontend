@@ -3,7 +3,7 @@
     <!--  1.导航栏  -->
     <el-header class="header-cls">
       <!--   logo   -->
-      <el-image class="header-logo" :src="logoUrl" :fit="fit"></el-image>
+      <el-image class="header-logo" :src="logoUrl" :fit="fit" @click="clickLogo()"></el-image>
       <!--   左目录   -->
       <el-menu
         class="header-left-menu"
@@ -85,7 +85,7 @@
     </div>
 
     <!--  4.帖子 & 话题 -->
-    <el-main class="main-cls">
+    <el-main class="topic-body-cls">
       <div style="margin: auto;width: 80%;margin-top: 4%;">
         <!--    第一行    -->
         <el-col :span="20" class="left-content" style="padding-left: 0.5%">
@@ -97,46 +97,42 @@
           <span style="display: inline-block;margin-left: 4%">当前热门话题</span>
         </el-col>
         <!--    第二行    -->
-        <el-col :span="20" class="left-content">
-          <template v-for="item in postList">
-            <el-col :span="6" :key="item.id">
-              <span class="post-cls">
-                <div style="background-color: #323335;margin-left: 2%;margin-right: 2%;border-radius: 10px">
-                  <div style="padding-top: 4%">
-                    <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
-                    <span class="post-name">{{ item.name }}</span>
-                    <span class="post-date">{{ item.date }}</span>
-                    <el-button
-                      style="float: right;
-                      margin-right: 5%;
-                      margin-top: 2%;
-                      background-color: antiquewhite;
-                      color: black"
-                      size="small"
-                    >
-                      关注
-                    </el-button>
-                    <div class="post-content">{{ item.content }}</div>
-                    <div class="post-picture">
-                      <!--  使用的图片  -->
-                      <div>
-                        <el-image
-                          style="height: 100px; width: 100px"
-                          :src=item.picture
-                          fit="fill">
-                        </el-image>
-                      </div>
-                      <div style="">
-                        <i class="el-icon-share"></i>
-                        <i class="el-icon-share"></i>
-                        <i class="el-icon-share"></i>
-                      </div>
+        <el-col :span="20">
+          <el-col v-for="item in postList" :span="6" :key="item.id">
+            <span class="post-cls">
+              <div style="background-color: #323335;margin-left: 2%;margin-right: 2%;border-radius: 10px">
+                <div style="padding-top: 4%">
+                  <el-avatar class="post-avatar" :size="50" :src="item.avatarUrl"></el-avatar>
+                  <span class="post-name">{{ item.name }}</span>
+                  <span class="post-date">{{ item.date }}</span>
+                  <el-button
+                    style="float: right;
+                    margin-right: 5%;
+                    margin-top: 2%;
+                    background-color: antiquewhite;
+                    color: black"
+                    size="small"
+                  >
+                    关注
+                  </el-button>
+                  <div class="post-content">{{ item.content }}</div>
+                  <div class="post-picture">
+                    <!--  使用的图片  -->
+                    <el-image
+                      style="height: 100px; width: 100px"
+                      :src=item.picture
+                      fit="fill">
+                    </el-image>
+                    <div style="">
+                      <i class="el-icon-share"></i>
+                      <i class="el-icon-share"></i>
+                      <i class="el-icon-share"></i>
                     </div>
                   </div>
                 </div>
-              </span>
-            </el-col>
-          </template>
+              </div>
+            </span>
+          </el-col>
         </el-col>
         <el-col :span="4" class="right-content">
           <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
@@ -156,15 +152,17 @@
     </el-main>
 
     <!--  4.派对Party -->
-    <el-main class="main-cls" style="background-color: #304156">
-      <el-row>
-        <el-col :span="18" class="left-content">
-          1111111111111111111
-        </el-col>
-        <el-col :span="6" class="right-content">
-          11111111111111111111
-        </el-col>
-      </el-row>
+    <el-main class="party-body-cls">
+      <div style="margin: auto;width: 80%;">
+        <el-row>
+          <el-col :span="20">
+            1111111111111111111
+          </el-col>
+          <el-col :span="4">
+            11111111111111111111
+          </el-col>
+        </el-row>
+      </div>
     </el-main>
 
     <!--  5.底边栏  -->
@@ -207,7 +205,7 @@ export default {
           date: '3天前',
           content: '大家好，大连有没有同城好友啊！一起玩啊！大家好，大连有没有同城好友啊！一起玩啊！大家好',
           picture: [
-            require('@/assets/avatar/liuhuaqiang.png')
+            require('@/assets/avatar/liuhuaqiang.png'),
           ],
           avatarUrl: require('@/assets/avatar/avatar.jpg')
         },
@@ -292,7 +290,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    clickLogo() {
+      window.location.reload()
+    }
+  }
 }
 </script>
 
@@ -303,6 +305,7 @@ export default {
   cursor: pointer;
   height: 68px;
   margin-left: -1.4%;
+  cursor: pointer;
 }
 
 .header-left-menu {
@@ -380,6 +383,7 @@ export default {
   padding-bottom: 5%;
   padding-top: 5%;
   margin-left: 5%;
+  cursor: pointer;
 }
 
 .mid-two {
@@ -404,13 +408,19 @@ export default {
   height: 90px
 }
 
-.main-cls {
+.topic-body-cls {
   width: 100vw;
   margin: 0;
   padding: 0;
   background-color: #292A2D;
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.party-body-cls {
+  background-color: #292A2D;
+  border: 1px solid red;
+  padding-top: 3%
 }
 
 .post-cls {
