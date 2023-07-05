@@ -215,11 +215,6 @@
 <script>
 
 export default {
-
-  mounted() {
-    this.$refs.videoPlayer.addEventListener('ended', this.handleVideoEnded);
-  },
-
   data() {
     return {
       videoUrl: require('@/assets/video/background.mp4'),
