@@ -227,28 +227,28 @@ export default {
 
       videoList: [
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
-          videoUrl: ''
+          videoUrl: require('@/assets/video/background.mp4')
         }
       ],
 
