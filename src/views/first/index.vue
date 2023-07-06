@@ -165,8 +165,8 @@
         <el-col :span="18" style="padding-left: 0.5%">
           <div style="border: 1px solid red;height: 500px">
             <el-col :span="6" v-for="item in videoList">
-              <div style="border: 1px solid red;height: 210px">
-                <video ref="videoPlayer" controls>
+              <div style="border: 1px solid red;height: 250px">
+                <video ref="videoPlayer" style="width: 100%; height: 100%; margin: auto" controls>
                   <source :src="item.videoUrl" type="video/mp4">
                 </video>
               </div>
@@ -227,7 +227,7 @@ export default {
 
       videoList: [
         {
-          videoUrl: require('@/assets/video/background.mp4')
+          videoUrl: require('@/assets/video/climb.mp4')
         },
         {
           videoUrl: require('@/assets/video/background.mp4')
