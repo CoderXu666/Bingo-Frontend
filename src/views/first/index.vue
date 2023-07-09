@@ -30,13 +30,10 @@
       </div>
     </div>
 
-    <!--    3.两界之间    -->
-    <div class="mid-one">
-    </div>
-    <div class="mid-two">
-    </div>
-    <div class="mid-three">
-    </div>
+    <!--  3.两界之间  -->
+    <div class="mid-one"></div>
+    <div class="mid-two"></div>
+    <div class="mid-three"></div>
 
     <!--  4.帖子 & 话题 -->
     <el-main class="topic-body-cls">
@@ -121,7 +118,7 @@
             <el-col :span="6" v-for="item in videoList">
               <div style="border: 1px solid red;height: 250px">
                 <video ref="videoPlayer" style="width: 100%; height: 100%; margin: auto" controls>
-                  <source :src="item.videoUrl" type="video/mp4">
+                  <source :src="require('@/assets/video/background.mp4')" type="video/mp4">
                 </video>
               </div>
             </el-col>
@@ -176,8 +173,6 @@ export default {
 
   data() {
     return {
-      videoUrl: require('@/assets/video/background.mp4'),
-      fit: 'fill',
       searchType: '帖子',
       searchContent: '',
 
@@ -301,8 +296,7 @@ export default {
     }
   },
 
-  methods: {
-  }
+  methods: {}
 }
 </script>
 

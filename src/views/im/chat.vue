@@ -22,12 +22,13 @@
                    @mouseout="hoverEffect($event, false)"
                    @click="clickFriend(item.userId, item.nickName)"
               >
-                <el-avatar style="float: left;" shape="square" :size="63" :src="item.avatarUrl"></el-avatar>
-                <div
-                  style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">
+                <el-avatar style="float: left;" shape="square" :size="60" :src="item.avatarUrl"/>
+                <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 16px">
                   {{ item.nickName }}
                 </div>
-                <div style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999">11:02</div>
+                <div style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
+                  11:02
+                </div>
                 <div style="padding-top: 40px;margin-left: 22.6%;font-size: 13px;color: #999999;">
                   {{ item.nickName }}：{{ item.lastContent }}
                 </div>
@@ -238,8 +239,9 @@ export default {
 }
 
 .friend-item {
-  height: 66px;
+  height: 60px;
   cursor: pointer;
+  margin-top: 2px;
 }
 
 .friend-item:hover {
