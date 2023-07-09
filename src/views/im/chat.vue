@@ -99,12 +99,9 @@
                   <span style="margin-left: 2%">语音</span>
                   <span style="margin-left: 2%">视频</span>
                 </div>
-                <el-input
-                  id="chat-input-id"
-                  placeholder="请输入内容"
-                  v-model="chatContent">
-                </el-input>
-                <el-button size="small" style="float: right;margin-right: 2%;margin-top: 0.5%">发送</el-button>
+                <!-- 输入框 -->
+                <div id="chat-input-id" v-model="chatContent" contenteditable="true"></div>
+                <el-button class="send-btn" size="small">发送</el-button>
               </div>
             </div>
           </el-col>
@@ -332,9 +329,17 @@ export default {
 }
 
 #chat-input-id {
-  height: 150px;
-  text-align: left;
+  background-color: #97a8be;
+  height: 140px;
+  width: 100%;
   padding: 0;
-  line-height: normal;
+  overflow: auto;
+  font-size: medium;
+}
+
+.send-btn {
+  float: right;
+  float: bottom;
+  margin-right: 2%;
 }
 </style>
