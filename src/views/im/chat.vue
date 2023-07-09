@@ -51,7 +51,7 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 80%;height: 760px;margin: auto;background-color: antiquewhite">
+      <div style="width: 78%;height: 760px;margin: auto;background-color: antiquewhite">
         <el-row :gutter="1">
           <!--  好友列表 -->
           <el-col :span="6">
@@ -230,7 +230,7 @@ export default {
      */
     limitText() {
       var maxLength = 10
-      var chatInput = document.getElementById("chat-input-id")
+      var chatInput = document.getElementById('chat-input-id')
       var text = chatInput.textContent
       if (text.length > maxLength) {
         event.preventDefault()
@@ -355,13 +355,12 @@ export default {
   height: 180px;
   width: 100%;
   overflow: auto;
-  font-size: medium;
+  font-size: 17px;
   padding: 1.2%;
 }
 
 .send-btn {
   float: right;
   margin-right: 2%;
-  margin-top: 1%;
 }
 </style>
