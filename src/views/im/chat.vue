@@ -100,7 +100,7 @@
                   <span style="margin-left: 2%">视频</span>
                 </div>
                 <!-- 输入框 -->
-                <div id="chat-input-id" v-model="chatContent" contenteditable="true"></div>
+                <div id="chat-input-id" v-model="chatContent" :contenteditable=contenteditable @input="limitText"></div>
                 <el-button class="send-btn" size="small">发送</el-button>
               </div>
             </div>
@@ -118,6 +118,7 @@ export default {
   data() {
     return {
       inputMessage: '',
+      contenteditable: true,
       userId: 'xuzhibin',
       currentUserName: '小温',
       chatContent: '',
@@ -220,6 +221,19 @@ export default {
           // 清空输入框
           this.inputMessage = ''
         })
+    },
+
+    /**
+     * 限制输入框字数
+     */
+    limitText() {
+      var maxLength = 10; // 设置最大字数
+      var chatInput = document.getElementById("chat-input-id");
+      var text = chatInput.textContent;
+
+      if (text.length > maxLength) {
+        event.preventDefault();
+      }
     }
   }
 }
@@ -332,9 +346,9 @@ export default {
   background-color: #97a8be;
   height: 140px;
   width: 100%;
-  padding: 0;
   overflow: auto;
   font-size: medium;
+  padding: 1.2%;
 }
 
 .send-btn {
