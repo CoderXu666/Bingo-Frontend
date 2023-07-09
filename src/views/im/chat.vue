@@ -11,7 +11,7 @@
           <el-col :span="6">
             <div style="height: 756px">
               <!--  上边栏 -->
-              <div style="background-color: red;height: 60px">
+              <div style="height: 60px">
                 <input style="background-color: antiquewhite">
               </div>
               <!--  好友列表  -->
