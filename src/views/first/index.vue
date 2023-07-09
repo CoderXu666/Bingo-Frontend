@@ -13,7 +13,7 @@
           Bingo：有趣的年轻人社交平台
         </h1>
         <div class="search-small-title">
-          我是徐志斌，这是我个人开源项目 Bingo 社交平台，欢迎加入我们一起Coding
+          欢迎访问我的个人开源项目 Bingo 社交平台，欢迎加入我们一起Coding
         </div>
         <!--    搜索框    -->
         <div style="margin-top: 40px;opacity: 0.7;">
@@ -59,10 +59,10 @@
                   <el-button
                     style="float: right;
                     margin-right: 5%;
-                    margin-top: 2%;
+                    margin-top: 4%;
                     background-color: antiquewhite;
                     color: black"
-                    size="small"
+                    size="mini"
                   >
                     关注
                   </el-button>

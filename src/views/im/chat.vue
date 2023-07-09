@@ -79,7 +79,7 @@ export default {
     return {
       inputMessage: '',
       contenteditable: true,
-      userId: 'xuzhibin',
+      userId: '',
       currentUserName: '',
       chatContent: '',
       userList: [
@@ -258,7 +258,7 @@ export default {
   width: 100%;
   overflow: auto;
   font-size: 17px;
-  padding: 1.2%;
+  padding: 1.4%;
 }
 
 .send-btn {
