@@ -1,0 +1,128 @@
+<template>
+  <!--  1.导航栏  -->
+  <el-header class="header-cls">
+    <!--   logo   -->
+    <el-image class="header-logo" :src="logoUrl" :fit="fit" @click="clickLogo()"></el-image>
+    <!--   左目录   -->
+    <el-menu
+      class="header-left-menu"
+      mode="horizontal"
+      background-color="transparent">
+      <el-menu-item index="1" class="header-left-menu-font">
+        社区广场
+      </el-menu-item>
+      <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
+      <el-menu-item index="3" class="header-left-menu-font">好物商城</el-menu-item>
+      <el-menu-item index="4" class="header-left-menu-font">关于作者</el-menu-item>
+    </el-menu>
+    <!--   头像   -->
+    <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
+    <!--   右目录   -->
+    <div class="icon-div">
+      <el-badge class="item" :value="2">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
+        </svg>
+        <div class="icon-font">通知</div>
+      </el-badge>
+    </div>
+    <div class="icon-div">
+      <el-badge class="item" :value="1">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+        </svg>
+        <div class="icon-font">好友</div>
+      </el-badge>
+    </div>
+    <div class="icon-div">
+      <svg class="iconfont">
+        <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
+      </svg>
+      <div class="icon-font">会员</div>
+    </div>
+    <div class="icon-div">
+      <svg class="iconfont">
+        <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
+      </svg>
+      <div class="icon-font">作品</div>
+    </div>
+  </el-header>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      logoUrl: require('@/assets/logo/logo.png'),
+      avatarUrl: require('@/assets/avatar/avatar.jpg')
+    }
+  },
+
+  methods: {
+    clickLogo() {
+      window.location.reload()
+    }
+  }
+}
+</script>
+
+<style scoped>
+.header-logo {
+  float: left;
+  width: 150px;
+  cursor: pointer;
+  height: 68px;
+  margin-left: -1.4%;
+}
+
+.header-left-menu {
+  width: 29.5%;
+  float: left;
+  margin-top: 6px;
+  border-bottom: none !important;
+}
+
+.header-avatar {
+  float: right;
+  cursor: pointer;
+  margin-top: 0.6%;
+  margin-right: 5%;
+  transition: transform 0.2s, margin-top 0.2s;
+}
+
+.header-avatar:hover {
+  transform: scale(1.4) translateY(5px);
+}
+
+.header-cls {
+  height: 68px !important;
+  background-color: #303133;
+}
+
+.icon-div {
+  float: right;
+  margin-right: 3.0%;
+  margin-top: 0.85%;
+  cursor: pointer;
+}
+
+.icon-div:hover {
+  animation: jump 1s;
+}
+
+.icon-font {
+  color: antiquewhite;
+  font-size: 12px
+}
+
+.iconfont {
+  width: 1.7em;
+  height: 1.7em;
+}
+
+.header-left-menu-font {
+  color: antiquewhite !important;
+  margin-left: 2%;
+  font-size: 15px
+}
+</style>
