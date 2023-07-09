@@ -63,9 +63,11 @@
               <!--  好友列表  -->
               <div class="friend-item"
                    v-for="item in userList"
-                   :key="item.id"
+                   :key="item.userId"
                    @mouseover="hoverEffect($event, true)"
-                   @mouseout="hoverEffect($event, false)">
+                   @mouseout="hoverEffect($event, false)"
+                   @click="clickFriend(item.userId, item.nickName)"
+              >
                 <el-avatar style="float: left;" shape="square" :size="63" :src="item.avatarUrl"></el-avatar>
                 <div
                   style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 17px;font-family: 'Arial Rounded MT Bold'">
@@ -83,17 +85,15 @@
             <div class="grid-content bg-purple" style="height: 760px">
               <!--  top  -->
               <div
-                style="border: 1px solid red; height: 60px; display: flex; align-items: center; justify-content: center;">
+                style="height: 60px; display: flex; align-items: center; justify-content: center">
                 <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
               </div>
               <!--  mid  -->
-              <div style="border: 1px solid red;height: 460px">
-
-              </div>
+              <div style="height: 460px;background-color: white"></div>
               <!--  内容输入框  -->
-              <div style="border: 1px solid red;height: 240px">
+              <div style="height: 240px;background-color: white">
                 <!-- 表情包 -->
-                <div style="border: 1px solid red;height: 20%">
+                <div style="border: 1px solid red;">
                   <span style="margin-left: 2%">emoji</span>
                   <span style="margin-left: 2%">表情包</span>
                   <span style="margin-left: 2%">语音</span>
@@ -101,7 +101,7 @@
                 </div>
                 <!-- 输入框 -->
                 <div id="chat-input-id" v-model="chatContent" :contenteditable=contenteditable @input="limitText"></div>
-                <el-button class="send-btn" size="small">发送</el-button>
+                <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
               </div>
             </div>
           </el-col>
@@ -120,25 +120,29 @@ export default {
       inputMessage: '',
       contenteditable: true,
       userId: 'xuzhibin',
-      currentUserName: '小温',
+      currentUserName: '',
       chatContent: '',
       userList: [
         {
+          userId: '111111',
           avatarUrl: require('@/assets/avatar/wen.jpg'),
           nickName: '小温',
           lastContent: '徐志哈，别睡了，起来学习'
         },
         {
+          userId: '22222',
           avatarUrl: require('@/assets/avatar/zhou.jpg'),
           nickName: '葵葵',
           lastContent: '路上全是腿,没开玩笑！'
         },
         {
+          userId: '33333',
           avatarUrl: require('@/assets/avatar/dan.jpg'),
           nickName: '王老师',
           lastContent: '老徐，记得请我喝咖啡'
         },
         {
+          userId: '4444',
           avatarUrl: require('@/assets/avatar/ru.jpg'),
           nickName: '艳茹',
           lastContent: '地震啦'
@@ -211,14 +215,12 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      // 封装发送的用户数据
       var message = {
         msg: this.inputMessage,
         userId: this.userId
       }
       chatApi.sendMessage(message)
         .then(res => {
-          // 清空输入框
           this.inputMessage = ''
         })
     },
@@ -227,13 +229,20 @@ export default {
      * 限制输入框字数
      */
     limitText() {
-      var maxLength = 10; // 设置最大字数
-      var chatInput = document.getElementById("chat-input-id");
-      var text = chatInput.textContent;
-
+      var maxLength = 10
+      var chatInput = document.getElementById("chat-input-id")
+      var text = chatInput.textContent
       if (text.length > maxLength) {
-        event.preventDefault();
+        event.preventDefault()
       }
+    },
+
+    /**
+     * 点击好友
+     */
+    clickFriend(userId, nickName) {
+      this.currentUserName = nickName
+      this.userId = userId
     }
   }
 }
@@ -343,8 +352,7 @@ export default {
 }
 
 #chat-input-id {
-  background-color: #97a8be;
-  height: 140px;
+  height: 180px;
   width: 100%;
   overflow: auto;
   font-size: medium;
@@ -353,7 +361,7 @@ export default {
 
 .send-btn {
   float: right;
-  float: bottom;
   margin-right: 2%;
+  margin-top: 1%;
 }
 </style>
