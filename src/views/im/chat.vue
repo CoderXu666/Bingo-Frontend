@@ -20,16 +20,16 @@
                    :key="item.userId"
                    @mouseover="hoverEffect($event, true)"
                    @mouseout="hoverEffect($event, false)"
-                   @click="clickFriend(item.userId, item.nickName)"
+                   @click="clickFriend(item.userId, item.nickName, item.avatarUrl)"
               >
                 <el-avatar style="float: left;" shape="square" :size="60" :src="item.avatarUrl"/>
-                <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 16px">
+                <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
                   {{ item.nickName }}
                 </div>
-                <div style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
+                <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
                   11:02
-                </div>
-                <div style="padding-top: 40px;margin-left: 22.6%;font-size: 13px;color: #999999;">
+                </span>
+                <div style="padding-top: 40px;margin-left: 21.5%;font-size: 13px;color: #999999;">
                   {{ item.nickName }}：{{ item.lastContent }}
                 </div>
               </div>
@@ -37,26 +37,34 @@
           </el-col>
           <!--  聊天内容  -->
           <el-col :span="18">
-            <div class="grid-content bg-purple" style="height: 760px">
-              <!--  top  -->
-              <div
-                style="height: 60px; display: flex; align-items: center; justify-content: center">
-                <span style="display: inline-block; vertical-align: middle;">{{ currentUserName }}</span>
+            <div style="height: 760px">
+              <!-- 未选择任何用户 -->
+              <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white">
+                
               </div>
-              <!--  mid  -->
-              <div style="height: 460px;background-color: white"></div>
-              <!--  内容输入框  -->
-              <div style="height: 240px;background-color: white">
-                <!-- 表情包 -->
-                <div style="border: 1px solid red;">
-                  <span style="margin-left: 2%">emoji</span>
-                  <span style="margin-left: 2%">表情包</span>
-                  <span style="margin-left: 2%">语音</span>
-                  <span style="margin-left: 2%">视频</span>
+
+              <!-- 选中某个用户 -->
+              <div v-if="avatarUrl != '' && avatarUrl != null">
+                <!--  top  -->
+                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%">
+                  <el-avatar :size="46" :src="avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+                  <span style="font-size: 17px;">{{ currentUserName }}</span>
                 </div>
-                <!-- 输入框 -->
-                <div id="chat-input-id" v-model="chatContent" :contenteditable=contenteditable @input="limitText"></div>
-                <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
+                <!--  mid  -->
+                <div style="height: 460px;background-color: white"></div>
+                <!--  内容输入框  -->
+                <div style="height: 240px;background-color: white">
+                  <!-- 表情包 -->
+                  <div style="border: 1px solid red">
+                    <span style="margin-left: 2%">emoji</span>
+                    <span style="margin-left: 2%">表情包</span>
+                    <span style="margin-left: 2%">语音</span>
+                    <span style="margin-left: 2%">视频</span>
+                  </div>
+                  <!-- 输入框 -->
+                  <div id="chat-input-id" v-model="chatContent" :contenteditable=contenteditable @input="limitText"></div>
+                  <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
+                </div>
               </div>
             </div>
           </el-col>
@@ -81,6 +89,7 @@ export default {
       contenteditable: true,
       userId: '',
       currentUserName: '',
+      avatarUrl: '',
       chatContent: '',
       userList: [
         {
@@ -111,17 +120,15 @@ export default {
     }
   },
 
-  /**
-   * 查询好友列表
-   */
+
   created() {
 
   },
 
-  /**
-   * 初始化WebSocket服务器：与Netty服务器建立WebSocket实时通讯连接
-   */
   mounted() {
+    /**
+     * 初始化WebSocket服务器：与Netty服务器建立WebSocket实时通讯连接
+     */
     this.initWebSocket()
   },
 
@@ -200,9 +207,10 @@ export default {
     /**
      * 点击好友
      */
-    clickFriend(userId, nickName) {
+    clickFriend(userId, nickName, avatarUrl) {
       this.currentUserName = nickName
       this.userId = userId
+      this.avatarUrl = avatarUrl
     }
   }
 }
