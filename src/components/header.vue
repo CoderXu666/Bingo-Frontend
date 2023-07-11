@@ -68,7 +68,7 @@ export default {
      * 点击Logo
      */
     clickLogo() {
-      window.location.reload()
+      this.$router.push('/')
     },
 
     /**
