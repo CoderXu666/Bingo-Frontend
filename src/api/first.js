@@ -13,6 +13,11 @@ export default {
       data: data
     })
   },
+
+  /**
+   * @param userName
+   * @returns {*}
+   */
   findUserStatistics(userName) {
     return request({
       url: `/user/find_by_username`,

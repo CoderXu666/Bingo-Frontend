@@ -19,21 +19,25 @@
     <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
     <!--   右目录   -->
     <div class="icon-div">
-      <el-badge class="item" :value="2">
+      <el-badge :value="2">
         <svg class="iconfont">
           <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
         </svg>
         <div class="icon-font">通知</div>
       </el-badge>
     </div>
-    <div class="icon-div">
-      <el-badge class="item" :value="1">
-        <svg class="iconfont">
-          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
-        </svg>
-        <div class="icon-font">好友</div>
-      </el-badge>
-    </div>
+
+    <router-link key="expand" :to="{path: '/chat', query: {id: this.userId}}">
+      <div class="icon-div">
+        <el-badge :value="1">
+          <svg class="iconfont">
+            <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+          </svg>
+          <div class="icon-font">好友</div>
+        </el-badge>
+      </div>
+    </router-link>
+
     <div class="icon-div">
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
@@ -44,7 +48,7 @@
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
       </svg>
-      <div class="icon-font">作品</div>
+      <div class="icon-font">通知</div>
     </div>
   </el-header>
 </template>
@@ -54,13 +58,25 @@ export default {
   data() {
     return {
       logoUrl: require('@/assets/logo/logo.png'),
-      avatarUrl: require('@/assets/avatar/avatar.jpg')
+      avatarUrl: require('@/assets/avatar/avatar.jpg'),
+      userId: 12622
     }
   },
 
   methods: {
+    /**
+     * 点击Logo
+     */
     clickLogo() {
       window.location.reload()
+    },
+
+    /**
+     * 点击跳转好友列表
+     */
+    redirect2Chat() {
+      // this.$router.push('/chat/' + this.userId)
+      this.$router.push('/chat')
     }
   }
 }
@@ -111,8 +127,8 @@ export default {
 }
 
 .icon-font {
-  color: antiquewhite;
-  font-size: 12px
+  color: antiquewhite !important;
+  font-size: 12px;
 }
 
 .iconfont {

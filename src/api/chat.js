@@ -11,5 +11,9 @@ export default {
       data: data
     })
   }
+
+  /**
+   * 向群聊发送消息
+   */
 }
 
