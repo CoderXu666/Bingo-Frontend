@@ -40,7 +40,7 @@
             <div style="height: 760px">
               <!-- 未选择任何用户 -->
               <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white">
-                
+
               </div>
 
               <!-- 选中某个用户 -->
@@ -50,8 +50,8 @@
                   <el-avatar :size="46" :src="avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
                   <span style="font-size: 17px;">{{ currentUserName }}</span>
                 </div>
-                <!--  mid  -->
-                <div style="height: 460px;background-color: white"></div>
+                <!--  聊天内容展示  -->
+                <div id="chat-content-show" style="height: 460px;background-color: white"></div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
                   <!-- 表情包 -->
@@ -62,7 +62,7 @@
                     <span style="margin-left: 2%">视频</span>
                   </div>
                   <!-- 输入框 -->
-                  <div id="chat-input-id" v-model="chatContent" :contenteditable=contenteditable @input="limitText"></div>
+                  <div id="chat-input-id" :contenteditable=contenteditable @input="limitText"></div>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
@@ -85,7 +85,6 @@ export default {
 
   data() {
     return {
-      inputMessage: '',
       contenteditable: true,
       userId: '',
       currentUserName: '',
@@ -106,9 +105,9 @@ export default {
         },
         {
           userId: '33333',
-          avatarUrl: require('@/assets/avatar/dan.jpg'),
-          nickName: '王老师',
-          lastContent: '老徐，记得请我喝咖啡'
+          avatarUrl: require('@/assets/avatar/liu.jpg'),
+          nickName: '美羊羊',
+          lastContent: '家人们，谁懂啊'
         },
         {
           userId: '4444',
@@ -119,7 +118,6 @@ export default {
       ]
     }
   },
-
 
   created() {
 
@@ -182,20 +180,22 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
+      document.getElementById('chat-content-show').append(this.chatContent)
       var message = {
-        msg: this.inputMessage,
+        msg: this.chatContent,
         userId: this.userId
       }
       chatApi.sendMessage(message)
         .then(res => {
-          this.inputMessage = ''
+          this.chatContent = ''
         })
     },
 
     /**
-     * 限制输入框字数
+     * 监听聊天输入框
      */
     limitText() {
+      this.chatContent = document.getElementById('chat-input-id').innerText
       var maxLength = 10
       var chatInput = document.getElementById('chat-input-id')
       var text = chatInput.textContent
@@ -211,6 +211,7 @@ export default {
       this.currentUserName = nickName
       this.userId = userId
       this.avatarUrl = avatarUrl
+      document.getElementById('chat-input-id').innerText = ''
     }
   }
 }
