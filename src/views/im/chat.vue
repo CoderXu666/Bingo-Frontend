@@ -37,11 +37,27 @@
           </el-col>
           <!--  聊天内容  -->
           <el-col :span="18">
-            <div style="height: 760px">
-              <!-- 未选择任何用户 -->
-              <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white">
 
+            <!-- TODO 聊天内容  -->
+            <div style="height: 760px">
+              <div class="chat-container">
+                <el-avatar :src="avatarUrl" shape="square" style="margin-right: 10px"/>
+                <el-popover
+                  ref="popover"
+                  placement="right"
+                  value=true
+                  :content=this.chatContent
+                />
+<!--                <el-popover-->
+<!--                  ref="popover"-->
+<!--                  placement="right"-->
+<!--                  -->
+<!--                  :content=this.chatContent-->
+<!--                />-->
               </div>
+
+              <!-- 未选择任何用户 -->
+              <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white"></div>
 
               <!-- 选中某个用户 -->
               <div v-if="avatarUrl != '' && avatarUrl != null">
@@ -85,11 +101,15 @@ export default {
 
   data() {
     return {
+      userInfo: {
+        userId: '',
+        avatarUrl: '',
+      },
       contenteditable: true,
-      userId: '',
       currentUserName: '',
       avatarUrl: '',
       chatContent: '',
+      chatContentHTML: '',
       userList: [
         {
           userId: '111111',
@@ -180,7 +200,8 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      document.getElementById('chat-content-show').append(this.chatContent)
+      var xzb = '<div style="color: red"></div>'
+      document.getElementById('chat-content-show').insertAdjacentHTML('beforeend', xzb)
       var message = {
         msg: this.chatContent,
         userId: this.userId
@@ -218,6 +239,11 @@ export default {
 </script>
 
 <style>
+.chat-container {
+  display: flex;
+  align-items: flex-start;
+}
+
 .search-cls video {
   position: absolute;
   top: 50%;
