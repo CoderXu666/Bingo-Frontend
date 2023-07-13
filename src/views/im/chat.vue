@@ -182,6 +182,7 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
+      // TODO 聊天消息封装成组件
       // var xzb = '<div style="color: red">11111</div>'
       var xzb = '<div class="chat-container">\n' +
         '  <el-avatar :src="avatarUrl" shape="square" style="margin-right: 10px"/>\n' +
