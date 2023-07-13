@@ -37,25 +37,7 @@
           </el-col>
           <!--  聊天内容  -->
           <el-col :span="18">
-
-            <!-- TODO 聊天内容  -->
             <div style="height: 760px">
-              <div class="chat-container">
-                <el-avatar :src="avatarUrl" shape="square" style="margin-right: 10px"/>
-                <el-popover
-                  ref="popover"
-                  placement="right"
-                  value=true
-                  :content=this.chatContent
-                />
-<!--                <el-popover-->
-<!--                  ref="popover"-->
-<!--                  placement="right"-->
-<!--                  -->
-<!--                  :content=this.chatContent-->
-<!--                />-->
-              </div>
-
               <!-- 未选择任何用户 -->
               <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white"></div>
 
@@ -200,8 +182,18 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      var xzb = '<div style="color: red"></div>'
-      document.getElementById('chat-content-show').insertAdjacentHTML('beforeend', xzb)
+      // var xzb = '<div style="color: red">11111</div>'
+      var xzb = '<div class="chat-container">\n' +
+        '  <el-avatar :src="avatarUrl" shape="square" style="margin-right: 10px"/>\n' +
+        // '  <el-popover\n' +
+        // '    ref="popover"\n' +
+        // '    placement="right"\n' +
+        // '    value=true\n' +
+        // '    content="我是内容"\n' +
+        // '  />\n' +
+        '11111111111111111111' +
+        '</div>'
+      document.getElementById('chat-content-show').insertAdjacentHTML('beforeend', xzb);
       var message = {
         msg: this.chatContent,
         userId: this.userId
