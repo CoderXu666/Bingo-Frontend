@@ -49,7 +49,23 @@
                   <span style="font-size: 17px;">{{ currentUserName }}</span>
                 </div>
                 <!--  聊天内容展示  -->
-                <div id="chat-content-show" style="height: 460px;background-color: white"></div>
+                <div id="chat-content-show" style="height: 460px;background-color: white">
+
+                  <!--  TODO 左  -->
+                  <div style="margin-left: 6px;padding-top: 6px">
+                    <el-tooltip class="item" :content="chatContent" value="true" placement="right">
+                      <el-avatar :src=this.avatarUrl shape="square"></el-avatar>
+                    </el-tooltip>
+                  </div>
+
+                  <!--  TODO 右  -->
+                  <div style="margin-left: 6px;padding-top: 6px;float: right">
+                    <el-tooltip class="item" :content="chatContent" value="true" placement="left">
+                      <el-avatar :src=userInfo.avatarUrl shape="square"></el-avatar>
+                    </el-tooltip>
+                  </div>
+
+                </div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
                   <!-- 表情包 -->
@@ -83,15 +99,15 @@ export default {
 
   data() {
     return {
+      // 当前登录用户信息
       userInfo: {
         userId: '',
-        avatarUrl: '',
+        avatarUrl: require('@/assets/avatar/avatar.jpg'),
       },
       contenteditable: true,
       currentUserName: '',
       avatarUrl: '',
-      chatContent: '',
-      chatContentHTML: '',
+      chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
       userList: [
         {
           userId: '111111',
@@ -126,9 +142,6 @@ export default {
   },
 
   mounted() {
-    /**
-     * 初始化WebSocket服务器：与Netty服务器建立WebSocket实时通讯连接
-     */
     this.initWebSocket()
   },
 
@@ -140,31 +153,52 @@ export default {
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
         // 当前用户Channel与Netty服务器建立连接
-        var socket = new WebSocket('ws://localhost:9099/ws')
+        const socket = new WebSocket('ws://localhost:9099/ws')
 
-        /**
-         * 建立连接瞬间，将userId传递过去，Netty进行客户端数据保存
-         */
+        // 建立连接瞬间，Netty服务器进行连接
         socket.onopen = () => {
           socket.send(JSON.stringify({userId: this.userId}))
         }
 
-        /**
-         * 接收服务端消息（展示到页面上）
-         */
+        // 监听接收服务端消息（接收消息一定来自于左侧）
         socket.onmessage = (msg) => {
           document.getElementById('content').append(msg.data)
         }
 
-        /**
-         * 出现异常
-         */
+        // 异常
         socket.onerror = () => {
           this.$message.error('出现异常信息')
         }
       } else {
-        this.$message.error('当前浏览器不支持聊天室功能，请更换浏览器')
+        this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
       }
+    },
+
+    /**
+     * 发送消息给指定用户（主动发送是当前用户，一定在右侧）
+     */
+    sendMessage() {
+      // 1.登陆者主动发送消息，消息展示到右侧
+
+      // 2. 调用后台接口，发送消息给用户
+      var message = {
+        msg: this.chatContent,
+        userId: this.userId
+      }
+      chatApi.sendMessage(message)
+        .then(res => {
+          this.chatContent = ''
+        })
+    },
+
+    /**
+     * 点击好友
+     */
+    clickFriend(userId, avatarUrl, nickName) {
+      this.userId = userId
+      this.avatarUrl = avatarUrl
+      this.currentUserName = nickName
+      document.getElementById('chat-input-id').innerText = ''
     },
 
     /**
@@ -177,56 +211,6 @@ export default {
         event.currentTarget.classList.remove('hover')
       }
     },
-
-    /**
-     * 发送消息给指定用户
-     */
-    sendMessage() {
-      // TODO 聊天消息封装成组件
-      // var xzb = '<div style="color: red">11111</div>'
-      var xzb = '<div class="chat-container">\n' +
-        '  <el-avatar :src="avatarUrl" shape="square" style="margin-right: 10px"/>\n' +
-        // '  <el-popover\n' +
-        // '    ref="popover"\n' +
-        // '    placement="right"\n' +
-        // '    value=true\n' +
-        // '    content="我是内容"\n' +
-        // '  />\n' +
-        '11111111111111111111' +
-        '</div>'
-      document.getElementById('chat-content-show').insertAdjacentHTML('beforeend', xzb);
-      var message = {
-        msg: this.chatContent,
-        userId: this.userId
-      }
-      chatApi.sendMessage(message)
-        .then(res => {
-          this.chatContent = ''
-        })
-    },
-
-    /**
-     * 监听聊天输入框
-     */
-    limitText() {
-      this.chatContent = document.getElementById('chat-input-id').innerText
-      var maxLength = 10
-      var chatInput = document.getElementById('chat-input-id')
-      var text = chatInput.textContent
-      if (text.length > maxLength) {
-        event.preventDefault()
-      }
-    },
-
-    /**
-     * 点击好友
-     */
-    clickFriend(userId, nickName, avatarUrl) {
-      this.currentUserName = nickName
-      this.userId = userId
-      this.avatarUrl = avatarUrl
-      document.getElementById('chat-input-id').innerText = ''
-    }
   }
 }
 </script>
@@ -292,5 +276,18 @@ export default {
 .send-btn {
   float: right;
   margin-right: 2%;
+}
+
+.right {
+  float: right;
+  width: 60px;
+}
+
+.item {
+  margin: 4px;
+}
+
+.right .el-tooltip__popper {
+  padding: 8px 10px;
 }
 </style>
