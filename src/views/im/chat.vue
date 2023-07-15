@@ -20,7 +20,7 @@
                    :key="item.userId"
                    @mouseover="hoverEffect($event, true)"
                    @mouseout="hoverEffect($event, false)"
-                   @click="clickFriend(item.userId, item.nickName, item.avatarUrl)"
+                   @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
               >
                 <el-avatar style="float: left;" shape="square" :size="60" :src="item.avatarUrl"/>
                 <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
@@ -50,17 +50,16 @@
                 </div>
                 <!--  聊天内容展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white">
-
                   <!--  TODO 左  -->
-                  <div style="margin-left: 6px;padding-top: 6px">
-                    <el-tooltip class="item" :content="chatContent" value="true" placement="right">
-                      <el-avatar :src=this.avatarUrl shape="square"></el-avatar>
+                  <div style="margin-left: 6px;padding-top: 6px;border: 1px solid red">
+                    <el-tooltip class="item" :content="chatContent" placement="right" style="background-color: red!important;">
+                      <el-avatar :src=avatarUrl shape="square"></el-avatar>
                     </el-tooltip>
                   </div>
 
                   <!--  TODO 右  -->
-                  <div style="margin-left: 6px;padding-top: 6px;float: right">
-                    <el-tooltip class="item" :content="chatContent" value="true" placement="left">
+                  <div style="margin-left: 6px;padding-top: 6px;border: 1px solid red">
+                    <el-tooltip class="item" :content="chatContent" placement="left" effect="light">
                       <el-avatar :src=userInfo.avatarUrl shape="square"></el-avatar>
                     </el-tooltip>
                   </div>
@@ -76,7 +75,7 @@
                     <span style="margin-left: 2%">视频</span>
                   </div>
                   <!-- 输入框 -->
-                  <div id="chat-input-id" :contenteditable=contenteditable @input="limitText"></div>
+                  <div id="chat-input-id" :contenteditable=contenteditable @input=""></div>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
@@ -102,7 +101,7 @@ export default {
       // 当前登录用户信息
       userInfo: {
         userId: '',
-        avatarUrl: require('@/assets/avatar/avatar.jpg'),
+        avatarUrl: require('@/assets/avatar/avatar.jpg')
       },
       contenteditable: true,
       currentUserName: '',
@@ -195,10 +194,10 @@ export default {
      * 点击好友
      */
     clickFriend(userId, avatarUrl, nickName) {
+      console.log(userId + avatarUrl + nickName)
       this.userId = userId
       this.avatarUrl = avatarUrl
       this.currentUserName = nickName
-      document.getElementById('chat-input-id').innerText = ''
     },
 
     /**
