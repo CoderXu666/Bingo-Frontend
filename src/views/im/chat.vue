@@ -22,14 +22,14 @@
                    @mouseout="hoverEffect($event, false)"
                    @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
               >
-                <el-avatar style="float: left;" shape="square" :size="60" :src="item.avatarUrl"/>
+                <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
                 <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
                   {{ item.nickName }}
                 </div>
                 <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
                   11:02
                 </span>
-                <div style="padding-top: 40px;margin-left: 21.5%;font-size: 13px;color: #999999;">
+                <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
                   {{ item.nickName }}：{{ item.lastContent }}
                 </div>
               </div>
@@ -50,29 +50,34 @@
                 <!--  聊天内容展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white">
 
-
+                  <!--  TODO ---------------------------------接收消息--------------------------------------  -->
                   <!--  接收消息  -->
-                  <div style="margin-left: 6px;padding-top: 6px">
-                    <div class="item" placement="right" style="display: flex; align-items: center;">
-                      <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer;"></el-avatar>
-                      <!--  气泡  -->
-                      <div style="width: 80%;margin-left: 2%;background-color: antiquewhite;border-radius: 4px">
-                        <div style="padding: 16px">我是一头猪</div>
+                  <div style="margin: 10px;display: flex; align-items: center;">
+                    <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
+                    <div style="width: 600px">
+                      <div style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                          11111111111111
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <!--  主动发送消息  -->
-                  <div style="margin-left: 6px;padding-top: 6px">
-                    <div class="item" placement="right" style="display: flex; align-items: center;">
-                      <el-avatar :src=userInfo.avatarUrl shape="square" style="cursor:pointer;"></el-avatar>
-                      <!--  气泡  -->
-                      <div style="width: 80%;margin-left: 2%;background-color: mediumspringgreen;border-radius: 4px">
-                        <div style="padding: 16px">对对对</div>
+
+                  <!--  主动发送  -->
+                  <div style="margin: 10px;display: flex; align-items: center;">
+                    <el-avatar :src=userInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
+                    <div style="width: 600px">
+                      <div style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                          11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                          11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                        </div>
                       </div>
                     </div>
                   </div>
 
 
+                  <!--  TODO ---------------------------------接收消息--------------------------------------  -->
                 </div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
@@ -265,7 +270,7 @@ export default {
 }
 
 .friend-item {
-  height: 60px;
+  height: 52px;
   cursor: pointer;
   margin-top: 2px;
 }
