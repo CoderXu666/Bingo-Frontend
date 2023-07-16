@@ -225,7 +225,7 @@ export default {
       this.insertChatMessage(loginUserInfo.userId, loginUserInfo.avatarUrl, loginUserInfo.nickName, this.chatContent)
 
       // 封装消息信息
-      var message = {
+      const message = {
         msg: this.chatContent,
         userId: this.userId
       }
@@ -234,17 +234,18 @@ export default {
       const chatContentShow = document.getElementById('chat-content-show')
       setTimeout(function() {
         chatContentShow.scrollTop = chatContentShow.scrollHeight
-      })
+      }, 0)
+
+      // 清空输入框，聚焦输入框
+      const chatInput = document.getElementById('chat-input-id')
+      chatInput.innerText = null
+      chatInput.focus()
 
       // 调用服务端接口，发送消息
       chatApi.sendMessage(message)
         .then(res => {
-          this.chatContent = ''
+          this.chatContent = null
         })
-
-      // 清空输入框
-      this.chatContent = null
-      document.getElementById('chat-input-id').innerText = null
     },
 
     /**
