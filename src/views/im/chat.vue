@@ -7,7 +7,7 @@
     <div style="background-color: #292A2D">
       <div style="width: 78%;height: 760px;margin: auto;">
         <el-row :gutter="1">
-          <!--  2.1好友列表 -->
+          <!--  2.1 好友列表 -->
           <el-col :span="6" style="background-color: antiquewhite">
             <div style="height: 756px">
               <!--  上边栏 -->
@@ -30,47 +30,49 @@
                   11:02
                 </span>
                 <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
-                  {{ item.nickName }}：{{ item.lastContent }}
+                  {{ item.nickName }}：1111
                 </div>
               </div>
             </div>
           </el-col>
-          <!--  2.2聊天内容  -->
-          <el-col :span="18" style="background-color: antiquewhite">
+
+          <!--  2.2 聊天内容  -->
+          <el-col :span="18" style="background-color: white">
             <div style="height: 760px">
-              <!-- 选中某个用户 -->
-              <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
+
+              <!-- 选中用户 -->
+              <div v-if="currentChatInfo.avatarUrl != ''">
                 <!--  上边栏  -->
                 <div
                   style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
-                             style="margin-right: 1%;cursor:pointer;"/>
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
+                  <!--  语音、视频、详情ICON  -->
                 </div>
-                <!--  聊天展示  -->
+
+                <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatMsgList">
+                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatContentList['1']">
                     <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
                     <div style="width: 600px">
                       <div
                         style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          {{ item.msg }}
+                          {{ item.content }}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!--  内容输入框  -->
+
+                <!--  内容输入  -->
                 <div style="height: 240px;background-color: white">
-                  <!-- 表情包 -->
                   <div style="border: 1px solid red">
                     <span style="margin-left: 2%">emoji</span>
                     <span style="margin-left: 2%">表情包</span>
                     <span style="margin-left: 2%">语音</span>
                     <span style="margin-left: 2%">视频</span>
                   </div>
-                  <!-- 输入框 -->
                   <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
@@ -107,53 +109,38 @@ export default {
         avatarUrl: ''
       },
 
-      // 好友列表
-      userList:
-        [
+      // 好友列表 + 聊天记录
+      userList: [
+        {
+          userId: '1',
+          avatarUrl: require('@/assets/avatar/wen.jpg'),
+          nickName: '小温'
+        }
+      ],
+
+      // 聊天信息
+      chatContentList: {
+        '1': [
           {
-            userId: '111111',
+            userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
-            lastContent: '徐志哈，别睡了，起来学习'
+            content: '哈哈哈哈哈，我真的服了'
           },
           {
-            userId: '22222',
-            avatarUrl: require('@/assets/avatar/zhou.jpg'),
-            nickName: '葵葵',
-            lastContent: '路上全是腿,没开玩笑！'
-          },
-          {
-            userId: '33333',
-            avatarUrl: require('@/assets/avatar/liu.jpg'),
-            nickName: '美羊羊',
-            lastContent: '家人们，谁懂啊'
-          },
-          {
-            userId: '4444',
-            avatarUrl: require('@/assets/avatar/ru.jpg'),
-            nickName: '艳茹',
-            lastContent: '地震啦'
+            userId: '1',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            content: '哈哈哈哈哈，我真的服了'
           }
         ],
+        '2': [
 
-      // 聊天消息列表
-      chatMsgList: [
-        {
-          contentId: '',
-          avatarUrl: require('@/assets/avatar/wen.jpg'),
-          msg: '嘿嘿嘿，笑死了'
-        },
-        {
-          contentId: '',
-          avatarUrl: require('@/assets/avatar/wen.jpg'),
-          msg: '嘿嘿嘿，笑死了'
-        },
-        {
-          contentId: '',
-          avatarUrl: require('@/assets/avatar/avatar.jpg'),
-          msg: '谁说不是呢！'
-        }
-      ]
+        ],
+        '3': [
+
+        ]
+      }
     }
   },
 
@@ -180,14 +167,14 @@ export default {
           socket.send(JSON.stringify({userId: this.userId}))
         }
 
-        // 监听接收服务端消息（接收消息一定来自于左侧）
+        // 监听接收服务端消息
         socket.onmessage = (msg) => {
           document.getElementById('content').append(msg.data)
         }
 
-        // 异常
+        // 发生异常
         socket.onerror = () => {
-          this.$message.error('出现异常信息')
+          this.$message.error('了解聊天服务器出现异常信息')
         }
       } else {
         this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
@@ -198,7 +185,7 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      // 1.登陆者主动发送消息，消息展示到右侧
+      // 1.登陆用户主动发送消息
 
 
       // 2.封装消息信息
@@ -218,6 +205,7 @@ export default {
      * 点击好友
      */
     clickFriend(userId, avatarUrl, nickName) {
+      console.log(userId + avatarUrl + nickName)
       this.currentChatInfo.userId = userId
       this.currentChatInfo.avatarUrl = avatarUrl
       this.currentChatInfo.userName = nickName
@@ -239,7 +227,6 @@ export default {
      */
     listenInput() {
       this.chatContent = document.getElementById('chat-input-id').innerText
-      console.log(this.chatContent)
     },
   }
 }
