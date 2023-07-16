@@ -48,7 +48,7 @@
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                 </div>
                 <!--  聊天内容展示  -->
-                <div id="chat-content-show" style="height: 460px;background-color: white">
+                <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
 
                   <!--  TODO ---------------------------------接收消息--------------------------------------  -->
                   <!--  接收消息  -->
@@ -69,8 +69,7 @@
                     <div style="width: 600px">
                       <div style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-                          11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                          11111111111111111111111111111111111111
                         </div>
                       </div>
                     </div>
@@ -290,10 +289,6 @@ export default {
 .send-btn {
   float: right;
   margin-right: 2%;
-}
-
-.item {
-  margin: 4px;
 }
 
 #chat-content-show {
