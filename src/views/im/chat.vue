@@ -52,11 +52,15 @@
 
                 <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatContentList['1']">
+                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatContentList[this.currentChatInfo.userId]">
                     <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
                     <div style="width: 600px">
-                      <div
-                        style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                      <div v-if="item.userId == userInfo.userId" style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                          {{ item.content }}
+                        </div>
+                      </div>
+                      <div style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                           {{ item.content }}
                         </div>
@@ -104,7 +108,7 @@ export default {
 
       // 当前选中聊天用户
       currentChatInfo: {
-        userId: '',
+        userId: '3',
         nickName: '',
         avatarUrl: ''
       },
@@ -125,20 +129,40 @@ export default {
             userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
-            content: '哈哈哈哈哈，我真的服了'
+            content: '哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了'
           },
           {
             userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
-            content: '哈哈哈哈哈，我真的服了'
-          }
+            content: '哈哈哈哈哈'
+          },
+          {
+            userId: '1',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            content: '哈哈哈哈哈'
+          },
         ],
         '2': [
-
-        ],
-        '3': [
-
+          {
+            userId: '2',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            content: '哈哈哈哈哈，我真的服了哈222222222了'
+          },
+          {
+            userId: '2',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            content: '哈哈哈哈哈22222222222'
+          },
+          {
+            userId: '2',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            content: '哈哈哈哈哈22222222222'
+          }
         ]
       }
     }
@@ -149,7 +173,7 @@ export default {
   },
 
   mounted() {
-    this.initWebSocket()
+    // this.initWebSocket()
   },
 
   methods: {
@@ -174,7 +198,7 @@ export default {
 
         // 发生异常
         socket.onerror = () => {
-          this.$message.error('了解聊天服务器出现异常信息')
+          this.$message.error('连接聊天服务器出现异常信息')
         }
       } else {
         this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
