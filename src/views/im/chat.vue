@@ -41,8 +41,10 @@
               <!-- 选中某个用户 -->
               <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
                 <!--  上边栏  -->
-                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+                <div
+                  style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
+                             style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                 </div>
                 <!--  聊天展示  -->
@@ -50,7 +52,8 @@
                   <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatMsgList">
                     <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
                     <div style="width: 600px">
-                      <div style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                      <div
+                        style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                           {{ item.msg }}
                         </div>
@@ -102,52 +105,55 @@ export default {
         userId: '',
         nickName: '',
         avatarUrl: ''
-
       },
 
       // 好友列表
-      userList: [
-        {
-          userId: '111111',
-          avatarUrl: require('@/assets/avatar/wen.jpg'),
-          nickName: '小温',
-          lastContent: '徐志哈，别睡了，起来学习'
-        },
-        {
-          userId: '22222',
-          avatarUrl: require('@/assets/avatar/zhou.jpg'),
-          nickName: '葵葵',
-          lastContent: '路上全是腿,没开玩笑！'
-        },
-        {
-          userId: '33333',
-          avatarUrl: require('@/assets/avatar/liu.jpg'),
-          nickName: '美羊羊',
-          lastContent: '家人们，谁懂啊'
-        },
-        {
-          userId: '4444',
-          avatarUrl: require('@/assets/avatar/ru.jpg'),
-          nickName: '艳茹',
-          lastContent: '地震啦'
-        }
-      ],
+      userList:
+        [
+          {
+            userId: '111111',
+            avatarUrl: require('@/assets/avatar/wen.jpg'),
+            nickName: '小温',
+            lastContent: '徐志哈，别睡了，起来学习'
+          },
+          {
+            userId: '22222',
+            avatarUrl: require('@/assets/avatar/zhou.jpg'),
+            nickName: '葵葵',
+            lastContent: '路上全是腿,没开玩笑！'
+          },
+          {
+            userId: '33333',
+            avatarUrl: require('@/assets/avatar/liu.jpg'),
+            nickName: '美羊羊',
+            lastContent: '家人们，谁懂啊'
+          },
+          {
+            userId: '4444',
+            avatarUrl: require('@/assets/avatar/ru.jpg'),
+            nickName: '艳茹',
+            lastContent: '地震啦'
+          }
+        ],
 
       // 聊天消息列表
       chatMsgList: [
         {
+          contentId: '',
           avatarUrl: require('@/assets/avatar/wen.jpg'),
           msg: '嘿嘿嘿，笑死了'
         },
         {
+          contentId: '',
           avatarUrl: require('@/assets/avatar/wen.jpg'),
           msg: '嘿嘿嘿，笑死了'
         },
         {
+          contentId: '',
           avatarUrl: require('@/assets/avatar/avatar.jpg'),
           msg: '谁说不是呢！'
         }
-      ],
+      ]
     }
   },
 
@@ -189,11 +195,11 @@ export default {
     },
 
     /**
-     * 发送消息给指定用户（主动发送是当前用户，一定在右侧）
+     * 发送消息给指定用户
      */
     sendMessage() {
       // 1.登陆者主动发送消息，消息展示到右侧
-      this.insertCodeBlock(this.chatContent)
+
 
       // 2.封装消息信息
       var message = {
@@ -201,7 +207,7 @@ export default {
         userId: this.userId
       }
 
-      // 调用服务端接口，发送消息
+      // 3.调用服务端接口，发送消息
       chatApi.sendMessage(message)
         .then(res => {
           this.chatContent = ''
@@ -235,13 +241,6 @@ export default {
       this.chatContent = document.getElementById('chat-input-id').innerText
       console.log(this.chatContent)
     },
-
-    /**
-     * 发送消息
-     */
-    insertCodeBlock(chatContent) {
-
-    }
   }
 }
 </script>
