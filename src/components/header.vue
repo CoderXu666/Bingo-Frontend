@@ -1,19 +1,16 @@
 <template>
   <!--  1.导航栏  -->
   <el-header class="header-cls">
-    <!--   logo   -->
-    <el-image class="header-logo" :src="logoUrl" :fit="fit" @click="clickLogo()"></el-image>
+    <!--   Logo   -->
+    <el-image class="header-logo" :src="logoUrl" @click="clickLogo()"></el-image>
     <!--   左目录   -->
     <el-menu
       class="header-left-menu"
       mode="horizontal"
       background-color="transparent">
-      <el-menu-item index="1" class="header-left-menu-font">
-        社区广场
-      </el-menu-item>
+      <el-menu-item index="1" class="header-left-menu-font">社区广场</el-menu-item>
       <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
-      <el-menu-item index="3" class="header-left-menu-font">好物商城</el-menu-item>
-      <el-menu-item index="4" class="header-left-menu-font">关于作者</el-menu-item>
+      <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
     <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
@@ -48,7 +45,7 @@
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
       </svg>
-      <div class="icon-font">通知</div>
+      <div class="icon-font">作品</div>
     </div>
   </el-header>
 </template>

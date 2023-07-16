@@ -40,34 +40,39 @@
             <div style="height: 760px">
               <!-- 选中某个用户 -->
               <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
-                <!--  top  -->
-                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
-                  <span style="font-size: 17px;">{{ currentChatInfo.userName }}</span>
+                <!--  上边栏  -->
+                <div
+                  style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
+                             style="margin-right: 1%;cursor:pointer;"/>
+                  <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                 </div>
                 <!--  聊天内容展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white">
-                  <!--  每条聊天信息  -->
+
+
+                  <!--  接收消息  -->
                   <div style="margin-left: 6px;padding-top: 6px">
-                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
-                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
-                    </el-tooltip>
+                    <div class="item" placement="right" style="display: flex; align-items: center;">
+                      <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer;"></el-avatar>
+                      <!--  气泡  -->
+                      <div style="width: 80%;margin-left: 2%;background-color: antiquewhite;border-radius: 4px">
+                        <div style="padding: 16px">我是一头猪</div>
+                      </div>
+                    </div>
                   </div>
+                  <!--  主动发送消息  -->
                   <div style="margin-left: 6px;padding-top: 6px">
-                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
-                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
-                    </el-tooltip>
+                    <div class="item" placement="right" style="display: flex; align-items: center;">
+                      <el-avatar :src=userInfo.avatarUrl shape="square" style="cursor:pointer;"></el-avatar>
+                      <!--  气泡  -->
+                      <div style="width: 80%;margin-left: 2%;background-color: mediumspringgreen;border-radius: 4px">
+                        <div style="padding: 16px">对对对</div>
+                      </div>
+                    </div>
                   </div>
-                  <div style="margin-left: 6px;padding-top: 6px">
-                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
-                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
-                    </el-tooltip>
-                  </div>
-                  <div style="margin-left: 6px;padding-top: 6px">
-                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
-                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
-                    </el-tooltip>
-                  </div>
+
+
                 </div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
@@ -79,7 +84,7 @@
                     <span style="margin-left: 2%">视频</span>
                   </div>
                   <!-- 输入框 -->
-                  <div id="chat-input-id" :contenteditable=contenteditable @input=""></div>
+                  <div id="chat-input-id" :contenteditable=contenteditable @input=""/>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
@@ -144,9 +149,7 @@ export default {
       ],
 
       // 聊天消息列表
-      chatMsgList: [
-
-      ],
+      chatMsgList: [],
 
       contenteditable: true
     }
@@ -286,5 +289,9 @@ export default {
 
 .item {
   margin: 4px;
+}
+
+#chat-content-show {
+  overflow: auto;
 }
 </style>
