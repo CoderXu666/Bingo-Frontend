@@ -45,22 +45,28 @@
                 <!--  上边栏  -->
                 <div
                   style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
+                             style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                   <!--  语音、视频、详情ICON  -->
                 </div>
 
                 <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatContentList[this.currentChatInfo.userId]">
+                  <div style="margin: 10px;display: flex; align-items: center;"
+                       v-for="item in chatContentList[this.currentChatInfo.userId]">
                     <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
                     <div style="width: 600px">
-                      <div v-if="item.userId == userInfo.userId" style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                      <!--  被动接受  -->
+                      <div v-if="item.userId !== loginUserInfo.userId"
+                           style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                           {{ item.content }}
                         </div>
                       </div>
-                      <div style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
+                      <!--  主动发送  -->
+                      <div v-if="item.userId === loginUserInfo.userId"
+                           style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                           {{ item.content }}
                         </div>
@@ -101,25 +107,31 @@ export default {
   data() {
     return {
       // 登录用户信息
-      userInfo: {
-        userId: '',
-        avatarUrl: require('@/assets/avatar/avatar.jpg')
+      loginUserInfo: {
+        userId: '3',
+        avatarUrl: require('@/assets/avatar/avatar.jpg'),
+        nickName: '徐志斌'
       },
 
       // 当前选中聊天用户
       currentChatInfo: {
-        userId: '3',
+        userId: '',
         nickName: '',
         avatarUrl: ''
       },
 
-      // 好友列表 + 聊天记录
+      // 聊天好友列表
       userList: [
         {
           userId: '1',
           avatarUrl: require('@/assets/avatar/wen.jpg'),
           nickName: '小温'
-        }
+        },
+        {
+          userId: '3',
+          avatarUrl: require('@/assets/avatar/avatar.jpg'),
+          nickName: '小徐'
+        },
       ],
 
       // 聊天信息
@@ -138,11 +150,11 @@ export default {
             content: '哈哈哈哈哈'
           },
           {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
-            content: '哈哈哈哈哈'
-          },
+            userId: '3',
+            avatarUrl: require('@/assets/avatar/avatar.jpg'),
+            nickName: '徐志斌',
+            content: '我真服了！'
+          }
         ],
         '2': [
           {
@@ -169,7 +181,6 @@ export default {
   },
 
   created() {
-
   },
 
   mounted() {
@@ -209,27 +220,37 @@ export default {
      * 发送消息给指定用户
      */
     sendMessage() {
-      // 1.登陆用户主动发送消息
+      // 登陆用户主动发送消息
+      const loginUserInfo = this.loginUserInfo
+      this.insertChatMessage(loginUserInfo.userId, loginUserInfo.avatarUrl, loginUserInfo.nickName, this.chatContent)
 
-
-      // 2.封装消息信息
+      // 封装消息信息
       var message = {
         msg: this.chatContent,
         userId: this.userId
       }
 
-      // 3.调用服务端接口，发送消息
+      // 聊天框滚动到最底部
+      const chatContentShow = document.getElementById('chat-content-show')
+      setTimeout(function() {
+        chatContentShow.scrollTop = chatContentShow.scrollHeight
+      })
+
+      // 调用服务端接口，发送消息
       chatApi.sendMessage(message)
         .then(res => {
           this.chatContent = ''
         })
+
+      // 清空输入框
+      this.chatContent = null
+      document.getElementById('chat-input-id').innerText = null
     },
 
     /**
      * 点击好友
      */
     clickFriend(userId, avatarUrl, nickName) {
-      console.log(userId + avatarUrl + nickName)
       this.currentChatInfo.userId = userId
       this.currentChatInfo.avatarUrl = avatarUrl
       this.currentChatInfo.userName = nickName
@@ -252,6 +273,19 @@ export default {
     listenInput() {
       this.chatContent = document.getElementById('chat-input-id').innerText
     },
+
+    /**
+     * 插入聊天信息
+     */
+    insertChatMessage(userId, avatarUrl, nickName, content) {
+      const newMessage = {
+        userId: userId,
+        avatarUrl: avatarUrl,
+        nickName: nickName,
+        content: content
+      }
+      this.chatContentList['1'].push(newMessage)
+    }
   }
 }
 </script>
@@ -300,7 +334,7 @@ export default {
   height: 180px;
   width: 100%;
   overflow: auto;
-  font-size: 17px;
+  font-size: 14px;
   padding: 1.4%;
 }
 
