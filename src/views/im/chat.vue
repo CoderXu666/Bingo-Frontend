@@ -39,31 +39,22 @@
           <el-col :span="18">
             <div style="height: 760px">
               <!-- 未选择任何用户 -->
-              <div v-if="avatarUrl == '' && avatarUrl == null" style="background-color: white"></div>
+              <div v-if="currentChatInfo.avatarUrl == '' && currentChatInfo.avatarUrl == null" style="background-color: white"></div>
 
               <!-- 选中某个用户 -->
-              <div v-if="avatarUrl != '' && avatarUrl != null">
+              <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
                 <!--  top  -->
                 <div style="height: 60px; display: flex; align-items: center;padding-left: 1%">
-                  <el-avatar :size="46" :src="avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
-                  <span style="font-size: 17px;">{{ currentUserName }}</span>
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+                  <span style="font-size: 17px;">{{ currentChatInfo.currentUserName }}</span>
                 </div>
                 <!--  聊天内容展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white">
-                  <!--  TODO 左  -->
                   <div style="margin-left: 6px;padding-top: 6px;border: 1px solid red">
-                    <el-tooltip class="item" :content="chatContent" placement="right" style="background-color: red!important;">
-                      <el-avatar :src=avatarUrl shape="square"></el-avatar>
+                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
+                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
                     </el-tooltip>
                   </div>
-
-                  <!--  TODO 右  -->
-                  <div style="margin-left: 6px;padding-top: 6px;border: 1px solid red">
-                    <el-tooltip class="item" :content="chatContent" placement="left" effect="light">
-                      <el-avatar :src=userInfo.avatarUrl shape="square"></el-avatar>
-                    </el-tooltip>
-                  </div>
-
                 </div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
@@ -98,15 +89,20 @@ export default {
 
   data() {
     return {
-      // 当前登录用户信息
+      // 登录用户信息
       userInfo: {
         userId: '',
         avatarUrl: require('@/assets/avatar/avatar.jpg')
       },
-      contenteditable: true,
-      currentUserName: '',
-      avatarUrl: '',
-      chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
+
+      // 当前选中聊天用户
+      currentChatInfo: {
+        avatarUrl: '',
+        userName: '',
+        chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
+      },
+
+      // 好友列表
       userList: [
         {
           userId: '111111',
@@ -132,7 +128,14 @@ export default {
           nickName: '艳茹',
           lastContent: '地震啦'
         }
-      ]
+      ],
+
+      // 聊天消息列表
+      chatMsgList: [
+
+      ],
+
+      contenteditable: true,
     }
   },
 
@@ -194,10 +197,9 @@ export default {
      * 点击好友
      */
     clickFriend(userId, avatarUrl, nickName) {
-      console.log(userId + avatarUrl + nickName)
-      this.userId = userId
-      this.avatarUrl = avatarUrl
-      this.currentUserName = nickName
+      this.currentChatInfo.userId = userId
+      this.currentChatInfo.avatarUrl = avatarUrl
+      this.currentChatInfo.userName = nickName
     },
 
     /**
@@ -215,11 +217,6 @@ export default {
 </script>
 
 <style>
-.chat-container {
-  display: flex;
-  align-items: flex-start;
-}
-
 .search-cls video {
   position: absolute;
   top: 50%;
@@ -259,11 +256,6 @@ export default {
   background-color: #ccc;
 }
 
-.grid-content {
-  border-radius: 4px;
-  min-height: 36px;
-}
-
 #chat-input-id {
   height: 180px;
   width: 100%;
@@ -277,16 +269,7 @@ export default {
   margin-right: 2%;
 }
 
-.right {
-  float: right;
-  width: 60px;
-}
-
 .item {
   margin: 4px;
-}
-
-.right .el-tooltip__popper {
-  padding: 8px 10px;
 }
 </style>
