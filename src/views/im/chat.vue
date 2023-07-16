@@ -5,13 +5,13 @@
 
     <!-- 2.聊天框 -->
     <div style="background-color: #292A2D">
-      <div style="width: 78%;height: 760px;margin: auto;background-color: antiquewhite">
+      <div style="width: 78%;height: 760px;margin: auto;">
         <el-row :gutter="1">
-          <!--  好友列表 -->
-          <el-col :span="6">
+          <!--  2.1好友列表 -->
+          <el-col :span="6" style="background-color: antiquewhite">
             <div style="height: 756px">
               <!--  上边栏 -->
-              <div style="height: 60px">
+              <div style="height: 60px;">
                 <input style="background-color: antiquewhite">
               </div>
               <!--  好友列表  -->
@@ -35,22 +35,35 @@
               </div>
             </div>
           </el-col>
-          <!--  聊天内容  -->
-          <el-col :span="18">
+          <!--  2.2聊天内容  -->
+          <el-col :span="18" style="background-color: antiquewhite">
             <div style="height: 760px">
-              <!-- 未选择任何用户 -->
-              <div v-if="currentChatInfo.avatarUrl == '' && currentChatInfo.avatarUrl == null" style="background-color: white"></div>
-
               <!-- 选中某个用户 -->
               <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
                 <!--  top  -->
-                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%">
+                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
                   <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
-                  <span style="font-size: 17px;">{{ currentChatInfo.currentUserName }}</span>
+                  <span style="font-size: 17px;">{{ currentChatInfo.userName }}</span>
                 </div>
                 <!--  聊天内容展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white">
-                  <div style="margin-left: 6px;padding-top: 6px;border: 1px solid red">
+                  <!--  每条聊天信息  -->
+                  <div style="margin-left: 6px;padding-top: 6px">
+                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
+                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
+                    </el-tooltip>
+                  </div>
+                  <div style="margin-left: 6px;padding-top: 6px">
+                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
+                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
+                    </el-tooltip>
+                  </div>
+                  <div style="margin-left: 6px;padding-top: 6px">
+                    <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
+                      <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
+                    </el-tooltip>
+                  </div>
+                  <div style="margin-left: 6px;padding-top: 6px">
                     <el-tooltip class="item" :content="currentChatInfo.chatContent" placement="right">
                       <el-avatar :src=currentChatInfo.avatarUrl shape="square"></el-avatar>
                     </el-tooltip>
@@ -99,7 +112,7 @@ export default {
       currentChatInfo: {
         avatarUrl: '',
         userName: '',
-        chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，去领30军棍，块！罢了！免了吧免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
+        chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，\n去领30军棍，块！罢了！免了吧免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
       },
 
       // 好友列表
@@ -135,7 +148,7 @@ export default {
 
       ],
 
-      contenteditable: true,
+      contenteditable: true
     }
   },
 
@@ -182,11 +195,13 @@ export default {
     sendMessage() {
       // 1.登陆者主动发送消息，消息展示到右侧
 
-      // 2. 调用后台接口，发送消息给用户
+      // 2.封装消息信息
       var message = {
         msg: this.chatContent,
         userId: this.userId
       }
+
+      // 调用服务端接口，发送消息
       chatApi.sendMessage(message)
         .then(res => {
           this.chatContent = ''
