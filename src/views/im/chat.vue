@@ -41,42 +41,22 @@
               <!-- 选中某个用户 -->
               <div v-if="currentChatInfo.avatarUrl != '' && currentChatInfo.avatarUrl != null">
                 <!--  上边栏  -->
-                <div
-                  style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
-                             style="margin-right: 1%;cursor:pointer;"/>
+                <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                 </div>
-                <!--  聊天内容展示  -->
+                <!--  聊天展示  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-
-                  <!--  TODO ---------------------------------接收消息--------------------------------------  -->
-                  <!--  接收消息  -->
-                  <div style="margin: 10px;display: flex; align-items: center;">
-                    <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
+                  <div style="margin: 10px;display: flex; align-items: center;" v-for="item in chatMsgList">
+                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
                     <div style="width: 600px">
                       <div style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
                         <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          11111111111111
+                          {{ item.msg }}
                         </div>
                       </div>
                     </div>
                   </div>
-
-                  <!--  主动发送  -->
-                  <div style="margin: 10px;display: flex; align-items: center;">
-                    <el-avatar :src=userInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
-                    <div style="width: 600px">
-                      <div style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
-                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          11111111111111111111111111111111111111
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <!--  TODO ---------------------------------接收消息--------------------------------------  -->
                 </div>
                 <!--  内容输入框  -->
                 <div style="height: 240px;background-color: white">
@@ -88,7 +68,7 @@
                     <span style="margin-left: 2%">视频</span>
                   </div>
                   <!-- 输入框 -->
-                  <div id="chat-input-id" :contenteditable=contenteditable @input=""/>
+                  <div id="chat-input-id" :contenteditable=contenteditable @input="listenInput()"/>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
@@ -153,7 +133,20 @@ export default {
       ],
 
       // 聊天消息列表
-      chatMsgList: [],
+      chatMsgList: [
+        {
+          avatarUrl: require('@/assets/avatar/wen.jpg'),
+          msg: '嘿嘿嘿，笑死了'
+        },
+        {
+          avatarUrl: require('@/assets/avatar/wen.jpg'),
+          msg: '嘿嘿嘿，笑死了'
+        },
+        {
+          avatarUrl: require('@/assets/avatar/avatar.jpg'),
+          msg: '谁说不是呢！'
+        },
+      ],
 
       contenteditable: true
     }
@@ -201,6 +194,7 @@ export default {
      */
     sendMessage() {
       // 1.登陆者主动发送消息，消息展示到右侧
+      this.insertCodeBlock(this.chatContent)
 
       // 2.封装消息信息
       var message = {
@@ -234,6 +228,37 @@ export default {
         event.currentTarget.classList.remove('hover')
       }
     },
+
+    /**
+     * 监听聊天输入框
+     */
+    listenInput() {
+      this.chatContent = document.getElementById('chat-input-id').innerText
+      console.log(this.chatContent)
+    },
+
+    /**
+     * 发送消息
+     */
+    insertCodeBlock(chatContent) {
+      var codeBlock =
+        `
+        <div style="margin: 10px; display: flex; align-items: center;">
+          <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar :src=currentChatInfo.avatarUrl>
+          <div style="width: 600px">
+            <div style="margin-left: 1.6%; background-color: antiquewhite; border-radius: 10px; display: inline-block;">
+              <div style="padding: 15px; font-size: 14px; word-break: break-all;">
+        `
+        + chatContent +
+        `
+              </div>
+            </div>
+          </div>
+        </div>
+        `
+      var chatContentDiv = document.getElementById('chat-content-show')
+      chatContentDiv.innerHTML += codeBlock
+    }
   }
 }
 </script>

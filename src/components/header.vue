@@ -45,7 +45,7 @@
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
       </svg>
-      <div class="icon-font">作品</div>
+      <div class="icon-font">发布</div>
     </div>
   </el-header>
 </template>
