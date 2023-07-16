@@ -68,7 +68,7 @@
                     <span style="margin-left: 2%">视频</span>
                   </div>
                   <!-- 输入框 -->
-                  <div id="chat-input-id" :contenteditable=contenteditable @input="listenInput()"/>
+                  <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
                   <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
@@ -99,9 +99,10 @@ export default {
 
       // 当前选中聊天用户
       currentChatInfo: {
-        avatarUrl: '',
-        userName: '',
-        chatContent: '许褚，去领30军棍，块！罢了！免了吧！不！不免；许褚，\n去领30军棍，块！罢了！免了吧免；许褚，去领30军棍，块！罢了！免了吧！不！不免',
+        userId: '',
+        nickName: '',
+        avatarUrl: ''
+
       },
 
       // 好友列表
@@ -145,10 +146,8 @@ export default {
         {
           avatarUrl: require('@/assets/avatar/avatar.jpg'),
           msg: '谁说不是呢！'
-        },
+        }
       ],
-
-      contenteditable: true
     }
   },
 
@@ -241,23 +240,7 @@ export default {
      * 发送消息
      */
     insertCodeBlock(chatContent) {
-      var codeBlock =
-        `
-        <div style="margin: 10px; display: flex; align-items: center;">
-          <el-avatar :src=currentChatInfo.avatarUrl shape="square" style="cursor:pointer"></el-avatar :src=currentChatInfo.avatarUrl>
-          <div style="width: 600px">
-            <div style="margin-left: 1.6%; background-color: antiquewhite; border-radius: 10px; display: inline-block;">
-              <div style="padding: 15px; font-size: 14px; word-break: break-all;">
-        `
-        + chatContent +
-        `
-              </div>
-            </div>
-          </div>
-        </div>
-        `
-      var chatContentDiv = document.getElementById('chat-content-show')
-      chatContentDiv.innerHTML += codeBlock
+
     }
   }
 }
