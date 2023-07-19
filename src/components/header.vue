@@ -55,8 +55,8 @@ export default {
   data() {
     return {
       logoUrl: require('@/assets/logo/logo.png'),
-      avatarUrl: require('@/assets/avatar/avatar.jpg'),
-      userId: 12622
+      avatarUrl: require('@/assets/avatar/null.png'),
+      userId: ''
     }
   },
 
@@ -72,7 +72,6 @@ export default {
      * 点击跳转好友列表
      */
     redirect2Chat() {
-      // this.$router.push('/chat/' + this.userId)
       this.$router.push('/chat')
     }
   }

@@ -108,7 +108,7 @@ export default {
     return {
       // 登录用户信息
       loginUserInfo: {
-        userId: '3',
+        userId: '1',
         avatarUrl: require('@/assets/avatar/avatar.jpg'),
         nickName: '徐志斌'
       },
@@ -184,7 +184,7 @@ export default {
   },
 
   mounted() {
-    // this.initWebSocket()
+    this.initWebSocket()
   },
 
   methods: {
@@ -199,7 +199,7 @@ export default {
 
         // 建立连接瞬间，Netty服务器进行连接
         socket.onopen = () => {
-          socket.send(JSON.stringify({userId: this.userId}))
+          socket.send(this.userId)
         }
 
         // 监听接收服务端消息
@@ -285,7 +285,7 @@ export default {
         nickName: nickName,
         content: content
       }
-      this.chatContentList['1'].push(newMessage)
+      this.chatContentList[userId].push(newMessage)
     }
   }
 }
@@ -348,3 +348,4 @@ export default {
   overflow: auto;
 }
 </style>
+
