@@ -13,7 +13,7 @@
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
-    <el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar>
+    <span @click="clickAvatar"><el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar></span>
     <!--   右目录   -->
     <div class="icon-div">
       <el-badge :value="2">
@@ -47,6 +47,26 @@
       </svg>
       <div class="icon-font">发布</div>
     </div>
+
+    <!-- 登录框 -->
+    <el-dialog
+      title="登录"
+      :visible.sync="loginDialog"
+      width="30%"
+      style="background-color: #"
+      center
+    >
+      <div style="height: 230px">
+        <div style="width: 200px">
+          <el-input style="width: 300px"></el-input>
+          <el-input></el-input>
+          <el-input></el-input>
+          <el-input></el-input>
+          <el-button type="primary" @click="">登 录</el-button>
+        </div>
+      </div>
+    </el-dialog>
+
   </el-header>
 </template>
 
@@ -56,7 +76,8 @@ export default {
     return {
       logoUrl: require('@/assets/logo/logo.png'),
       avatarUrl: require('@/assets/avatar/null.png'),
-      userId: ''
+      userId: '',
+      loginDialog: false
     }
   },
 
@@ -73,6 +94,14 @@ export default {
      */
     redirect2Chat() {
       this.$router.push('/chat')
+    },
+
+    /**
+     * 点击头像
+     */
+    clickAvatar() {
+      // 如果没有登录，弹出登录框
+      this.loginDialog = true
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <!--  1.上边栏  -->
-    <headerComponent></headerComponent>
+    <headerComponent/>
 
     <!--  2.搜索板块  -->
     <div class="search-cls">
@@ -296,7 +296,11 @@ export default {
     }
   },
 
-  methods: {}
+  methods: {
+    clickAvatar(message) {
+      console.log('首页发生的事件：' + message)
+    }
+  }
 }
 </script>
 
