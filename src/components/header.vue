@@ -53,7 +53,6 @@
       title="登录"
       :visible.sync="loginDialog"
       width="30%"
-      style="background-color: #"
       center
     >
       <div style="height: 230px">
@@ -101,7 +100,9 @@ export default {
      */
     clickAvatar() {
       // 如果没有登录，弹出登录框
-      this.loginDialog = true
+      if (this.userId === '') {
+        this.loginDialog = true
+      }
     }
   }
 }
