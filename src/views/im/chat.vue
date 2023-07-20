@@ -45,18 +45,19 @@
                 <!--  上边栏  -->
                 <div
                   style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
+                             style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                   <!--  语音、视频、详情ICON  -->
                 </div>
 
                 <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div style="margin: 10px;display: flex; align-items: center;"
-                       v-for="item in chatContentList[currentChatInfo.userId]">
+                  <div style="margin: 10px;" v-for="item in chatContentList[currentChatInfo.userId]">
                     <div style="width: 100%">
                       <!--  被动接受  -->
-                      <div v-if="item.userId !== loginUserInfo.userId" style="width: 70%;display: flex;align-items: center">
+                      <div v-if="item.userId !== loginUserInfo.userId"
+                           style="width: 80%;display: flex;align-items: center">
                         <span style="margin-right: 6px">
                           <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                         </span>
@@ -67,13 +68,15 @@
                         </div>
                       </div>
                       <!--  主动发送  -->
-                      <div v-if="item.userId === loginUserInfo.userId" style="float: right;width: 70%;display: flex; align-items: center; justify-content: flex-end;">
-                        <div style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block">
+                      <div v-if="item.userId === loginUserInfo.userId"
+                           style="float: right;width: 80%;display: flex; align-items: center;justify-content: flex-end;">
+                        <div
+                          style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;float: right">
                           <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                             {{ item.content }}
                           </div>
                         </div>
-                        <span>
+                        <span style="margin-left: 6px">
                           <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
                         </span>
                       </div>
@@ -147,7 +150,7 @@ export default {
             userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
-            content: '哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
+            content: '哈哈哈哈哈，我真哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
           },
           {
             userId: '1',
@@ -159,28 +162,34 @@ export default {
             userId: '3',
             avatarUrl: require('@/assets/avatar/avatar.jpg'),
             nickName: '徐志斌',
-            content: '我真服了！哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的'
+            content: '我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的'
           }
         ],
-        '2': [
+        '3': [
           {
-            userId: '2',
+            userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
             content: '哈哈哈哈哈，我真的服了哈222222222了'
           },
           {
-            userId: '2',
+            userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
             content: '哈哈哈哈哈22222222222'
           },
           {
-            userId: '2',
+            userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
             content: '哈哈哈哈哈22222222222'
-          }
+          },
+          {
+            userId: '3',
+            avatarUrl: require('@/assets/avatar/avatar.jpg'),
+            nickName: '徐志斌',
+            content: '哈哈哈哈哈22222222222'
+          },
         ]
       }
     }
@@ -238,7 +247,7 @@ export default {
 
       // 聊天框滚动到最底部
       const chatContentShow = document.getElementById('chat-content-show')
-      setTimeout(function() {
+      setTimeout(function () {
         chatContentShow.scrollTop = chatContentShow.scrollHeight
       }, 0)
 
