@@ -45,8 +45,7 @@
                 <!--  上边栏  -->
                 <div
                   style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
-                             style="margin-right: 1%;cursor:pointer;"/>
+                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square" style="margin-right: 1%;cursor:pointer;"/>
                   <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
                   <!--  语音、视频、详情ICON  -->
                 </div>
@@ -54,22 +53,29 @@
                 <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
                   <div style="margin: 10px;display: flex; align-items: center;"
-                       v-for="item in chatContentList[this.currentChatInfo.userId]">
-                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"></el-avatar>
-                    <div style="width: 600px">
+                       v-for="item in chatContentList[currentChatInfo.userId]">
+                    <div style="width: 100%">
                       <!--  被动接受  -->
-                      <div v-if="item.userId !== loginUserInfo.userId"
-                           style="margin-left: 1.6%;background-color: antiquewhite;border-radius: 10px;display: inline-block;">
-                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          {{ item.content }}
+                      <div v-if="item.userId !== loginUserInfo.userId" style="width: 70%;display: flex;align-items: center">
+                        <span style="margin-right: 6px">
+                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
+                        </span>
+                        <div style="background-color: antiquewhite;border-radius: 10px;">
+                          <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                            {{ item.content }}
+                          </div>
                         </div>
                       </div>
                       <!--  主动发送  -->
-                      <div v-if="item.userId === loginUserInfo.userId"
-                           style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
-                        <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                          {{ item.content }}
+                      <div v-if="item.userId === loginUserInfo.userId" style="float: right;width: 70%;display: flex; align-items: center; justify-content: flex-end;">
+                        <div style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block">
+                          <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                            {{ item.content }}
+                          </div>
                         </div>
+                        <span>
+                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -108,7 +114,7 @@ export default {
     return {
       // 登录用户信息
       loginUserInfo: {
-        userId: '1',
+        userId: '3',
         avatarUrl: require('@/assets/avatar/avatar.jpg'),
         nickName: '徐志斌'
       },
@@ -141,7 +147,7 @@ export default {
             userId: '1',
             avatarUrl: require('@/assets/avatar/wen.jpg'),
             nickName: '小温',
-            content: '哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了哈哈哈哈哈，我真的服了'
+            content: '哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
           },
           {
             userId: '1',
@@ -153,7 +159,7 @@ export default {
             userId: '3',
             avatarUrl: require('@/assets/avatar/avatar.jpg'),
             nickName: '徐志斌',
-            content: '我真服了！'
+            content: '我真服了！哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈真的服了哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈哈哈，我真的服了哈哈哈哈哈哈哈哈哈，我真的'
           }
         ],
         '2': [

@@ -55,13 +55,25 @@
       width="30%"
       center
     >
-      <div style="height: 230px">
-        <div style="width: 200px">
-          <el-input style="width: 300px"></el-input>
-          <el-input></el-input>
-          <el-input></el-input>
-          <el-input></el-input>
-          <el-button type="primary" @click="">登 录</el-button>
+      <div style="height: 250px;display: flex; justify-content: center;">
+        <div style="width: 300px">
+          <div>
+            <span style="margin-right: 4%">账号：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="accountId"></el-input>
+          </div>
+          <div style="margin-top: 5%">
+            <span style="margin-right: 4%">密码：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="password"></el-input>
+          </div>
+          <div style="margin-top: 5%;display: flex;align-items: center;">
+            <span>验证码：</span>
+            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="captchaContent"></el-input>
+            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
+          </div>
+          <div style="display: flex; justify-content: center;">
+            <div>还未注册？点击注册</div>
+            <el-button type="primary" size="medium">登 录</el-button>
+          </div>
         </div>
       </div>
     </el-dialog>
@@ -76,8 +88,22 @@ export default {
       logoUrl: require('@/assets/logo/logo.png'),
       avatarUrl: require('@/assets/avatar/null.png'),
       userId: '',
+      accountId: '',
+      password: '',
+
+      captchaContent: '',
+      captchaUrl: '',
+      apiCaptchaUrl: 'http://localhost:10000/user/captcha',
+
       loginDialog: false
     }
+  },
+
+  /**
+   * 生命周期函数
+   */
+  created() {
+    this.captcha()
   },
 
   methods: {
@@ -89,13 +115,6 @@ export default {
     },
 
     /**
-     * 点击跳转好友列表
-     */
-    redirect2Chat() {
-      this.$router.push('/chat')
-    },
-
-    /**
      * 点击头像
      */
     clickAvatar() {
@@ -103,6 +122,13 @@ export default {
       if (this.userId === '') {
         this.loginDialog = true
       }
+    },
+
+    /**
+     * 生成验证码
+     */
+    captcha() {
+      this.captchaUrl = this.apiCaptchaUrl + '?' + Math.random()
     }
   }
 }
