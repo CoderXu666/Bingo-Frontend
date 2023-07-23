@@ -27,7 +27,7 @@ export const constantRoutes = [
    */
   {
     path: '/',
-    component: () => import('@/views/first/index'),
+    component: () => import('@/views/index/index'),
     hidden: true
   },
 

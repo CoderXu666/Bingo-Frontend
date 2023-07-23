@@ -247,7 +247,7 @@ export default {
 
       // 聊天框滚动到最底部
       const chatContentShow = document.getElementById('chat-content-show')
-      setTimeout(function () {
+      setTimeout(() => {
         chatContentShow.scrollTop = chatContentShow.scrollHeight
       }, 0)
 
