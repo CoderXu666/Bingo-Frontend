@@ -16,7 +16,7 @@
     <span @click="clickAvatar"><el-avatar class="header-avatar" :size="50" :src="userInfo.avatarUrl"></el-avatar></span>
     <!--   右目录   -->
     <div class="icon-div">
-      <el-badge :value="2">
+      <el-badge :value="noticeCount">
         <svg class="iconfont">
           <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
         </svg>
@@ -52,7 +52,7 @@
     <el-dialog
       title="登录"
       :visible.sync="loginDialog"
-      style="opacity: 94%"
+      style="opacity: 92%"
       width="30%"
       center
     >

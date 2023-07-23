@@ -8,7 +8,6 @@ import '@/styles/index.scss'
 import './assets/iconfont/iconfont.css'
 import './assets/iconfont/iconfont'
 import App from './App'
-import store from './store'
 import router from './router'
 
 import '@/icons' // icon
@@ -26,6 +25,5 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  store,
   render: h => h(App)
 })
