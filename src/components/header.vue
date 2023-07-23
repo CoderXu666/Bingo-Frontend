@@ -13,7 +13,7 @@
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
-    <span @click="clickAvatar"><el-avatar class="header-avatar" :size="50" :src="avatarUrl"></el-avatar></span>
+    <span @click="clickAvatar"><el-avatar class="header-avatar" :size="50" :src="userInfo.avatarUrl"></el-avatar></span>
     <!--   右目录   -->
     <div class="icon-div">
       <el-badge :value="2">
@@ -24,9 +24,9 @@
       </el-badge>
     </div>
 
-    <router-link key="expand" :to="{path: '/chat', query: {id: this.userId}}">
+    <router-link key="expand" :to="{path: '/chat', query: {id: userInfo.userId}}">
       <div class="icon-div">
-        <el-badge :value="1">
+        <el-badge :value="chatCount">
           <svg class="iconfont">
             <use xlink:href="#icon-biaoqianA01_wode-55"></use>
           </svg>
@@ -52,32 +52,71 @@
     <el-dialog
       title="登录"
       :visible.sync="loginDialog"
+      style="opacity: 94%"
       width="30%"
       center
     >
+      <h2 style="text-align: center;color: antiquewhite;margin-top: -2%">账号登录</h2>
       <div style="height: 250px;display: flex; justify-content: center;">
         <div style="width: 300px">
           <div>
-            <span style="margin-right: 4%">账号：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="accountId"></el-input>
+            <span style="margin-right: 4%;color: antiquewhite">账号：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
           </div>
           <div style="margin-top: 5%">
-            <span style="margin-right: 4%">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="password"></el-input>
+            <span style="margin-right: 4%;color: antiquewhite">密码：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
           </div>
           <div style="margin-top: 5%;display: flex;align-items: center;">
-            <span>验证码：</span>
-            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="captchaContent"></el-input>
+            <span style="color: antiquewhite">验证码：</span>
+            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
             <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
           </div>
-          <div style="display: flex; justify-content: center;">
-            <div>还未注册？点击注册</div>
-            <el-button type="primary" size="medium">登 录</el-button>
+          <div style="text-align: center;">
+            <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
+              <span>没有账号？</span>
+              <span @click="clickRegister">点击注册</span>
+            </div>
+            <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
           </div>
         </div>
       </div>
     </el-dialog>
 
+    <!-- 注册 -->
+    <el-dialog
+      title="登录"
+      :visible.sync="registerDialog"
+      style="opacity: 94%"
+      width="30%"
+      center
+    >
+      <h2 style="text-align: center;color: antiquewhite;margin-top: -2%">账号登录</h2>
+      <div style="height: 250px;display: flex; justify-content: center;">
+        <div style="width: 300px">
+          <div>
+            <span style="margin-right: 4%;color: antiquewhite">账号：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
+          </div>
+          <div style="margin-top: 5%">
+            <span style="margin-right: 4%;color: antiquewhite">密码：</span>
+            <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+          </div>
+          <div style="margin-top: 5%;display: flex;align-items: center;">
+            <span style="color: antiquewhite">验证码：</span>
+            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
+            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
+          </div>
+          <div style="text-align: center;">
+            <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
+              <span>已有账号？</span>
+              <span @click="clickLogin()">点击登录</span>
+            </div>
+            <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
+          </div>
+        </div>
+      </div>
+    </el-dialog>
   </el-header>
 </template>
 
@@ -85,17 +124,32 @@
 export default {
   data() {
     return {
+      // 表单输入信息
+      formData: {
+        accountId: '',
+        nickName: '',
+        password: '',
+        avatarUrl: '',
+        captcha: ''
+      },
+
+      // 登录用户信息
+      userInfo: {
+        userId: '',
+        nickName: '',
+        accountId: '',
+        password: '',
+        avatarUrl: require('@/assets/avatar/null.png')
+      },
+
+      // 好友消息数、通知数量
+      chatCount: '',
+      noticeCount: '',
+
       logoUrl: require('@/assets/logo/logo.png'),
-      avatarUrl: require('@/assets/avatar/null.png'),
-      userId: '',
-      accountId: '',
-      password: '',
-
-      captchaContent: '',
       captchaUrl: '',
-      apiCaptchaUrl: 'http://localhost:10000/user/captcha',
-
-      loginDialog: false
+      loginDialog: false,
+      registerDialog: false
     }
   },
 
@@ -119,7 +173,7 @@ export default {
      */
     clickAvatar() {
       // 如果没有登录，弹出登录框
-      if (this.userId === '') {
+      if (this.userInfo.userId === '') {
         this.loginDialog = true
       }
     },
@@ -128,7 +182,14 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = this.apiCaptchaUrl + '?' + Math.random()
+      this.captchaUrl = 'http://localhost:10000/user/captcha' + '?' + Math.random()
+    },
+
+    /**
+     * 跳转注册页
+     */
+    clickRegister() {
+
     }
   }
 }
@@ -192,5 +253,9 @@ export default {
   color: antiquewhite !important;
   margin-left: 2%;
   font-size: 15px
+}
+
+::v-deep .el-dialog {
+  background-color: #303133;
 }
 </style>
