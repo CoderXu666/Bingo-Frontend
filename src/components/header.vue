@@ -23,7 +23,6 @@
         <div class="icon-font">通知</div>
       </el-badge>
     </div>
-
     <router-link key="expand" :to="{path: '/chat', query: {id: userInfo.userId}}">
       <div class="icon-div">
         <el-badge :value="chatCount">
@@ -34,7 +33,6 @@
         </el-badge>
       </div>
     </router-link>
-
     <div class="icon-div">
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
@@ -52,11 +50,11 @@
     <el-dialog
       title="登录"
       :visible.sync="loginDialog"
-      style="opacity: 92%"
+      style="opacity: 92%;"
       width="30%"
       center
     >
-      <h2 style="text-align: center;color: antiquewhite;margin-top: -2%">账号登录</h2>
+      <h2 style="text-align: center;color: antiquewhite;margin-top: -3%">登录账号</h2>
       <div style="height: 250px;display: flex; justify-content: center;">
         <div style="width: 300px">
           <div>
@@ -75,7 +73,7 @@
           <div style="text-align: center;">
             <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
               <span>没有账号？</span>
-              <span @click="clickRegister">点击注册</span>
+              <span style="cursor: pointer;color: #409EFF" @click="loginDialog = false;registerDialog = true;">点击注册</span>
             </div>
             <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
           </div>
@@ -85,34 +83,48 @@
 
     <!-- 注册 -->
     <el-dialog
-      title="登录"
+      title="注册账号"
       :visible.sync="registerDialog"
       style="opacity: 94%"
       width="30%"
       center
     >
-      <h2 style="text-align: center;color: antiquewhite;margin-top: -2%">账号登录</h2>
-      <div style="height: 250px;display: flex; justify-content: center;">
-        <div style="width: 300px">
-          <div>
-            <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
-          </div>
-          <div style="margin-top: 5%">
-            <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
-          </div>
-          <div style="margin-top: 5%;display: flex;align-items: center;">
-            <span style="color: antiquewhite">验证码：</span>
-            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
-            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
-          </div>
-          <div style="text-align: center;">
-            <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
-              <span>已有账号？</span>
-              <span @click="clickLogin()">点击登录</span>
+      <div style="height: 450px">
+        <h2 style="text-align: center;color: antiquewhite;margin-top: -3%">注册账号</h2>
+        <div style="height: 250px;display: flex; justify-content: center;">
+          <div style="width: 300px">
+            <div>
+              <span style="margin-right: 4%;color: antiquewhite">账号：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
             </div>
-            <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
+            <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">密码：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+            </div>
+            <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">性别：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+            </div>
+            <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">密码：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+            </div>
+            <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">密码：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+            </div>
+            <div style="margin-top: 5%;display: flex;align-items: center;">
+              <span style="color: antiquewhite">验证码：</span>
+              <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
+              <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
+            </div>
+            <div style="text-align: center">
+              <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
+                <span>已有账号？</span>
+                <span style="cursor: pointer;color: #409EFF" @click="registerDialog = false;loginDialog = true;">点击登录</span>
+              </div>
+              <el-button type="primary" size="medium" style="margin-top: 6%">注 册</el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -189,7 +201,8 @@ export default {
      * 跳转注册页
      */
     clickRegister() {
-
+      this.loginDialog = false
+      this.registerDialog = true
     }
   }
 }
@@ -257,5 +270,6 @@ export default {
 
 ::v-deep .el-dialog {
   background-color: #303133;
+  border-radius: 10px;
 }
 </style>
