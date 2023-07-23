@@ -10,8 +10,6 @@ import './assets/iconfont/iconfont'
 import App from './App'
 import router from './router'
 
-import '@/icons'
-
 if (process.env.NODE_ENV === 'production') {
 }
 
