@@ -53,11 +53,11 @@
 
                 <!--  聊天窗口  -->
                 <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div style="margin: 10px;" v-for="item in chatContentList[currentChatInfo.userId]">
+                  <div v-for="item in chatContentList[currentChatInfo.userId]">
                     <div style="width: 100%">
                       <!--  被动接受  -->
                       <div v-if="item.userId !== loginUserInfo.userId"
-                           style="width: 80%;display: flex;align-items: center">
+                           style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%">
                         <span style="margin-right: 6px">
                           <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                         </span>
@@ -69,9 +69,9 @@
                       </div>
                       <!--  主动发送  -->
                       <div v-if="item.userId === loginUserInfo.userId"
-                           style="float: right;width: 80%;display: flex; align-items: center;justify-content: flex-end;">
+                           style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
                         <div
-                          style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;float: right">
+                          style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
                           <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                             {{ item.content }}
                           </div>
