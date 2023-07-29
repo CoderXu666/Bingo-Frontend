@@ -9,14 +9,14 @@ const service = axios.create({
 })
 
 /**
- * request interceptor
+ * 请求拦截器
  */
 service.interceptors.request.use(
 
 )
 
 /**
- * response interceptor
+ * 响应拦截器
  */
 service.interceptors.response.use(
 

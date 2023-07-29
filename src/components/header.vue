@@ -73,7 +73,8 @@
           <div style="text-align: center;">
             <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
               <span>没有账号？</span>
-              <span style="cursor: pointer;color: #409EFF" @click="loginDialog = false;registerDialog = true;">点击注册</span>
+              <span style="cursor: pointer;color: #409EFF"
+                    @click="loginDialog = false;registerDialog = true;">点击注册</span>
             </div>
             <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
           </div>
@@ -93,35 +94,54 @@
         <h2 style="text-align: center;color: antiquewhite;margin-top: -3%">注册账号</h2>
         <div style="height: 250px;display: flex; justify-content: center;">
           <div style="width: 300px">
+            <!--  上传头像 -->
+            <!--            <div>-->
+            <!--              <span style="margin-right: 4%;color: antiquewhite">头像：</span>-->
+            <!--              <el-upload-->
+            <!--                class="avatar-uploader"-->
+            <!--                action="http://localhost:10000/user/upload_avatar"-->
+            <!--                :show-file-list="false"-->
+            <!--                :on-success="handleAvatarSuccess"-->
+            <!--                :before-upload="beforeAvatarUpload">-->
+            <!--                <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
+            <!--                <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
+            <!--              </el-upload>-->
+            <!--            </div>-->
             <div>
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="formData.accountId"></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="formData.password" show-password></el-input>
+            </div>
+            <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">昵称：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="formData.nickName"></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
-            </div>
-            <div style="margin-top: 5%">
-              <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
-            </div>
-            <div style="margin-top: 5%">
-              <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+              <el-select v-model="formData.gender" placeholder="请选择">
+                <el-option
+                  v-for="item in genderList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                  <span style="float: left">{{ item.label }}</span>
+                </el-option>
+              </el-select>
             </div>
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
-              <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
+              <el-input style="display: inline-block;width: 130px;margin-right: 1%"
+                        v-model="formData.captcha"></el-input>
               <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
             </div>
             <div style="text-align: center">
               <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
                 <span>已有账号？</span>
-                <span style="cursor: pointer;color: #409EFF" @click="registerDialog = false;loginDialog = true;">点击登录</span>
+                <span style="cursor: pointer;color: #409EFF"
+                      @click="registerDialog = false;loginDialog = true;">点击登录</span>
               </div>
               <el-button type="primary" size="medium" style="margin-top: 6%">注 册</el-button>
             </div>
@@ -133,25 +153,28 @@
 </template>
 
 <script>
+import userApi from '@/api/user'
+
 export default {
   data() {
     return {
       // 表单输入信息
       formData: {
         accountId: '',
-        nickName: '',
         password: '',
-        avatarUrl: '',
+        nickName: '',
+        gender: '1',
         captcha: ''
       },
 
       // 登录用户信息
       userInfo: {
+        avatarUrl: require('@/assets/avatar/null.png'),
         userId: '',
         nickName: '',
         accountId: '',
         password: '',
-        avatarUrl: require('@/assets/avatar/null.png')
+        gender: ''
       },
 
       // 好友消息数、通知数量
@@ -161,7 +184,27 @@ export default {
       logoUrl: require('@/assets/logo/logo.png'),
       captchaUrl: '',
       loginDialog: false,
-      registerDialog: false
+      registerDialog: false,
+
+      // 头像上传
+      imageUrl: '',
+      dialogVisible: false,
+
+      // 性别
+      genderList: [
+        {
+          value: '1',
+          label: '男'
+        },
+        {
+          value: '2',
+          label: '女'
+        },
+        {
+          value: '3',
+          label: '通吃'
+        }
+      ]
     }
   },
 
@@ -191,6 +234,32 @@ export default {
     },
 
     /**
+     * 注册
+     */
+    register() {
+      userApi.register(this.formData)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(e => {
+          console.log("出异常了:" + e)
+        })
+    },
+
+    /**
+     * 登录
+     */
+    login() {
+      userApi.login(this.userInfo)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(e => {
+          console.log("出异常了：" + e)
+        })
+    },
+
+    /**
      * 生成验证码
      */
     captcha() {
@@ -198,11 +267,29 @@ export default {
     },
 
     /**
-     * 跳转注册页
+     * 头像相关
      */
-    clickRegister() {
-      this.loginDialog = false
-      this.registerDialog = true
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
+    },
+
+    /**
+     * 头像上传回调函数
+     */
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
     }
   }
 }
@@ -271,5 +358,32 @@ export default {
 ::v-deep .el-dialog {
   background-color: #303133;
   border-radius: 10px;
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
