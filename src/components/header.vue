@@ -59,11 +59,11 @@
         <div style="width: 300px">
           <div>
             <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="userInfo.accountId"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="formData.accountId"></el-input>
           </div>
           <div style="margin-top: 5%">
             <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="userInfo.password"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="formData.passWord"></el-input>
           </div>
           <div style="margin-top: 5%;display: flex;align-items: center;">
             <span style="color: antiquewhite">验证码：</span>
@@ -76,7 +76,7 @@
               <span style="cursor: pointer;color: #409EFF"
                     @click="loginDialog = false;registerDialog = true;">点击注册</span>
             </div>
-            <el-button type="primary" size="medium" style="margin-top: 6%">登 录</el-button>
+            <el-button type="primary" size="medium" style="margin-top: 6%" @click="login">登 录</el-button>
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="formData.password" show-password></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="formData.passWord" show-password></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">昵称：</span>
@@ -143,7 +143,7 @@
                 <span style="cursor: pointer;color: #409EFF"
                       @click="registerDialog = false;loginDialog = true;">点击登录</span>
               </div>
-              <el-button type="primary" size="medium" style="margin-top: 6%">注 册</el-button>
+              <el-button type="primary" size="medium" style="margin-top: 6%" @click="register">注 册</el-button>
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@
 </template>
 
 <script>
-import userApi from '@/api/user'
+import axios from '@/utils/request'
 
 export default {
   data() {
@@ -161,7 +161,7 @@ export default {
       // 表单输入信息
       formData: {
         accountId: '',
-        password: '',
+        passWord: '',
         nickName: '',
         gender: '1',
         captcha: ''
@@ -173,7 +173,7 @@ export default {
         userId: '',
         nickName: '',
         accountId: '',
-        password: '',
+        passWord: '',
         gender: ''
       },
 
@@ -237,12 +237,12 @@ export default {
      * 注册
      */
     register() {
-      userApi.register(this.formData)
+      axios.post('/customer/register', this.formData)
         .then(res => {
           console.log(res)
         })
         .catch(e => {
-          console.log("出异常了:" + e)
+          console.log(e)
         })
     },
 
@@ -250,12 +250,12 @@ export default {
      * 登录
      */
     login() {
-      userApi.login(this.userInfo)
+      axios.post('/customer/login', this.formData)
         .then(res => {
-          console.log(res)
+          console.log("成功了")
         })
         .catch(e => {
-          console.log("出异常了：" + e)
+          console.log("失败了")
         })
     },
 
@@ -263,7 +263,7 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = 'http://localhost:10000/user/captcha' + '?' + Math.random()
+      this.captchaUrl = 'http://localhost:10000/user/customer/captcha' + '?' + Math.random()
     },
 
     /**

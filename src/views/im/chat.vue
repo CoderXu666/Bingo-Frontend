@@ -106,7 +106,6 @@
 
 <script>
 import HeaderComponent from '@/components/header'
-import chatApi from '@/api/chat'
 
 export default {
   components: {
@@ -257,10 +256,10 @@ export default {
       chatInput.focus()
 
       // 调用服务端接口，发送消息
-      chatApi.sendMessage(message)
-        .then(res => {
-          this.chatContent = null
-        })
+      // chatApi.sendMessage(message)
+      //   .then(res => {
+      //     this.chatContent = null
+      //   })
     },
 
     /**
