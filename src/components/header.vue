@@ -59,15 +59,16 @@
         <div style="width: 300px">
           <div>
             <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="formData.accountId"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.accountId"></el-input>
           </div>
           <div style="margin-top: 5%">
             <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="formData.passWord"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.passWord"></el-input>
           </div>
           <div style="margin-top: 5%;display: flex;align-items: center;">
             <span style="color: antiquewhite">验证码：</span>
-            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="formData.captcha"></el-input>
+            <el-input style="display: inline-block;width: 130px;margin-right: 1%"
+                      v-model="loginFormData.captcha"></el-input>
             <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
           </div>
           <div style="text-align: center;">
@@ -109,19 +110,20 @@
             <!--            </div>-->
             <div>
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="formData.accountId"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="formData.passWord" show-password></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.passWord"
+                        show-password></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">昵称：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="formData.nickName"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.nickName"></el-input>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
-              <el-select v-model="formData.gender" placeholder="请选择">
+              <el-select v-model="registerFormData.gender" placeholder="请选择">
                 <el-option
                   v-for="item in genderList"
                   :key="item.value"
@@ -134,7 +136,7 @@
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
               <el-input style="display: inline-block;width: 130px;margin-right: 1%"
-                        v-model="formData.captcha"></el-input>
+                        v-model="registerFormData.captcha"></el-input>
               <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
             </div>
             <div style="text-align: center">
@@ -158,12 +160,19 @@ import axios from '@/utils/request'
 export default {
   data() {
     return {
-      // 表单输入信息
-      formData: {
+      // 注册表单输入信息
+      registerFormData: {
         accountId: '',
         passWord: '',
         nickName: '',
         gender: '1',
+        captcha: ''
+      },
+
+      // 登录表单输入
+      loginFormData: {
+        accountId: '',
+        passWord: '',
         captcha: ''
       },
 
@@ -237,12 +246,12 @@ export default {
      * 注册
      */
     register() {
-      axios.post('/customer/register', this.formData)
+      axios.post('/customer/register', this.registerFormData)
         .then(res => {
-          console.log(res)
+          console.log("注册成功了")
         })
         .catch(e => {
-          console.log(e)
+          this.$message.error('注册失败:' + e.data)
         })
     },
 
@@ -250,12 +259,12 @@ export default {
      * 登录
      */
     login() {
-      axios.post('/customer/login', this.formData)
+      axios.post('/customer/login', this.loginFormData)
         .then(res => {
-          console.log("成功了")
+          console.log("登录成功")
         })
         .catch(e => {
-          console.log("失败了")
+          this.$message.error('登录失败:' + e.data)
         })
     },
 
