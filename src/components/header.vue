@@ -2,7 +2,7 @@
   <!--  1.导航栏  -->
   <el-header class="header-cls">
     <!--   Logo   -->
-    <el-image class="header-logo" :src="logoUrl" @click="clickLogo()"></el-image>
+    <el-image class="header-logo" :src="logoUrl" @click="clickLogo()"/>
     <!--   左目录   -->
     <el-menu
       class="header-left-menu"
@@ -59,17 +59,16 @@
         <div style="width: 300px">
           <div>
             <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.accountId"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.accountId"/>
           </div>
           <div style="margin-top: 5%">
             <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.passWord"></el-input>
+            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.passWord"/>
           </div>
           <div style="margin-top: 5%;display: flex;align-items: center;">
             <span style="color: antiquewhite">验证码：</span>
-            <el-input style="display: inline-block;width: 130px;margin-right: 1%"
-                      v-model="loginFormData.captcha"></el-input>
-            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
+            <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="loginFormData.captcha"/>
+            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"/>
           </div>
           <div style="text-align: center;">
             <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
@@ -134,9 +133,8 @@
             </div>
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
-              <el-input style="display: inline-block;width: 130px;margin-right: 1%"
-                        v-model="registerFormData.captcha"></el-input>
-              <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"></el-image>
+              <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="registerFormData.captcha"/>
+              <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"/>
             </div>
             <div style="text-align: center">
               <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
@@ -154,7 +152,7 @@
 </template>
 
 <script>
-import axios from '@/utils/request'
+import axios from '@/utils/axios'
 
 export default {
   data() {

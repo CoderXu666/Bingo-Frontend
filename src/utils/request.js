@@ -13,7 +13,6 @@ const service = axios.create({
  */
 axios.defaults.validateStatus = status => {
   // 只有HTTP状态码为2xx时认为是成功的，其他状态码都认为是失败的
-  console.log(status)
   return status !== 200
 }
 
