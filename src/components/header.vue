@@ -8,8 +8,8 @@
       class="header-left-menu"
       mode="horizontal"
       background-color="transparent">
-      <el-menu-item index="1" class="header-left-menu-font">社区广场</el-menu-item>
-      <el-menu-item index="2" class="header-left-menu-font">狂欢派对</el-menu-item>
+      <el-menu-item index="1" class="header-left-menu-font">Github</el-menu-item>
+      <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
@@ -110,16 +110,15 @@
             <!--            </div>-->
             <div>
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"/>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.passWord"
-                        show-password></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.passWord" show-password/>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">昵称：</span>
-              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.nickName"></el-input>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.nickName"/>
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
@@ -166,7 +165,7 @@ export default {
         passWord: '',
         nickName: '',
         gender: '1',
-        captcha: ''
+        email: ''
       },
 
       // 登录表单输入
@@ -176,7 +175,7 @@ export default {
         captcha: ''
       },
 
-      // 登录用户信息
+      // 登录后用户信息
       userInfo: {
         avatarUrl: require('@/assets/avatar/null.png'),
         userId: '',
