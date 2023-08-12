@@ -13,7 +13,9 @@
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
-    <span @click="clickAvatar"><el-avatar class="header-avatar" :size="50" :src="userInfo.avatarUrl"></el-avatar></span>
+    <span @click="clickAvatar">
+      <el-avatar class="header-avatar" :size="50" :src="userInfo.avatarUrl"/>
+    </span>
     <!--   右目录   -->
     <div class="icon-div">
       <el-badge :value="noticeCount">
@@ -120,6 +122,10 @@
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.nickName"/>
             </div>
             <div style="margin-top: 5%">
+              <span style="margin-right: 4%;color: antiquewhite">邮件：</span>
+              <el-input style="display: inline-block;width: 220px" v-model="registerFormData.email"/>
+            </div>
+            <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
               <el-select v-model="registerFormData.gender" placeholder="请选择">
                 <el-option
@@ -134,6 +140,19 @@
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
               <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="registerFormData.captcha"/>
+
+              <div
+                @click="getCode(registerFormData)"
+                v-bind:class="{ active: isActive }"
+                class="verifyPhone-button"
+              >
+                <span v-show="isActive" style="font-size: 13px;cursor: pointer"
+                      @click="sendEmail(registerFormData.email)">
+                  获取验证码
+                </span>
+                <span v-show="!isActive">{{ count }}s</span>
+              </div>
+
             </div>
             <div style="text-align: center">
               <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
@@ -186,8 +205,11 @@ export default {
       chatCount: '',
       noticeCount: '',
 
-      // 邮件倒计时
-      deadline: Date.now() + 1000 * 60 * 60 * 8,
+      // 发送邮件按钮
+      isActive: true,
+      count: 0,
+      timer: null,
+
 
       logoUrl: require('@/assets/logo/logo.png'),
       captchaUrl: '',
@@ -285,19 +307,44 @@ export default {
      * 头像上传回调函数
      */
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+        this.$message.error('上传头像图片只能是 JPG 格式!')
       }
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
+        this.$message.error('上传头像图片大小不能超过 2MB!')
       }
-      return isJPG && isLt2M;
+      return isJPG && isLt2M
+    },
+
+    /**
+     * 发送邮件验证码
+     */
+    sendEmail(email) {
+      axios.post('/customer/send_email', this.registerFormData)
+        .then(res => {
+          if (!this.timer) {
+            this.count = 60
+            this.isActive = false
+            this.timer = setInterval(() => {
+              if (this.count > 0 && this.count <= 60) {
+                this.count--
+              } else {
+                this.isActive = true
+                clearInterval(this.timer)
+                this.timer = null
+              }
+            }, 1000)
+          }
+        })
+        .catch(e => {
+          this.$message.error('发送验证码失败')
+        })
     }
   }
 }
@@ -393,5 +440,22 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+
+.verifyPhone-button {
+  border: .0625rem solid #ccc;
+  background: #f7f7f7;
+  color: #999;
+  border-radius: .3125rem;
+  width: 5rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+}
+
+.active {
+  border: .0625rem solid #3980ea;
+  background: #fff;
+  color: #3980ea;
 }
 </style>
