@@ -142,12 +142,11 @@
               <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="registerFormData.captcha"/>
 
               <div
-                @click="getCode(registerFormData)"
+                @click="sendEmail()"
                 v-bind:class="{ active: isActive }"
                 class="verifyPhone-button"
               >
-                <span v-show="isActive" style="font-size: 13px;cursor: pointer"
-                      @click="sendEmail(registerFormData.email)">
+                <span v-show="isActive" style="font-size: 13px;cursor: pointer">
                   获取验证码
                 </span>
                 <span v-show="!isActive">{{ count }}s</span>
@@ -170,7 +169,7 @@
 </template>
 
 <script>
-import axios from '@/utils/axios'
+import headerApi from '@/api/header'
 
 export default {
   data() {
@@ -209,7 +208,6 @@ export default {
       isActive: true,
       count: 0,
       timer: null,
-
 
       logoUrl: require('@/assets/logo/logo.png'),
       captchaUrl: '',
@@ -267,12 +265,12 @@ export default {
      * 注册
      */
     register() {
-      axios.post('/customer/register', this.registerFormData)
+      headerApi.register(this.registerFormData)
         .then(res => {
-          console.log("注册成功了")
+          this.$message.success('注册成功')
         })
         .catch(e => {
-          this.$message.error('注册失败:' + e.data)
+          this.$message.error('注册失败')
         })
     },
 
@@ -280,13 +278,7 @@ export default {
      * 登录
      */
     login() {
-      axios.post('/customer/login', this.loginFormData)
-        .then(res => {
-          console.log("登录成功")
-        })
-        .catch(e => {
-          this.$message.error('登录失败:' + e.data)
-        })
+
     },
 
     /**
@@ -325,8 +317,8 @@ export default {
     /**
      * 发送邮件验证码
      */
-    sendEmail(email) {
-      axios.post('/customer/send_email', this.registerFormData)
+    sendEmail() {
+      headerApi.sendEmail(this.registerFormData.email)
         .then(res => {
           if (!this.timer) {
             this.count = 60
@@ -343,7 +335,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$message.error('发送验证码失败')
+          this.$message.error('发送验证码失败');
         })
     }
   }
