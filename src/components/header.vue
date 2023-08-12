@@ -134,7 +134,6 @@
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
               <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="registerFormData.captcha"/>
-              <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"/>
             </div>
             <div style="text-align: center">
               <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
@@ -186,6 +185,9 @@ export default {
       // 好友消息数、通知数量
       chatCount: '',
       noticeCount: '',
+
+      // 邮件倒计时
+      deadline: Date.now() + 1000 * 60 * 60 * 8,
 
       logoUrl: require('@/assets/logo/logo.png'),
       captchaUrl: '',

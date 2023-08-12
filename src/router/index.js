@@ -34,7 +34,11 @@ export const constantRoutes = [
   /**
    * 404 Page
    */
-  {path: '*', redirect: '/404', hidden: true}
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 const createRouter = () => new Router({
