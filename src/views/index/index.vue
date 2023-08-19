@@ -296,11 +296,7 @@ export default {
     }
   },
 
-  methods: {
-    clickAvatar(message) {
-      console.log('首页发生的事件：' + message)
-    }
-  }
+  methods: {}
 }
 </script>
 

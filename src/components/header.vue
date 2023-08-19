@@ -8,7 +8,9 @@
       class="header-left-menu"
       mode="horizontal"
       background-color="transparent">
-      <el-menu-item index="1" class="header-left-menu-font">Github</el-menu-item>
+      <el-menu-item index="1" class="header-left-menu-font">
+        <a href="https://github.com/CoderXu666" target="_blank">Github</a>
+      </el-menu-item>
       <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
       <el-menu-item index="3" class="header-left-menu-font">关于我</el-menu-item>
     </el-menu>
@@ -25,7 +27,7 @@
         <div class="icon-font">通知</div>
       </el-badge>
     </div>
-    <router-link key="expand" :to="{path: '/chat', query: {id: userInfo.userId}}">
+    <router-link :to="{path: '/chat', query: {id: userInfo.id}}">
       <div class="icon-div">
         <el-badge :value="chatCount">
           <svg class="iconfont">
@@ -98,18 +100,18 @@
         <div style="height: 250px;display: flex; justify-content: center;">
           <div style="width: 300px">
             <!--  上传头像 -->
-            <!--            <div>-->
-            <!--              <span style="margin-right: 4%;color: antiquewhite">头像：</span>-->
-            <!--              <el-upload-->
-            <!--                class="avatar-uploader"-->
-            <!--                action="http://localhost:10000/user/upload_avatar"-->
-            <!--                :show-file-list="false"-->
-            <!--                :on-success="handleAvatarSuccess"-->
-            <!--                :before-upload="beforeAvatarUpload">-->
-            <!--                <img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-            <!--                <i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-            <!--              </el-upload>-->
-            <!--            </div>-->
+            <div>
+              <span style="margin-right: 4%;color: antiquewhite">头像：</span>
+              <el-upload
+                class="avatar-uploader"
+                action="http://localhost:10000/user/customer/upload_avatar"
+                :show-file-list="false"
+                :on-success="handleAvatarSuccess"
+                :before-upload="beforeAvatarUpload">
+                <img v-if="registerFormData.avatarUrl" :src="registerFormData.avatarUrl" class="avatar">
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+            </div>
             <div>
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"/>
@@ -178,6 +180,7 @@ export default {
     return {
       // 注册表单输入信息
       registerFormData: {
+        avatarUrl: '',
         accountId: '',
         passWord: '',
         nickName: '',
@@ -195,8 +198,8 @@ export default {
 
       // 登录后用户信息
       userInfo: {
+        id: '',
         avatarUrl: require('@/assets/avatar/null.png'),
-        userId: '',
         nickName: '',
         accountId: '',
         passWord: '',
@@ -216,9 +219,6 @@ export default {
       captchaUrl: '',
       loginDialog: false,
       registerDialog: false,
-
-      // 头像上传
-      imageUrl: '',
       dialogVisible: false,
 
       // 性别
@@ -260,8 +260,12 @@ export default {
      */
     clickAvatar() {
       // 如果没有登录，弹出登录框
-      if (this.userInfo.userId === '') {
+      if (this.userInfo.id === '' || this.userInfo.id === null) {
         this.loginDialog = true
+      }
+      // 如果登录过了，鼠标放上去给个下拉框
+      else {
+
       }
     },
 
@@ -285,7 +289,6 @@ export default {
      */
     login() {
       this.loginFormData.captchaKey = cookie.get('bingo_captcha')
-      console.log(this.loginFormData.captchaKey)
       headerApi.login(this.loginFormData)
         .then(res => {
           localStorage.setItem('bingo_token', res.data.data)
@@ -338,7 +341,7 @@ export default {
      * 头像上传回调函数
      */
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
+      this.registerFormData.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
