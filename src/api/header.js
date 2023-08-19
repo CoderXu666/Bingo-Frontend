@@ -4,6 +4,9 @@ import axios from '@/utils/axios'
  * 发送邮件二维码
  */
 export default {
+  /**
+   * 发送验证码给Email
+   */
   sendEmail(email) {
     return axios({
       url: '/customer/send_email',
@@ -26,18 +29,27 @@ export default {
   },
 
   /**
-   * 注册
+   * 登录
    */
   login(data) {
     return axios({
-      url: '/user/info',
+      url: '/customer/login',
       method: 'post',
       data
     })
+  },
+
+  /**
+   * 解析Token
+   */
+  resolveToken(token) {
+    return axios({
+      url: '/customer/resolve_token',
+      method: 'get',
+      params: {
+        token: token
+      }
+    })
   }
 }
-
-
-
-
 

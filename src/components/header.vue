@@ -241,6 +241,8 @@ export default {
    */
   created() {
     this.captcha()
+    let token = localStorage.getItem('bingo_token')
+    this.resolveToken(token)
   },
 
   methods: {
@@ -275,10 +277,32 @@ export default {
     },
 
     /**
-     * 登录
+     * 登录功能
+     * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
+     * 2.以后每次客户端发起请求，都会从localStorage中获取token信息，解析成用户信息
      */
     login() {
+      headerApi.login()
+        .then(res => {
+          localStorage.setItem('bingo_token', res.data.data)
+          this.$message.success('登陆成功')
+        })
+        .catch(e => {
+          this.$message.error('登录功能异常')
+        })
+    },
 
+    /**
+     * 解析Token
+     */
+    resolveToken(token) {
+      headerApi.resolveToken(token)
+        .then(res => {
+          this.userInfo = res.data.data
+        })
+        .catch(e => {
+          this.$message.error('解析Token功能异常')
+        })
     },
 
     /**
@@ -335,7 +359,7 @@ export default {
           }
         })
         .catch(e => {
-          this.$message.error('发送验证码失败');
+          this.$message.error('验证码发送失败')
         })
     }
   }
