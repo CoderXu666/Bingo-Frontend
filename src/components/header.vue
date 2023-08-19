@@ -271,7 +271,7 @@ export default {
           this.$message.success('注册成功')
         })
         .catch(e => {
-          this.$message.error('注册失败')
+          this.$message.error(e.data.data)
         })
     },
 
@@ -287,7 +287,7 @@ export default {
           this.$message.success('登陆成功')
         })
         .catch(e => {
-          this.$message.error('登录异常')
+          this.$message.error(e.data.data)
         })
     },
 
