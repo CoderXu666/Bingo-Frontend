@@ -70,7 +70,8 @@
           <div style="margin-top: 5%;display: flex;align-items: center;">
             <span style="color: antiquewhite">验证码：</span>
             <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="loginFormData.captcha"/>
-            <el-image :src="captchaUrl" @click="captcha()" style="border-radius: 4px"/>
+            <!-- el-image标签会加载两次验证码，不要使用！ -->
+            <img :src="captchaUrl" @click="captcha()" style="border-radius: 4px"/>
           </div>
           <div style="text-align: center;">
             <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
@@ -170,6 +171,7 @@
 
 <script>
 import headerApi from '@/api/header'
+import cookie from 'js-cookie'
 
 export default {
   data() {
@@ -185,6 +187,7 @@ export default {
 
       // 登录表单输入
       loginFormData: {
+        captchaKey: '',
         accountId: '',
         passWord: '',
         captcha: ''
@@ -281,7 +284,9 @@ export default {
      * 2.以后每次客户端发起请求，都会从localStorage中获取token信息，解析成用户信息
      */
     login() {
-      headerApi.login()
+      this.loginFormData.captchaKey = cookie.get('bingo_captcha')
+      console.log(this.loginFormData.captchaKey)
+      headerApi.login(this.loginFormData)
         .then(res => {
           localStorage.setItem('bingo_token', res.data.data)
           this.$message.success('登陆成功')
@@ -312,7 +317,7 @@ export default {
      */
     logout() {
       localStorage.removeItem('bingo_token')
-      window.location.href('/')
+      this.$router.push('/')
     },
 
     /**
