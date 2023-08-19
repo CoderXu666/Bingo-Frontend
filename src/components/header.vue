@@ -10,7 +10,7 @@
       background-color="transparent">
       <el-menu-item index="1" class="header-left-menu-font">Github</el-menu-item>
       <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
-      <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
+      <el-menu-item index="3" class="header-left-menu-font">关于我</el-menu-item>
     </el-menu>
     <!--   头像   -->
     <span @click="clickAvatar">
@@ -241,8 +241,7 @@ export default {
    */
   created() {
     this.captcha()
-    let token = localStorage.getItem('bingo_token')
-    this.resolveToken(token)
+    this.resolveToken(localStorage.getItem('bingo_token'))
   },
 
   methods: {
@@ -288,7 +287,7 @@ export default {
           this.$message.success('登陆成功')
         })
         .catch(e => {
-          this.$message.error('登录功能异常')
+          this.$message.error('登录异常')
         })
     },
 
@@ -296,13 +295,24 @@ export default {
      * 解析Token
      */
     resolveToken(token) {
+      if (token === '' || token === null) {
+        return
+      }
       headerApi.resolveToken(token)
         .then(res => {
           this.userInfo = res.data.data
         })
         .catch(e => {
-          this.$message.error('解析Token功能异常')
+          this.$message.error('解析Token功能异常:' + e)
         })
+    },
+
+    /**
+     * 退出登录
+     */
+    logout() {
+      localStorage.removeItem('bingo_token')
+      window.location.href('/')
     },
 
     /**
@@ -357,6 +367,7 @@ export default {
               }
             }, 1000)
           }
+          this.$message.success('已发送验证码至您的邮箱，请查收')
         })
         .catch(e => {
           this.$message.error('验证码发送失败')

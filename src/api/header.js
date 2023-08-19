@@ -22,7 +22,7 @@ export default {
    */
   register(data) {
     return axios({
-      url: '/customer/reigster',
+      url: '/customer/register',
       method: 'post',
       data
     })
