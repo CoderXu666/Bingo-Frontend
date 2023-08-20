@@ -2,7 +2,6 @@
   <el-container>
     <!--  1.上边栏  -->
     <headerComponent/>
-
     <!--  2.搜索板块  -->
     <div class="search-cls">
       <!--   背景视频   -->
@@ -86,7 +85,8 @@
           </el-col>
         </el-col>
         <el-col :span="6" class="right-content">
-          <div style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
+          <div
+            style="color: antiquewhite;margin-top: 5%;margin-left: 5%;background-color: #323335;border-radius: 10px">
             <div class="topic-cls">1.最让你难忘事情</div>
             <div class="topic-cls">2.最想对年轻的你说什么</div>
             <div class="topic-cls">3.你最后悔的事情是什么</div>

@@ -67,7 +67,7 @@
           </div>
           <div style="margin-top: 5%">
             <span style="margin-right: 4%;color: antiquewhite">密码：</span>
-            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.passWord"/>
+            <el-input style="display: inline-block;width: 220px" v-model="loginFormData.passWord" show-password/>
           </div>
           <div style="margin-top: 5%;display: flex;align-items: center;">
             <span style="color: antiquewhite">验证码：</span>
@@ -251,6 +251,8 @@ export default {
       headerApi.register(this.registerFormData)
         .then(res => {
           this.$message.success('注册成功')
+          this.registerDialog = false
+          this.loginDialog = true
         })
         .catch(e => {
           this.$message.error(e.data.data)
@@ -268,6 +270,8 @@ export default {
         .then(res => {
           localStorage.setItem('bingo_token', res.data.data)
           this.$message.success('登陆成功')
+          this.loginDialog = false
+          this.resolveToken(localStorage.getItem('bingo_token'))
         })
         .catch(e => {
           this.$message.error(e.data.data)
