@@ -87,7 +87,7 @@
       </div>
     </el-dialog>
 
-    <!-- 注册 -->
+    <!-- 注册页 -->
     <el-dialog
       title="注册账号"
       :visible.sync="registerDialog"
@@ -95,24 +95,22 @@
       width="30%"
       center
     >
-      <div style="height: 450px">
+      <div style="height: 500px;">
         <h2 style="text-align: center;color: antiquewhite;margin-top: -3%">注册账号</h2>
         <div style="height: 250px;display: flex; justify-content: center;">
           <div style="width: 300px">
-            <!--  上传头像 -->
             <div>
               <span style="margin-right: 4%;color: antiquewhite">头像：</span>
               <el-upload
-                class="avatar-uploader"
                 action="http://localhost:10000/user/customer/upload_avatar"
-                :show-file-list="false"
-                :on-success="handleAvatarSuccess"
-                :before-upload="beforeAvatarUpload">
-                <img v-if="registerFormData.avatarUrl" :src="registerFormData.avatarUrl" class="avatar">
-                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                :on-remove="handleRemove"
+                :limit="1"
+                style="display: inline-block"
+              >
+                <el-button size="small" type="primary">上传头像</el-button>
               </el-upload>
             </div>
-            <div>
+            <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"/>
             </div>
@@ -130,15 +128,19 @@
             </div>
             <div style="margin-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
-              <el-select v-model="registerFormData.gender" placeholder="请选择">
-                <el-option
-                  v-for="item in genderList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                  <span style="float: left">{{ item.label }}</span>
-                </el-option>
-              </el-select>
+              <template>
+                <el-radio v-model="registerFormData.gender" label="1">男</el-radio>
+                <el-radio v-model="registerFormData.gender" label="2">女</el-radio>
+              </template>
+              <!--              <el-select v-model="registerFormData.gender" placeholder="请选择">-->
+              <!--                <el-option-->
+              <!--                  v-for="item in genderList"-->
+              <!--                  :key="item.value"-->
+              <!--                  :label="item.label"-->
+              <!--                  :value="item.value">-->
+              <!--                  <span style="float: left">{{ item.label }}</span>-->
+              <!--                </el-option>-->
+              <!--              </el-select>-->
             </div>
             <div style="margin-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
@@ -178,7 +180,7 @@ import cookie from 'js-cookie'
 export default {
   data() {
     return {
-      // 注册表单输入信息
+      // 注册表单
       registerFormData: {
         avatarUrl: '',
         accountId: '',
@@ -188,7 +190,7 @@ export default {
         email: ''
       },
 
-      // 登录表单输入
+      // 登录表单
       loginFormData: {
         captchaKey: '',
         accountId: '',
@@ -196,7 +198,7 @@ export default {
         captcha: ''
       },
 
-      // 登录后用户信息
+      // 用户信息（完成登录）
       userInfo: {
         id: '',
         avatarUrl: require('@/assets/avatar/null.png'),
@@ -219,23 +221,6 @@ export default {
       captchaUrl: '',
       loginDialog: false,
       registerDialog: false,
-      dialogVisible: false,
-
-      // 性别
-      genderList: [
-        {
-          value: '1',
-          label: '男'
-        },
-        {
-          value: '2',
-          label: '女'
-        },
-        {
-          value: '3',
-          label: '通吃'
-        }
-      ]
     }
   },
 
@@ -311,7 +296,7 @@ export default {
           this.userInfo = res.data.data
         })
         .catch(e => {
-          this.$message.error('解析Token功能异常:' + e)
+          this.$message.error('解析Token异常:' + e)
         })
     },
 
@@ -331,29 +316,10 @@ export default {
     },
 
     /**
-     * 头像相关
+     * 注册框头像相关
      */
     handleRemove(file, fileList) {
       console.log(file, fileList)
-    },
-
-    /**
-     * 头像上传回调函数
-     */
-    handleAvatarSuccess(res, file) {
-      this.registerFormData.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
     },
 
     /**

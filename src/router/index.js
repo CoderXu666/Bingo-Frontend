@@ -42,7 +42,6 @@ export const constantRoutes = [
 ]
 
 const createRouter = () => new Router({
-  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
