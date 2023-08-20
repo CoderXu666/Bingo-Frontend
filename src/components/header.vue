@@ -103,46 +103,36 @@
               <span style="margin-right: 4%;color: antiquewhite">头像：</span>
               <el-upload
                 action="http://localhost:10000/user/customer/upload_avatar"
-                :on-remove="handleRemove"
+                :on-remove="removeAvatar"
+                :on-success="uploadSuccess"
                 :limit="1"
-                style="display: inline-block"
+                style="display: inline"
               >
                 <el-button size="small" type="primary">上传头像</el-button>
               </el-upload>
             </div>
-            <div style="margin-top: 5%">
+            <div style="padding-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">账号：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.accountId"/>
             </div>
-            <div style="margin-top: 5%">
+            <div style="padding-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">密码：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.passWord" show-password/>
             </div>
-            <div style="margin-top: 5%">
+            <div style="padding-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">昵称：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.nickName"/>
             </div>
-            <div style="margin-top: 5%">
+            <div style="padding-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">邮件：</span>
               <el-input style="display: inline-block;width: 220px" v-model="registerFormData.email"/>
             </div>
-            <div style="margin-top: 5%">
+            <div style="padding-top: 5%">
               <span style="margin-right: 4%;color: antiquewhite">性别：</span>
-              <template>
-                <el-radio v-model="registerFormData.gender" label="1">男</el-radio>
-                <el-radio v-model="registerFormData.gender" label="2">女</el-radio>
-              </template>
-              <!--              <el-select v-model="registerFormData.gender" placeholder="请选择">-->
-              <!--                <el-option-->
-              <!--                  v-for="item in genderList"-->
-              <!--                  :key="item.value"-->
-              <!--                  :label="item.label"-->
-              <!--                  :value="item.value">-->
-              <!--                  <span style="float: left">{{ item.label }}</span>-->
-              <!--                </el-option>-->
-              <!--              </el-select>-->
+              <el-radio v-model="registerFormData.gender" label="1" style="color: antiquewhite">男</el-radio>
+              <el-radio v-model="registerFormData.gender" label="0" style="color: antiquewhite">女</el-radio>
             </div>
-            <div style="margin-top: 5%;display: flex;align-items: center;">
+            <div style="padding-top: 5%;display: flex;align-items: center;">
               <span style="color: antiquewhite">验证码：</span>
               <el-input style="display: inline-block;width: 130px;margin-right: 1%" v-model="registerFormData.captcha"/>
 
@@ -162,7 +152,7 @@
               <div style="color: antiquewhite;margin-top: 8%;font-size: 4px">
                 <span>已有账号？</span>
                 <span style="cursor: pointer;color: #409EFF"
-                      @click="registerDialog = false;loginDialog = true;">点击登录</span>
+                      @click="clickLogin()">点击登录</span>
               </div>
               <el-button type="primary" size="medium" style="margin-top: 6%" @click="register">注 册</el-button>
             </div>
@@ -201,7 +191,7 @@ export default {
       // 用户信息（完成登录）
       userInfo: {
         id: '',
-        avatarUrl: require('@/assets/avatar/null.png'),
+        avatarUrl: require('@/assets/avatar/default.png'),
         nickName: '',
         accountId: '',
         passWord: '',
@@ -217,10 +207,10 @@ export default {
       count: 0,
       timer: null,
 
-      logoUrl: require('@/assets/logo/logo.png'),
+      logoUrl: require('@/assets/logo.png'),
       captchaUrl: '',
       loginDialog: false,
-      registerDialog: false,
+      registerDialog: false
     }
   },
 
@@ -316,10 +306,42 @@ export default {
     },
 
     /**
-     * 注册框头像相关
+     * 上传头像成功回调
      */
-    handleRemove(file, fileList) {
-      console.log(file, fileList)
+    uploadSuccess(res) {
+      this.registerFormData.avatarUrl = res.data
+    },
+
+    /**
+     * 获取存储在Minio中的文件名称
+     */
+    extractPathFromUrl(url) {
+      const keyword = '/avatar-bucket/'
+      const startIndex = url.indexOf(keyword)
+      if (startIndex !== -1) {
+        return url.substring(startIndex + keyword.length)
+      }
+      return null
+    },
+
+    /**
+     * 移除头像
+     */
+    removeAvatar(file) {
+      let url = this.extractPathFromUrl(file.response.data)
+      headerApi.removeAvatar(url)
+        .catch(e => {
+          this.$message.error("头像上传成功")
+        })
+    },
+
+    /**
+     * 点击【点击登录】选项
+     */
+    clickLogin() {
+      this.registerDialog = false
+      this.loginDialog = true
+      this.captcha()
     },
 
     /**

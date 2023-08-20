@@ -221,10 +221,10 @@ export default {
           document.getElementById('content').append(msg.data)
         }
 
-        // 发生异常
-        socket.onerror = () => {
-          this.$message.error('连接聊天服务器出现异常信息')
-        }
+        // // 发生异常
+        // socket.onerror = () => {
+        //   this.$message.error('连接聊天服务器出现异常信息')
+        // }
       } else {
         this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
       }

@@ -40,6 +40,19 @@ export default {
   },
 
   /**
+   * 移除头像
+   */
+  removeAvatar(objName) {
+    return axios({
+      url: '/customer/remove_avatar',
+      method: 'delete',
+      params: {
+        objectName: objName
+      }
+    })
+  },
+
+  /**
    * 解析Token
    */
   resolveToken(token) {
