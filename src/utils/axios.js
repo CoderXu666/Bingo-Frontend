@@ -4,7 +4,7 @@ import axios from 'axios'
  * Axios配置
  */
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: process.env.VUE_APP_BASE_API
   // timeout: 5000
 })
 
@@ -17,10 +17,10 @@ service.interceptors.request.use(
 
 /**
  * 响应拦截器
+ * 后端响应状态码不是200，进入到catch逻辑
  */
 service.interceptors.response.use(
   response => {
-    // 如果后端响应状态码不是200，进入到catch逻辑
     if (response.data.code !== 200) {
       return Promise.reject(response)
     } else {
