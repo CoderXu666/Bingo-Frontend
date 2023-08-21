@@ -238,7 +238,7 @@ export default {
       if (!this.userInfo.id) {
         this.loginDialog = true
       }
-      // 如果登录过了，鼠标放上去给个下拉框
+      // 如果登录过了，鼠标点击给个下拉框
       else {
 
       }
@@ -272,6 +272,8 @@ export default {
           this.resolveToken(localStorage.getItem('bingo_token'))
         })
         .catch(e => {
+          this.captcha()
+          this.loginFormData.captcha = null
           this.$message.error(e.data.data)
         })
     },
@@ -290,7 +292,7 @@ export default {
         .catch(e => {
           if (e.data.code === 501) {
             this.logout()
-            this.$message.error('用户登录身份失效，请重新登录')
+            this.$message.warning('用户登录身份已失效，请重新登录')
           } else {
             this.$message.error(e)
           }
@@ -400,7 +402,7 @@ export default {
   float: right;
   cursor: pointer;
   margin-top: 0.6%;
-  margin-right: 5%;
+  margin-right: 5.5%;
   transition: transform 0.2s, margin-top 0.2s;
 }
 
