@@ -10,9 +10,19 @@ const service = axios.create({
 
 /**
  * 请求拦截器
+ *
+ * 每次发送请求，都从localStorage中获取token
+ * 通过后端拦截器校验Token是否失效
+ * 如果Token失效，跳转到首页，给登录失效提示
  */
 service.interceptors.request.use(
-
+  config => {
+    const token = localStorage.getItem('bingo_token')
+    if (token !== null && token !== '') {
+      config.headers['token'] = token
+    }
+    return config
+  }
 )
 
 /**

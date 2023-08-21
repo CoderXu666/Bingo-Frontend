@@ -8,9 +8,6 @@ import './assets/iconfont/iconfont'
 import App from './App'
 import router from './router'
 
-if (process.env.NODE_ENV === 'production') {
-}
-
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false

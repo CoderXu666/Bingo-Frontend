@@ -102,7 +102,7 @@
             <div>
               <span style="margin-right: 4%;color: antiquewhite">头像：</span>
               <el-upload
-                action="http://localhost:10000/user/customer/upload_avatar"
+                action="http://localhost:10001/user/customer/upload_avatar"
                 :on-remove="removeAvatar"
                 :on-success="uploadSuccess"
                 :limit="1"
@@ -218,8 +218,8 @@ export default {
    * 生命周期函数
    */
   created() {
-    this.captcha()
     this.resolveToken(localStorage.getItem('bingo_token'))
+    this.captcha()
   },
 
   methods: {
@@ -261,8 +261,6 @@ export default {
 
     /**
      * 登录功能
-     * 1.登录成功后，将token信息保存到客户端的localStorage（使用Cookie也可以）
-     * 2.以后每次客户端发起请求，都会从localStorage中获取token信息，解析成用户信息
      */
     login() {
       this.loginFormData.captchaKey = cookie.get('bingo_captcha')
@@ -279,7 +277,7 @@ export default {
     },
 
     /**
-     * 解析Token
+     * 解析Token获取用户信息
      */
     resolveToken(token) {
       if (token === '' || token === null) {
@@ -306,7 +304,7 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = 'http://localhost:10000/user/customer/captcha' + '?' + Math.random()
+      this.captchaUrl = 'http://localhost:10001/user/customer/captcha' + '?' + Math.random()
     },
 
     /**
