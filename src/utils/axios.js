@@ -18,7 +18,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     const token = localStorage.getItem('bingo_token')
-    if (token !== null && token !== '') {
+    if (token) {
       config.headers['token'] = token
     }
     return config

@@ -235,7 +235,7 @@ export default {
      */
     clickAvatar() {
       // 如果没有登录，弹出登录框
-      if (this.userInfo.id === '' || this.userInfo.id === null) {
+      if (!this.userInfo.id) {
         this.loginDialog = true
       }
       // 如果登录过了，鼠标放上去给个下拉框
@@ -280,7 +280,7 @@ export default {
      * 解析Token获取用户信息
      */
     resolveToken(token) {
-      if (token === '' || token === null) {
+      if (!token) {
         return
       }
       headerApi.resolveToken(token)
@@ -288,7 +288,12 @@ export default {
           this.userInfo = res.data.data
         })
         .catch(e => {
-          this.$message.error('解析Token异常:' + e)
+          if (e.data.code === 501) {
+            this.logout()
+            this.$message.error('用户登录身份失效，请重新登录')
+          } else {
+            this.$message.error(e)
+          }
         })
     },
 

@@ -197,7 +197,7 @@ export default {
   created() {
     // 判断是否登录，未登录回到首页并提示
     const token = localStorage.getItem('bingo_token')
-    if (token === '' || token === null) {
+    if (!token) {
       this.$router.push('/')
       this.$message.warning('您还未登录呢，讨厌~')
     }
