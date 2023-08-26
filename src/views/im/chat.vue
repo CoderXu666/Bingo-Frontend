@@ -106,6 +106,7 @@
 
 <script>
 import HeaderComponent from '@/components/header'
+import chatApi from '@/api/chat'
 
 export default {
   components: {
@@ -132,8 +133,8 @@ export default {
       userList: [
         {
           userId: '1',
-          avatarUrl: require('@/assets/avatar/wen.jpg'),
-          nickName: '小温'
+          avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+          nickName: '章若楠'
         },
         {
           userId: '3',
@@ -147,14 +148,14 @@ export default {
         '1': [
           {
             userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
             content: '哈哈哈哈哈，我真哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
           },
           {
             userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
             content: '哈哈哈哈哈'
           },
           {
@@ -167,20 +168,20 @@ export default {
         '3': [
           {
             userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
             content: '哈哈哈哈哈，我真的服了哈222222222了'
           },
           {
             userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
             content: '哈哈哈哈哈22222222222'
           },
           {
             userId: '1',
-            avatarUrl: require('@/assets/avatar/wen.jpg'),
-            nickName: '小温',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
             content: '哈哈哈哈哈22222222222'
           },
           {
@@ -201,6 +202,9 @@ export default {
       this.$router.push('/')
       this.$message.warning('您还未登录呢，讨厌~')
     }
+
+    // 查询好友列表、聊天记录
+    this.getChatList();
   },
 
   mounted() {
@@ -234,6 +238,30 @@ export default {
       } else {
         this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
       }
+    },
+
+    /**
+     * 查询好友列表信息
+     */
+    getChatList() {
+      const userId = this.getUrlIdParam()
+      chatApi.chatList(userId)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+
+    /**
+     * 获取url的?后第一个参数id
+     */
+    getUrlIdParam() {
+      const url = window.location.href
+      const p = url.split('?')[1]
+      const params = new URLSearchParams(p)
+      return params.get('id')
     },
 
     /**
