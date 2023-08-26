@@ -33,7 +33,7 @@
           <svg class="iconfont">
             <use xlink:href="#icon-biaoqianA01_wode-55"></use>
           </svg>
-          <div class="icon-font">好友</div>
+          <div class="icon-font">聊天</div>
         </el-badge>
       </div>
     </router-link>
@@ -102,7 +102,7 @@
             <div>
               <span style="margin-right: 4%;color: antiquewhite">头像：</span>
               <el-upload
-                action="http://localhost:10001/user/customer/upload_avatar"
+                action="http://localhost:10001/user/upload_avatar"
                 :on-remove="removeAvatar"
                 :on-success="uploadSuccess"
                 :limit="1"
@@ -311,7 +311,7 @@ export default {
      * 生成验证码
      */
     captcha() {
-      this.captchaUrl = 'http://localhost:10001/user/customer/captcha' + '?' + Math.random()
+      this.captchaUrl = 'http://localhost:10001/user/captcha' + '?' + Math.random()
     },
 
     /**
@@ -337,10 +337,10 @@ export default {
      * 移除头像
      */
     removeAvatar(file) {
-      let url = this.extractPathFromUrl(file.response.data)
-      headerApi.removeAvatar(url)
+      const avatarUrl = this.extractPathFromUrl(file.response.data)
+      headerApi.removeAvatar(avatarUrl)
         .catch(e => {
-          this.$message.error("头像上传成功")
+          this.$message.error('头像移除成功')
         })
     },
 
