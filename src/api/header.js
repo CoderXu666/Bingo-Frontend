@@ -9,7 +9,7 @@ export default {
    */
   sendEmail(email) {
     return axios({
-      url: '/send_email',
+      url: '/user/send_email',
       method: 'post',
       params: {
         email: email
@@ -22,7 +22,7 @@ export default {
    */
   register(data) {
     return axios({
-      url: '/register',
+      url: '/user/register',
       method: 'post',
       data
     })
@@ -33,7 +33,7 @@ export default {
    */
   login(data) {
     return axios({
-      url: '/login',
+      url: '/user/login',
       method: 'post',
       data
     })
@@ -44,7 +44,7 @@ export default {
    */
   removeAvatar(objName) {
     return axios({
-      url: '/remove_avatar',
+      url: '/user/remove_avatar',
       method: 'delete',
       params: {
         objectName: objName
@@ -57,7 +57,7 @@ export default {
    */
   resolveToken(token) {
     return axios({
-      url: '/resolve_token',
+      url: '/user/resolve_token',
       method: 'get',
       params: {
         token: token

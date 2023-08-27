@@ -9,7 +9,7 @@ export default {
    */
   chatList(userId) {
     return axios({
-      url: `/chat/list/${userId}`,
+      url: `/im/chat/list/${userId}`,
       method: 'get'
     })
   },
