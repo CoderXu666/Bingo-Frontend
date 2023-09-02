@@ -1,55 +1,53 @@
 <template>
-  <div style="border: 1px solid red; width: 70%;margin: auto;">
-    <el-row :gutter="1">
+  <div style="background-color: #292A2D;width: 72%;height: 600px;margin: auto;margin-top: 55px;border-radius: 20px">
+    <el-row :gutter="20">
       <!--  左侧列 -->
-      <el-col :span="2" style="background-color: #303133;height: 600px">
-        <div>
-          <el-avatar shape="circle" :size="60" src=""/>
-        </div>
+      <el-col :span="2" style="margin-top: 12px">
+        <el-avatar style="margin-left: 16px" shape="circle" :size="55"
+                   src="http://101.42.13.186:9000/avatar-bucket/avatar_1692515610706.jpg"/>
       </el-col>
 
       <!--  好友列表 -->
-      <el-col :span="6" style="background-color: #303133;height: 600px">
+      <el-col :span="6" style="margin-top: 10px">
         <div class="friend-item"
              v-for="item in userList"
-             :key="item.userId"
+             style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 8px"
              @mouseover="hoverEffect($event, true)"
              @mouseout="hoverEffect($event, false)"
              @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
         >
-          <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
+          <el-avatar style="float: left;" shape="square" :size="58" :src="item.avatarUrl"/>
           <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
             {{ item.nickName }}
           </div>
           <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
-                  11:02
-                </span>
-          <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
+            11:02
+          </span>
+          <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999">
             {{ item.nickName }}：1111
           </div>
         </div>
       </el-col>
 
       <!--  聊天框  -->
-      <el-col :span="16" style="background-color: white">
-        <div style="height: 600px">
+      <el-col :span="15" style="background-color: #323335;border-radius: 20px;">
+        <div style="">
           <!-- 选中用户 -->
-          <div v-if="currentChatInfo.avatarUrl != ''">
+          <div style="" v-if="currentChatInfo.avatarUrl != ''">
             <!--  上边栏  -->
-            <div
-              style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
+            <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
               <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
                          style="margin-right: 1%;cursor:pointer;"/>
-              <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
+              <div style="font-size: 17px;color: antiquewhite">{{ currentChatInfo.userName }}</div>
             </div>
 
             <!--  聊天窗口  -->
-            <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
+            <div id="chat-content-show" style="height: 460px;border-radius: 6px;height: 500px">
               <div v-for="item in chatContentList[currentChatInfo.userId]">
-                <div style="width: 100%">
-                  <!--  被动接受  -->
+                <div style="width: 100%;">
+                  <!--  接收信息  -->
                   <div v-if="item.userId !== loginUserInfo.userId"
-                       style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%">
+                       style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
                         <span style="margin-right: 6px">
                           <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                         </span>
@@ -69,23 +67,16 @@
                       </div>
                     </div>
                     <span style="margin-left: 6px">
-                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
-                        </span>
+                      <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
             <!--  内容输入  -->
-            <div style="height: 240px;background-color: white">
-              <div style="border: 1px solid red">
-                <span style="margin-left: 2%">emoji</span>
-                <span style="margin-left: 2%">表情包</span>
-                <span style="margin-left: 2%">语音</span>
-                <span style="margin-left: 2%">视频</span>
-              </div>
+            <div>
               <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
-              <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
             </div>
           </div>
         </div>
@@ -127,6 +118,9 @@ export default {
           nickName: '小徐'
         },
       ],
+
+      // 聊天输入框内容
+      chatMsg: '',
 
       // 聊天信息
       chatContentList: {
@@ -325,37 +319,14 @@ export default {
 </script>
 
 <style>
-.search-cls video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -1;
-}
-
-@keyframes jump {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
 .chat-footer el-input {
   flex: 1;
   margin-right: 10px;
 }
 
 .friend-item {
-  height: 52px;
+  color: antiquewhite;
+  height: 58px;
   cursor: pointer;
   margin-top: 2px;
 }
@@ -365,16 +336,12 @@ export default {
 }
 
 #chat-input-id {
-  height: 180px;
-  width: 100%;
+  width: 70%;
+  color: antiquewhite;
   overflow: auto;
   font-size: 14px;
   padding: 1.4%;
-}
-
-.send-btn {
-  float: right;
-  margin-right: 2%;
+  background-color: white;
 }
 
 #chat-content-show {
