@@ -1,41 +1,38 @@
 <template>
-  <div style="border: 1px solid red; width: 70%;height: 100%;margin: auto;">
+  <div style="border: 1px solid red; width: 70%;margin: auto;">
     <el-row :gutter="1">
       <!--  左侧列 -->
+      <el-col :span="2" style="background-color: #303133;height: 600px">
+        <div>
+          <el-avatar shape="circle" :size="60" src=""/>
+        </div>
+      </el-col>
 
       <!--  好友列表 -->
-      <el-col :span="6" style="background-color: antiquewhite">
-        <div style="height: 600px">
-          <!--  上边栏 -->
-          <div style="height: 60px;">
-            <input style="background-color: antiquewhite">
+      <el-col :span="6" style="background-color: #303133;height: 600px">
+        <div class="friend-item"
+             v-for="item in userList"
+             :key="item.userId"
+             @mouseover="hoverEffect($event, true)"
+             @mouseout="hoverEffect($event, false)"
+             @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
+        >
+          <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
+          <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
+            {{ item.nickName }}
           </div>
-          <!--  好友列表  -->
-          <div class="friend-item"
-               v-for="item in userList"
-               :key="item.userId"
-               @mouseover="hoverEffect($event, true)"
-               @mouseout="hoverEffect($event, false)"
-               @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
-          >
-            <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
-            <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
-              {{ item.nickName }}
-            </div>
-            <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
+          <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
                   11:02
                 </span>
-            <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
-              {{ item.nickName }}：1111
-            </div>
+          <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
+            {{ item.nickName }}：1111
           </div>
         </div>
       </el-col>
 
-      <!--  聊天内容  -->
-      <el-col :span="18" style="background-color: white">
+      <!--  聊天框  -->
+      <el-col :span="16" style="background-color: white">
         <div style="height: 600px">
-
           <!-- 选中用户 -->
           <div v-if="currentChatInfo.avatarUrl != ''">
             <!--  上边栏  -->
@@ -44,7 +41,6 @@
               <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
                          style="margin-right: 1%;cursor:pointer;"/>
               <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
-              <!--  语音、视频、详情ICON  -->
             </div>
 
             <!--  聊天窗口  -->
@@ -99,14 +95,9 @@
 </template>
 
 <script>
-import HeaderComponent from '@/components/header'
 import chatApi from '@/api/chat'
 
 export default {
-  components: {
-    HeaderComponent
-  },
-
   data() {
     return {
       // 登录用户信息
@@ -183,7 +174,7 @@ export default {
             avatarUrl: require('@/assets/avatar/avatar.jpg'),
             nickName: '徐志斌',
             content: '哈哈哈哈哈22222222222'
-          },
+          }
         ]
       }
     }
@@ -198,7 +189,7 @@ export default {
     }
 
     // 查询好友列表、聊天记录
-    this.getChatList();
+    this.getChatList()
   },
 
   mounted() {
@@ -225,10 +216,10 @@ export default {
           document.getElementById('content').append(msg.data)
         }
 
-        // // 发生异常
-        // socket.onerror = () => {
-        //   this.$message.error('连接聊天服务器出现异常信息')
-        // }
+        // 发生异常
+        socket.onerror = () => {
+          this.$message.error('连接聊天服务器出现异常信息')
+        }
       } else {
         this.$message.error('当前浏览器不支持聊天功能，请更换浏览器!')
       }

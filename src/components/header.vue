@@ -27,7 +27,8 @@
         <div class="icon-font">通知</div>
       </el-badge>
     </div>
-    <router-link :to="{path: '/chat', query: {id: userInfo.id}}">
+
+    <router-link :to="{path: '/chat'}">
       <div class="icon-div">
         <el-badge :value="chatCount">
           <svg class="iconfont">
@@ -37,6 +38,7 @@
         </el-badge>
       </div>
     </router-link>
+
     <div class="icon-div">
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
