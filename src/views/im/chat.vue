@@ -1,106 +1,100 @@
 <template>
-  <div>
-    <!--  1.导航栏  -->
-    <headerComponent></headerComponent>
+  <div style="border: 1px solid red; width: 70%;height: 100%;margin: auto;">
+    <el-row :gutter="1">
+      <!--  左侧列 -->
 
-    <!-- 2.聊天框 -->
-    <div style="background-color: #292A2D">
-      <div style="width: 78%;height: 760px;margin: auto;">
-        <el-row :gutter="1">
-          <!--  2.1 好友列表 -->
-          <el-col :span="6" style="background-color: antiquewhite">
-            <div style="height: 756px">
-              <!--  上边栏 -->
-              <div style="height: 60px;">
-                <input style="background-color: antiquewhite">
-              </div>
-              <!--  好友列表  -->
-              <div class="friend-item"
-                   v-for="item in userList"
-                   :key="item.userId"
-                   @mouseover="hoverEffect($event, true)"
-                   @mouseout="hoverEffect($event, false)"
-                   @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
-              >
-                <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
-                <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
-                  {{ item.nickName }}
-                </div>
-                <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
+      <!--  好友列表 -->
+      <el-col :span="6" style="background-color: antiquewhite">
+        <div style="height: 600px">
+          <!--  上边栏 -->
+          <div style="height: 60px;">
+            <input style="background-color: antiquewhite">
+          </div>
+          <!--  好友列表  -->
+          <div class="friend-item"
+               v-for="item in userList"
+               :key="item.userId"
+               @mouseover="hoverEffect($event, true)"
+               @mouseout="hoverEffect($event, false)"
+               @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
+          >
+            <el-avatar style="float: left;" shape="square" :size="50" :src="item.avatarUrl"/>
+            <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
+              {{ item.nickName }}
+            </div>
+            <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
                   11:02
                 </span>
-                <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
-                  {{ item.nickName }}：1111
-                </div>
-              </div>
+            <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999;">
+              {{ item.nickName }}：1111
             </div>
-          </el-col>
+          </div>
+        </div>
+      </el-col>
 
-          <!--  2.2 聊天内容  -->
-          <el-col :span="18" style="background-color: white">
-            <div style="height: 760px">
+      <!--  聊天内容  -->
+      <el-col :span="18" style="background-color: white">
+        <div style="height: 600px">
 
-              <!-- 选中用户 -->
-              <div v-if="currentChatInfo.avatarUrl != ''">
-                <!--  上边栏  -->
-                <div
-                  style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
-                  <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
-                             style="margin-right: 1%;cursor:pointer;"/>
-                  <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
-                  <!--  语音、视频、详情ICON  -->
-                </div>
+          <!-- 选中用户 -->
+          <div v-if="currentChatInfo.avatarUrl != ''">
+            <!--  上边栏  -->
+            <div
+              style="height: 60px; display: flex; align-items: center;padding-left: 1%;background-color: antiquewhite">
+              <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
+                         style="margin-right: 1%;cursor:pointer;"/>
+              <div style="font-size: 17px;">{{ currentChatInfo.userName }}</div>
+              <!--  语音、视频、详情ICON  -->
+            </div>
 
-                <!--  聊天窗口  -->
-                <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
-                  <div v-for="item in chatContentList[currentChatInfo.userId]">
-                    <div style="width: 100%">
-                      <!--  被动接受  -->
-                      <div v-if="item.userId !== loginUserInfo.userId"
-                           style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%">
+            <!--  聊天窗口  -->
+            <div id="chat-content-show" style="height: 460px;background-color: white;border-radius: 6px">
+              <div v-for="item in chatContentList[currentChatInfo.userId]">
+                <div style="width: 100%">
+                  <!--  被动接受  -->
+                  <div v-if="item.userId !== loginUserInfo.userId"
+                       style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%">
                         <span style="margin-right: 6px">
                           <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                         </span>
-                        <div style="background-color: antiquewhite;border-radius: 10px;">
-                          <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                            {{ item.content }}
-                          </div>
-                        </div>
-                      </div>
-                      <!--  主动发送  -->
-                      <div v-if="item.userId === loginUserInfo.userId"
-                           style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
-                        <div
-                          style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
-                          <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                            {{ item.content }}
-                          </div>
-                        </div>
-                        <span style="margin-left: 6px">
-                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
-                        </span>
+                    <div style="background-color: antiquewhite;border-radius: 10px;">
+                      <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                        {{ item.content }}
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <!--  内容输入  -->
-                <div style="height: 240px;background-color: white">
-                  <div style="border: 1px solid red">
-                    <span style="margin-left: 2%">emoji</span>
-                    <span style="margin-left: 2%">表情包</span>
-                    <span style="margin-left: 2%">语音</span>
-                    <span style="margin-left: 2%">视频</span>
+                  <!--  主动发送  -->
+                  <div v-if="item.userId === loginUserInfo.userId"
+                       style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+                    <div
+                      style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                      <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                        {{ item.content }}
+                      </div>
+                    </div>
+                    <span style="margin-left: 6px">
+                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                        </span>
                   </div>
-                  <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
-                  <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
                 </div>
               </div>
             </div>
-          </el-col>
-        </el-row>
-      </div>
-    </div>
+
+            <!--  内容输入  -->
+            <div style="height: 240px;background-color: white">
+              <div style="border: 1px solid red">
+                <span style="margin-left: 2%">emoji</span>
+                <span style="margin-left: 2%">表情包</span>
+                <span style="margin-left: 2%">语音</span>
+                <span style="margin-left: 2%">视频</span>
+              </div>
+              <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
+              <el-button class="send-btn" size="small" @click="sendMessage()">发送</el-button>
+            </div>
+          </div>
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -219,9 +213,9 @@ export default {
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
         // 当前用户Channel与Netty服务器建立连接
-        const socket = new WebSocket('ws://localhost:9099/ws')
+        const socket = new WebSocket('ws://localhost:10086/ws')
 
-        // 建立连接瞬间，Netty服务器进行连接
+        // 建立WebSocket连接
         socket.onopen = () => {
           socket.send(this.userId)
         }

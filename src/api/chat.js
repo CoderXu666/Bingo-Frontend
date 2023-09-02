@@ -7,9 +7,9 @@ export default {
   /**
    * 查询好友列表、聊天记录
    */
-  chatList(userId) {
+  chatList() {
     return axios({
-      url: `/im/chat/list/${userId}`,
+      url: `/im/show/list`,
       method: 'get'
     })
   },
