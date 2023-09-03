@@ -12,7 +12,7 @@
           Bingo：有趣的年轻人社交平台
         </h1>
         <div class="search-small-title">
-          欢迎访问我的个人开源项目 Bingo 社交平台，欢迎加入我们一起Coding
+          欢迎使用开源项目 Bingo 社交平台，感谢你的支持，期待您加入一起开源
         </div>
         <!--    搜索框    -->
         <div style="margin-top: 40px;opacity: 0.7;">
@@ -21,7 +21,6 @@
               <el-option label="帖子" value="1"></el-option>
               <el-option label="话题" value="3"></el-option>
               <el-option label="视频" value="2"></el-option>
-              <el-option label="商品" value="3"></el-option>
             </el-select>
             <el-button class="search-btn" slot="append" icon="el-icon-search"></el-button>
           </el-input>

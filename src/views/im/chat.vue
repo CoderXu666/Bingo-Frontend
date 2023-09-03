@@ -1,9 +1,9 @@
 <template>
   <div
-    style="background-color: #292A2D;width: 80%;height: 600px;margin: auto;margin-top: 4.5%;border-radius: 20px">
+    style="background-color: #292A2D;width: 80%;margin: auto;margin-top: 4.5%;border-radius: 20px">
     <el-row :gutter="16">
       <!--  左侧列 -->
-      <el-col :span="1" style="margin-top: 26px">
+      <el-col :span="1" style="margin-top: 26px;height: 580px;">
         <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
       </el-col>
 
@@ -30,7 +30,7 @@
       </el-col>
 
       <!--  聊天框  -->
-      <el-col :span="13" style="background-color: #323335;border-radius: 20px;margin-top: 30px">
+      <el-col :span="13" style="background-color: #323335;border-radius: 10px;margin-top: 30px">
         <div v-if="curChatInfo.userId != ''">
           <!--  上边栏  -->
           <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
@@ -48,7 +48,7 @@
                 <span style="margin-right: 6px">
                   <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                 </span>
-                <div style="background-color: #409EFF;border-radius: 10px;">
+                <div style="background-color: #34A8FF;border-radius: 10px;">
                   <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                     {{ item.content }}
                   </div>
@@ -71,26 +71,45 @@
           </div>
           <!--  内容输入Container  -->
           <div id="chat-input-container">
-            <!--  真正输入框  -->
-            <el-input id="chat-input-id" placeholder="请开始您的表演~" v-model="chatMsg"/>
+            <svg style="width: 2em;height: 2em;margin-right: 1%;cursor:pointer;">
+              <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+            </svg>
+            <span style="width: 76%">
+              <!--  语音输入icon  -->
+              <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatMsg"></el-input>
+            </span>
+            <!--  其他功能icon  -->
+            <svg style="width: 2em;height: 2em;margin-left: 1%;cursor:pointer;">
+              <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+            </svg>
+            <svg style="width: 2em;height: 2em;;cursor:pointer;">
+              <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+            </svg>
+            <svg style="width: 2em;height: 2em;;cursor:pointer;">
+              <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+            </svg>
+            <svg style="width: 2em;height: 2em;;cursor:pointer;">
+              <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+            </svg>
           </div>
         </div>
       </el-col>
 
-      <!--  预留区 -->
+      <!--  用户信息、功能框架 -->
       <el-col :span="4" style="margin-top: 30px" v-if="curChatInfo.userId != ''">
-        <!--  语音视频  -->
-        <div style="height: 250px;background-color: #323335;border-radius: 10px">
-          1111
+        <!--  用户信息、群聊列表  -->
+        <div style="height: 340px;background-color: #323335;border-radius: 10px">
+          用户信息
         </div>
-        <!--  Emoji列表  -->
+        <!--  Emoji  -->
         <Picker
-          style="width: 200px;height: 180px;background-color: #323335;margin-top: 20px"
+          style="width: 200px;height: 190px;background-color: #323335;margin-top: 16px;"
           :include="['people']"
           :showSearch="false"
           :showPreview="false"
           :showCategories="false"
           @select="addEmoji"
+          :i18n="i18n"
         />
       </el-col>
     </el-row>
@@ -136,6 +155,13 @@ export default {
           nickName: '小徐'
         },
       ],
+
+      // vue-smart-emoji国际化
+      i18n: {
+        categories: {
+          people: '',
+        }
+      },
 
       // 聊天框消息
       chatMsg: '',
@@ -224,6 +250,7 @@ export default {
         }
 
         // 监听接收服务端消息
+        // TODO 这里要处理一大堆逻辑，发送消息发给谁
         socket.onmessage = (msg) => {
           document.getElementById('content').append(msg.data)
         }
@@ -241,8 +268,7 @@ export default {
      * 查询好友列表信息
      */
     getChatList() {
-      const userId = this.getUrlIdParam()
-      chatApi.chatList(userId)
+      chatApi.chatList()
         .then(res => {
           console.log(res)
         })
@@ -256,27 +282,6 @@ export default {
      */
     addEmoji(e) {
       this.chatMsg += e.native
-    },
-
-    /**
-     * 展示emoji列表
-     */
-    showEmoji() {
-      if (this.showEmojiFlag === true) {
-        this.showEmojiFlag = false
-      } else {
-        this.showEmojiFlag = true
-      }
-    },
-
-    /**
-     * 获取url的?后第一个参数id
-     */
-    getUrlIdParam() {
-      const url = window.location.href
-      const p = url.split('?')[1]
-      const params = new URLSearchParams(p)
-      return params.get('id')
     },
 
     /**
@@ -365,20 +370,21 @@ export default {
 }
 
 #chat-input-container {
-  align-items: center;
   width: 99%;
   border-radius: 10px;
   overflow: auto;
-  font-size: 14px;
   padding: 0.6%;
-  background-color: antiquewhite;
-  display: inline-block;
+  background-color: ;
   max-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 #chat-input-id {
   border-radius: 20px;
-  width: 80%;
+  font-size: 14px;
+  background-color: #323335;
+  color: white;
 }
 
 #chat-content-show {
