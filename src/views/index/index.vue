@@ -112,7 +112,7 @@
           <span style="display: inline-block;margin-left: 4%">随便看看</span>
         </el-col>
 
-        <!--    热门视频    -->
+        <!--  热门话题 -->
         <el-col :span="18" style="padding-left: 0.5%">
           <div style="border: 1px solid red;height: 500px">
             <el-col :span="6" v-for="item in videoList">

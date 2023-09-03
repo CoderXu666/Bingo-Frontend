@@ -1,22 +1,22 @@
 <template>
   <div
     style="background-color: #292A2D;width: 80%;height: 600px;margin: auto;margin-top: 4.5%;border-radius: 20px">
-    <el-row :gutter="10">
+    <el-row :gutter="16">
       <!--  左侧列 -->
-      <el-col :span="2" style="margin-top: 26px">
-        <el-avatar style="margin-left: 16px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+      <el-col :span="1" style="margin-top: 26px">
+        <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
       </el-col>
 
       <!--  好友列表 -->
-      <el-col :span="5" style="margin-top: 26px">
+      <el-col :span="5" style="margin-top: 26px;margin-left: 3%">
         <div class="friend-item"
              v-for="item in userList"
-             style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 8px"
+             style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 10px"
              @mouseover="hoverEffect($event, true)"
              @mouseout="hoverEffect($event, false)"
              @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
         >
-          <el-avatar style="float: left;" shape="square" :size="58" :src="item.avatarUrl"/>
+          <el-avatar style="float: left;" shape="square" :size="55" :src="item.avatarUrl"/>
           <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
             {{ item.nickName }}
           </div>
@@ -30,7 +30,7 @@
       </el-col>
 
       <!--  聊天框  -->
-      <el-col :span="16" style="background-color: #323335;border-radius: 20px;margin-top: 30px">
+      <el-col :span="13" style="background-color: #323335;border-radius: 20px;margin-top: 30px">
         <div v-if="curChatInfo.userId != ''">
           <!--  上边栏  -->
           <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
@@ -40,7 +40,7 @@
           </div>
 
           <!--  聊天内容展示  -->
-          <div id="chat-content-show" style="height: 440px;border-radius: 6px;">
+          <div id="chat-content-show" style="height: 440px;border-radius: 10px;">
             <div v-for="item in chatContentList[curChatInfo.userId]">
               <!--  接收信息  -->
               <div v-if="item.userId !== loginUserInfo.userId"
@@ -48,7 +48,7 @@
                 <span style="margin-right: 6px">
                   <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
                 </span>
-                <div style="background-color: antiquewhite;border-radius: 10px;">
+                <div style="background-color: #409EFF;border-radius: 10px;">
                   <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                     {{ item.content }}
                   </div>
@@ -69,27 +69,29 @@
               </div>
             </div>
           </div>
-          <!--  emoji  -->
-          <Picker
-            style="width: 320px;height: 250px"
-            v-show=this.showEmojiFlag
-            :showSearch="false"
-            :showPreview="false"
-            @select="addEmoji"
-          />
           <!--  内容输入Container  -->
           <div id="chat-input-container">
             <!--  真正输入框  -->
-            <el-input id="chat-input-id" @input="listenInput()" placeholder="开始您的交流！" v-model="chatMsg"/>
-            <el-button @click="showEmoji()" size="mini" style="float: right">emoji展示</el-button>
+            <el-input id="chat-input-id" placeholder="请开始您的表演~" v-model="chatMsg"/>
           </div>
-
         </div>
       </el-col>
 
       <!--  预留区 -->
-      <el-col :span="6" style="margin-top: 26px">
-
+      <el-col :span="4" style="margin-top: 30px" v-if="curChatInfo.userId != ''">
+        <!--  语音视频  -->
+        <div style="height: 250px;background-color: #323335;border-radius: 10px">
+          1111
+        </div>
+        <!--  Emoji列表  -->
+        <Picker
+          style="width: 200px;height: 180px;background-color: #323335;margin-top: 20px"
+          :include="['people']"
+          :showSearch="false"
+          :showPreview="false"
+          :showCategories="false"
+          @select="addEmoji"
+        />
       </el-col>
     </el-row>
   </div>
@@ -137,9 +139,6 @@ export default {
 
       // 聊天框消息
       chatMsg: '',
-
-      // emoji展示标识
-      showEmojiFlag: '',
 
       // 聊天信息
       chatContentList: {
@@ -333,13 +332,6 @@ export default {
     },
 
     /**
-     * 监听聊天输入框
-     */
-    listenInput() {
-      this.chatContent = document.getElementById('chat-input-id').innerText
-    },
-
-    /**
      * 插入聊天信息
      */
     insertChatMessage(userId, avatarUrl, nickName, content) {
@@ -374,11 +366,11 @@ export default {
 
 #chat-input-container {
   align-items: center;
-  width: 95%;
+  width: 99%;
   border-radius: 10px;
   overflow: auto;
   font-size: 14px;
-  padding: 1.2%;
+  padding: 0.6%;
   background-color: antiquewhite;
   display: inline-block;
   max-height: 40px;
@@ -387,7 +379,6 @@ export default {
 #chat-input-id {
   border-radius: 20px;
   width: 80%;
-  display: inline-block;
 }
 
 #chat-content-show {
