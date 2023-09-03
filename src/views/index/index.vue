@@ -302,7 +302,6 @@ export default {
 <style>
 .search-big-title {
   color: antiquewhite;
-  font-family: 'Arial Rounded MT Bold';
   padding-left: 21%
 }
 

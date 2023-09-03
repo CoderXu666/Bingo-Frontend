@@ -446,7 +446,6 @@ export default {
 
 .header-left-menu-font {
   color: antiquewhite !important;
-  margin-left: 2%;
   font-size: 15px
 }
 
