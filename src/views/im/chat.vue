@@ -1,14 +1,14 @@
 <template>
-  <div style="background-color: #292A2D;width: 72%;height: 600px;margin: auto;margin-top: 55px;border-radius: 20px">
-    <el-row :gutter="20">
+  <div
+    style="background-color: #292A2D;width: 80%;height: 600px;margin: auto;margin-top: 4.5%;border-radius: 20px">
+    <el-row :gutter="10">
       <!--  左侧列 -->
-      <el-col :span="2" style="margin-top: 12px">
-        <el-avatar style="margin-left: 16px" shape="circle" :size="55"
-                   src="http://101.42.13.186:9000/avatar-bucket/avatar_1692515610706.jpg"/>
+      <el-col :span="2" style="margin-top: 26px">
+        <el-avatar style="margin-left: 16px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
       </el-col>
 
       <!--  好友列表 -->
-      <el-col :span="6" style="margin-top: 10px">
+      <el-col :span="5" style="margin-top: 26px">
         <div class="friend-item"
              v-for="item in userList"
              style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 8px"
@@ -30,56 +30,66 @@
       </el-col>
 
       <!--  聊天框  -->
-      <el-col :span="15" style="background-color: #323335;border-radius: 20px;">
-        <div style="">
-          <!-- 选中用户 -->
-          <div style="" v-if="currentChatInfo.avatarUrl != ''">
-            <!--  上边栏  -->
-            <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
-              <el-avatar :size="46" :src="currentChatInfo.avatarUrl" shape="square"
-                         style="margin-right: 1%;cursor:pointer;"/>
-              <div style="font-size: 17px;color: antiquewhite">{{ currentChatInfo.userName }}</div>
-            </div>
+      <el-col :span="16" style="background-color: #323335;border-radius: 20px;margin-top: 30px">
+        <div v-if="curChatInfo.userId != ''">
+          <!--  上边栏  -->
+          <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
+            <el-avatar :size="46" :src="curChatInfo.avatarUrl" shape="square"
+                       style="margin-right: 1%;cursor:pointer;"/>
+            <div style="font-size: 17px;color: antiquewhite">{{ curChatInfo.userName }}</div>
+          </div>
 
-            <!--  聊天窗口  -->
-            <div id="chat-content-show" style="height: 460px;border-radius: 6px;height: 500px">
-              <div v-for="item in chatContentList[currentChatInfo.userId]">
-                <div style="width: 100%;">
-                  <!--  接收信息  -->
-                  <div v-if="item.userId !== loginUserInfo.userId"
-                       style="width: 80%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
-                        <span style="margin-right: 6px">
-                          <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
-                        </span>
-                    <div style="background-color: antiquewhite;border-radius: 10px;">
-                      <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                        {{ item.content }}
-                      </div>
-                    </div>
-                  </div>
-                  <!--  主动发送  -->
-                  <div v-if="item.userId === loginUserInfo.userId"
-                       style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
-                    <div
-                      style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
-                      <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                        {{ item.content }}
-                      </div>
-                    </div>
-                    <span style="margin-left: 6px">
-                      <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
-                    </span>
+          <!--  聊天内容展示  -->
+          <div id="chat-content-show" style="height: 440px;border-radius: 6px;">
+            <div v-for="item in chatContentList[curChatInfo.userId]">
+              <!--  接收信息  -->
+              <div v-if="item.userId !== loginUserInfo.userId"
+                   style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
+                <span style="margin-right: 6px">
+                  <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
+                </span>
+                <div style="background-color: antiquewhite;border-radius: 10px;">
+                  <div style="padding: 15px;font-size: 14px;word-break: break-all;">
+                    {{ item.content }}
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!--  内容输入  -->
-            <div>
-              <div id="chat-input-id" contenteditable="true" @input="listenInput()"/>
+              <!--  主动发送  -->
+              <div v-if="item.userId === loginUserInfo.userId"
+                   style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
+                <div
+                  style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
+                  <div style="padding: 15px;font-size: 14px;word-break: break-all">
+                    {{ item.content }}
+                  </div>
+                </div>
+                <span style="margin-left: 6px">
+                  <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                </span>
+              </div>
             </div>
           </div>
+          <!--  emoji  -->
+          <Picker
+            style="width: 320px;height: 250px"
+            v-show=this.showEmojiFlag
+            :showSearch="false"
+            :showPreview="false"
+            @select="addEmoji"
+          />
+          <!--  内容输入Container  -->
+          <div id="chat-input-container">
+            <!--  真正输入框  -->
+            <el-input id="chat-input-id" @input="listenInput()" placeholder="开始您的交流！" v-model="chatMsg"/>
+            <el-button @click="showEmoji()" size="mini" style="float: right">emoji展示</el-button>
+          </div>
+
         </div>
+      </el-col>
+
+      <!--  预留区 -->
+      <el-col :span="6" style="margin-top: 26px">
+
       </el-col>
     </el-row>
   </div>
@@ -87,8 +97,14 @@
 
 <script>
 import chatApi from '@/api/chat'
+import {Picker} from 'emoji-mart-vue'
+import 'emoji-mart-vue/css/emoji-mart.css'
 
 export default {
+  components: {
+    Picker
+  },
+
   data() {
     return {
       // 登录用户信息
@@ -99,7 +115,7 @@ export default {
       },
 
       // 当前选中聊天用户
-      currentChatInfo: {
+      curChatInfo: {
         userId: '',
         nickName: '',
         avatarUrl: ''
@@ -119,8 +135,11 @@ export default {
         },
       ],
 
-      // 聊天输入框内容
+      // 聊天框消息
       chatMsg: '',
+
+      // emoji展示标识
+      showEmojiFlag: '',
 
       // 聊天信息
       chatContentList: {
@@ -234,6 +253,24 @@ export default {
     },
 
     /**
+     * 选中emoji到输入框
+     */
+    addEmoji(e) {
+      this.chatMsg += e.native
+    },
+
+    /**
+     * 展示emoji列表
+     */
+    showEmoji() {
+      if (this.showEmojiFlag === true) {
+        this.showEmojiFlag = false
+      } else {
+        this.showEmojiFlag = true
+      }
+    },
+
+    /**
      * 获取url的?后第一个参数id
      */
     getUrlIdParam() {
@@ -279,9 +316,9 @@ export default {
      * 点击好友
      */
     clickFriend(userId, avatarUrl, nickName) {
-      this.currentChatInfo.userId = userId
-      this.currentChatInfo.avatarUrl = avatarUrl
-      this.currentChatInfo.userName = nickName
+      this.curChatInfo.userId = userId
+      this.curChatInfo.avatarUrl = avatarUrl
+      this.curChatInfo.userName = nickName
     },
 
     /**
@@ -335,13 +372,22 @@ export default {
   background-color: #ccc;
 }
 
-#chat-input-id {
-  width: 70%;
-  color: antiquewhite;
+#chat-input-container {
+  align-items: center;
+  width: 95%;
+  border-radius: 10px;
   overflow: auto;
   font-size: 14px;
-  padding: 1.4%;
-  background-color: white;
+  padding: 1.2%;
+  background-color: antiquewhite;
+  display: inline-block;
+  max-height: 40px;
+}
+
+#chat-input-id {
+  border-radius: 20px;
+  width: 80%;
+  display: inline-block;
 }
 
 #chat-content-show {

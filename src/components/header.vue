@@ -12,7 +12,7 @@
         <a href="https://github.com/CoderXu666" target="_blank">Github</a>
       </el-menu-item>
       <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
-      <el-menu-item index="3" class="header-left-menu-font">关于我</el-menu-item>
+      <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
     </el-menu>
     <!--   头像   -->
     <span @click="clickAvatar">
@@ -28,16 +28,14 @@
       </el-badge>
     </div>
 
-    <router-link :to="{path: '/chat'}">
-      <div class="icon-div">
-        <el-badge :value="chatCount">
-          <svg class="iconfont">
-            <use xlink:href="#icon-biaoqianA01_wode-55"></use>
-          </svg>
-          <div class="icon-font">聊天</div>
-        </el-badge>
-      </div>
-    </router-link>
+    <div class="icon-div" @click="clickChat()">
+      <el-badge :value="chatCount">
+        <svg class="iconfont">
+          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+        </svg>
+        <div class="icon-font">聊天</div>
+      </el-badge>
+    </div>
 
     <div class="icon-div">
       <svg class="iconfont">
@@ -230,6 +228,13 @@ export default {
      */
     clickLogo() {
       this.$router.push('/')
+    },
+
+    /**
+     * 跳转到聊天页面
+     */
+    clickChat() {
+      window.open('http://localhost:9528/#/chat', '_blank');
     },
 
     /**
