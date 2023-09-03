@@ -6,32 +6,130 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "16385550",
-      "name": "专区",
-      "font_class": "biaoqianA01_zhuanqu-53",
-      "unicode": "eaab",
-      "unicode_decimal": 60075
+      "icon_id": "33847252",
+      "name": "系统通知",
+      "font_class": "xitongtongzhi",
+      "unicode": "e74a",
+      "unicode_decimal": 59210
+    },
+    {
+      "icon_id": "8491384",
+      "name": "社区7",
+      "font_class": "shequ",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "953288",
+      "name": "附近(激活)",
+      "font_class": "fujin",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "12188359",
+      "name": "好友",
+      "font_class": "haoyou",
+      "unicode": "e7fe",
+      "unicode_decimal": 59390
+    },
+    {
+      "icon_id": "646697",
+      "name": "充值",
+      "font_class": "chongzhi1",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "26847628",
+      "name": "键盘",
+      "font_class": "jianpan",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "1283",
+      "name": "视频",
+      "font_class": "shipin",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "7587731",
+      "name": "切换",
+      "font_class": "qiehuan",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "19605563",
+      "name": "饮料",
+      "font_class": "party",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "1070",
+      "name": "礼物",
+      "font_class": "liwu",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1126",
+      "name": "文件夹",
+      "font_class": "wenjianjia",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "1172709",
+      "name": "发送",
+      "font_class": "fasong",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "6684308",
+      "name": "微信",
+      "font_class": "weixin",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "7008927",
+      "name": "emoji",
+      "font_class": "emoji",
+      "unicode": "e6f6",
+      "unicode_decimal": 59126
+    },
+    {
+      "icon_id": "8760187",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "17782707",
+      "name": "语音",
+      "font_class": "yuyin",
+      "unicode": "e888",
+      "unicode_decimal": 59528
     },
     {
       "icon_id": "16385553",
       "name": "我的",
-      "font_class": "biaoqianA01_wode-55",
+      "font_class": "wode",
       "unicode": "eaad",
       "unicode_decimal": 60077
     },
     {
       "icon_id": "16386591",
       "name": "消息",
-      "font_class": "biaoqiankuozhan_xiaoxi-152",
+      "font_class": "pinglun",
       "unicode": "eb10",
       "unicode_decimal": 60176
-    },
-    {
-      "icon_id": "16395354",
-      "name": "项目",
-      "font_class": "biaoqiankuozhan_xiangmu-292",
-      "unicode": "eb95",
-      "unicode_decimal": 60309
     }
   ]
 }

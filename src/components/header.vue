@@ -13,7 +13,6 @@
       </el-menu-item>
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
       <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
-      <el-menu-item index="2" class="header-left-menu-font">主题切换</el-menu-item>
     </el-menu>
     <!--   头像   -->
     <span @click="clickAvatar">
@@ -23,7 +22,7 @@
     <div class="icon-div">
       <el-badge :value="noticeCount">
         <svg class="iconfont">
-          <use xlink:href="#icon-biaoqiankuozhan_xiaoxi-152"></use>
+          <use xlink:href="#icon-xitongtongzhi"></use>
         </svg>
         <div class="icon-font">通知</div>
       </el-badge>
@@ -32,7 +31,7 @@
     <div class="icon-div" @click="clickChat()">
       <el-badge :value="chatCount">
         <svg class="iconfont">
-          <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+          <use xlink:href="#icon-wode"></use>
         </svg>
         <div class="icon-font">聊天</div>
       </el-badge>
@@ -40,16 +39,16 @@
 
     <div class="icon-div">
       <svg class="iconfont">
-        <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
+        <use xlink:href="#icon-chongzhi1"></use>
       </svg>
       <div class="icon-font">充值</div>
     </div>
 
     <div class="icon-div">
       <svg class="iconfont">
-        <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
+        <use xlink:href="#icon-qiehuan"></use>
       </svg>
-      <div class="icon-font">发布</div>
+      <div class="icon-font">切换</div>
     </div>
 
     <!-- 登录框 -->

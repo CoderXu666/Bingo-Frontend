@@ -6,16 +6,20 @@
       <el-row :gutter="14">
         <!--  左侧列 -->
         <el-col :span="1" style="margin-top: 26px;height: 600px;">
-          <div>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-          </div>
-          <div>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
-          </div>
+          <!--  头像 -->
+          <el-avatar style="margin-left: 20px;margin-bottom: 10px" shape="circle" :size="56"
+                     :src="this.loginUserInfo.avatarUrl"/>
+          <!--  其他按钮 -->
+          <el-avatar style="margin-left: 20px;margin-top: 10px" shape="circle" :size="45"
+                     :src="this.loginUserInfo.avatarUrl"/>
+          <el-avatar style="margin-left: 20px;margin-top: 10px" shape="circle" :size="45"
+                     :src="this.loginUserInfo.avatarUrl"/>
+          <el-avatar style="margin-left: 20px;margin-top: 10px" shape="circle" :size="45"
+                     :src="this.loginUserInfo.avatarUrl"/>
+          <el-avatar style="margin-left: 20px;margin-top: 10px" shape="circle" :size="45"
+                     :src="this.loginUserInfo.avatarUrl"/>
+          <el-avatar style="margin-left: 20px;margin-top: 10px" shape="circle" :size="45"
+                     :src="this.loginUserInfo.avatarUrl"/>
         </el-col>
 
         <!--  好友列表 -->
@@ -84,31 +88,31 @@
             <div id="chat-input-container">
               <!-- 语音消息 -->
               <svg style="width: 2em;height: 2em;margin-right: 1%;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+                <use xlink:href="#icon-yuyin"></use>
               </svg>
               <!-- 输入框 -->
               <span style="width: 70%">
                 <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatMsg" type="text"/>
               </span>
               <!-- emoji -->
-              <svg style="width: 2em;height: 2em;margin-left: 1%;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
+                <use xlink:href="#icon-emoji"></use>
               </svg>
-              <!-- 语音、视频 -->
-              <svg style="width: 2em;height: 2em;;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+              <!-- 礼物 -->
+              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
+                <use xlink:href="#icon-liwu"></use>
               </svg>
-              <!-- 礼物打赏 -->
-              <svg style="width: 2em;height: 2em;;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+              <!-- 视频 -->
+              <svg style="width: 1.9em;height: 1.9em;margin-left: 0.6%;cursor:pointer;">
+                <use xlink:href="#icon-shipin"></use>
               </svg>
               <!-- 文件 -->
-              <svg style="width: 2em;height: 2em;;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
+                <use xlink:href="#icon-wenjianjia"></use>
               </svg>
               <!-- 发送 -->
-              <svg style="width: 2em;height: 2em;;cursor:pointer;">
-                <use xlink:href="#icon-biaoqianA01_wode-55"></use>
+              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
+                <use xlink:href="#icon-fasong"></use>
               </svg>
             </div>
           </div>
