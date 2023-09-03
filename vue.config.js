@@ -14,7 +14,7 @@ const name = 'Bingo' // page title
 // port = 9528 npm run dev OR npm run dev --port = 9528
 
 // 前端项目端口号
-const port = 9528
+const port = 9527
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {

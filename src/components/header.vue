@@ -11,8 +11,9 @@
       <el-menu-item index="1" class="header-left-menu-font">
         <a href="https://github.com/CoderXu666" target="_blank">Github</a>
       </el-menu-item>
-      <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
       <el-menu-item index="3" class="header-left-menu-font">关于作者</el-menu-item>
+      <el-menu-item index="2" class="header-left-menu-font">加入我们</el-menu-item>
+      <el-menu-item index="2" class="header-left-menu-font">主题切换</el-menu-item>
     </el-menu>
     <!--   头像   -->
     <span @click="clickAvatar">
@@ -41,8 +42,9 @@
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqianA01_zhuanqu-53"></use>
       </svg>
-      <div class="icon-font">会员</div>
+      <div class="icon-font">充值</div>
     </div>
+
     <div class="icon-div">
       <svg class="iconfont">
         <use xlink:href="#icon-biaoqiankuozhan_xiangmu-292"></use>
@@ -234,7 +236,7 @@ export default {
      * 跳转到聊天页面
      */
     clickChat() {
-      window.open('http://localhost:9528/#/chat', '_blank');
+      window.open('http://localhost:9527/#/chat', '_blank');
     },
 
     /**
@@ -395,7 +397,6 @@ export default {
   width: 150px;
   cursor: pointer;
   height: 68px;
-  margin-left: -1.4%;
 }
 
 .header-left-menu {

@@ -177,7 +177,7 @@ export default {
 
       videoList: [
         {
-          videoUrl: require('@/assets/video/climb.mp4')
+          videoUrl: require('@/assets/video/background.mp4')
         },
         {
           videoUrl: require('@/assets/video/background.mp4')

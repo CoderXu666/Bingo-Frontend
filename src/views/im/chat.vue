@@ -1,11 +1,21 @@
 <template>
   <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-    <div
-      style="background-color: #292A2D;width: 80%;margin: auto;border-radius: 20px">
+    <video src="@/assets/video/background.mp4" autoplay muted loop
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; object-fit: cover;"/>
+    <div style="background-color: #292A2D;width: 80%;margin: auto;border-radius: 20px;opacity: 0.86">
       <el-row :gutter="14">
         <!--  左侧列 -->
         <el-col :span="1" style="margin-top: 26px;height: 600px;">
-          <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+          <div>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+          </div>
+          <div>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+            <el-avatar style="margin-left: 20px" shape="circle" :size="55" :src="this.loginUserInfo.avatarUrl"/>
+          </div>
         </el-col>
 
         <!--  好友列表 -->
@@ -78,7 +88,7 @@
               </svg>
               <!-- 输入框 -->
               <span style="width: 70%">
-                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatMsg"></el-input>
+                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatMsg" type="text"/>
               </span>
               <!-- emoji -->
               <svg style="width: 2em;height: 2em;margin-left: 1%;cursor:pointer;">
@@ -112,7 +122,7 @@
           </div>
           <!--  Emoji  -->
           <Picker
-            style="width: 200px;height: 216px;background-color: #323335;margin-top: 10px;"
+            style="width: 100%;height: 216px;background-color: #323335;margin-top: 10px;"
             :include="['people']"
             :showSearch="false"
             :showPreview="false"
@@ -370,7 +380,7 @@ export default {
 
 .friend-item {
   color: antiquewhite;
-  height: 58px;
+  height: 55px;
   cursor: pointer;
   margin-top: 2px;
 }
@@ -384,7 +394,6 @@ export default {
   border-radius: 10px;
   overflow: auto;
   padding: 0.6%;
-  background-color: ;
   max-height: 40px;
   display: flex;
   align-items: center;
@@ -395,6 +404,10 @@ export default {
   font-size: 14px;
   background-color: #323335;
   color: white;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 40px;
+  resize: vertical;
 }
 
 #chat-content-show {
