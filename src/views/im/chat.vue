@@ -265,7 +265,7 @@ export default {
     initWebSocket() {
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
-        // 当前用户Channel与Netty服务器建立连接
+        // 创建WebSocket对象
         const socket = new WebSocket('ws://localhost:10086/ws')
 
         // 建立WebSocket连接
@@ -273,13 +273,12 @@ export default {
           socket.send(this.userId)
         }
 
-        // 监听接收服务端消息
-        // TODO 这里要处理一大堆逻辑，发送消息发给谁
+        // 监听WebSocket Server发送消息
         socket.onmessage = (msg) => {
           document.getElementById('content').append(msg.data)
         }
 
-        // 发生异常
+        // WebSocket连接异常
         socket.onerror = () => {
           this.$message.error('连接聊天服务器出现异常信息')
         }
@@ -310,6 +309,7 @@ export default {
 
     /**
      * 发送消息给指定用户
+     * 注意：这里使用调用接口方式，而不是直接通过Channel发送信息给 WebSocket Server
      */
     sendMessage() {
       // 登陆用户主动发送消息
