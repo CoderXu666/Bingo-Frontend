@@ -29,15 +29,15 @@
                style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 10px"
                @mouseover="hoverEffect($event, true)"
                @mouseout="hoverEffect($event, false)"
-               @click="clickFriend(item.userId, item.avatarUrl, item.nickName)"
+               @click="clickFriend(item.uid, item.avatarUrl, item.nickName)"
           >
             <el-avatar style="float: left;" shape="square" :size="55" :src="item.avatarUrl"/>
             <div style="float: left;margin-left: 2%;margin-top:3.5%;font-size: 15px">
               {{ item.nickName }}
             </div>
             <span style="float: right;margin-top: 3.5%;margin-right: 3.5%;color: #999999;font-size: 13px">
-            11:02
-          </span>
+              11:02
+            </span>
             <div style="padding-top: 35px;margin-left: 19%;font-size: 13px;color: #999999">
               {{ item.nickName }}：1111
             </div>
@@ -46,23 +46,23 @@
 
         <!--  聊天框  -->
         <el-col :span="13" style="background-color: #323335;border-radius: 10px;margin-top: 30px">
-          <div v-if="curChatInfo.userId != ''">
+          <div v-if="curChatInfo.uid != ''">
             <!--  上边栏  -->
             <div style="height: 60px; display: flex; align-items: center;padding-left: 1%;">
               <el-avatar :size="46" :src="curChatInfo.avatarUrl" shape="square"
                          style="margin-right: 1%;cursor:pointer;"/>
-              <div style="font-size: 17px;color: antiquewhite">{{ curChatInfo.userName }}</div>
+              <div style="font-size: 17px;color: antiquewhite">{{ curChatInfo.nickName }}</div>
             </div>
 
             <!--  聊天内容展示  -->
             <div id="chat-content-show" style="height: 460px;border-radius: 10px;">
-              <div v-for="item in chatContentList[curChatInfo.userId]">
+              <div v-for="item in chatContentList[curChatInfo.uid]">
                 <!--  接收信息  -->
-                <div v-if="item.userId !== loginUserInfo.userId"
+                <div v-if="item.uid !== loginUserInfo.id"
                      style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
-                <span style="margin-right: 6px">
-                  <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
-                </span>
+                  <span style="margin-right: 6px">
+                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
+                  </span>
                   <div style="background-color: #34A8FF;border-radius: 10px;">
                     <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                       {{ item.content }}
@@ -70,7 +70,7 @@
                   </div>
                 </div>
                 <!--  主动发送  -->
-                <div v-if="item.userId === loginUserInfo.userId"
+                <div v-if="item.uid === loginUserInfo.id"
                      style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
                   <div
                     style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
@@ -79,8 +79,8 @@
                     </div>
                   </div>
                   <span style="margin-left: 6px">
-                  <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
-                </span>
+                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                  </span>
                 </div>
               </div>
             </div>
@@ -119,7 +119,7 @@
         </el-col>
 
         <!--  用户信息、功能框架 -->
-        <el-col :span="4" style="margin-top: 30px" v-if="curChatInfo.userId != ''">
+        <el-col :span="4" style="margin-top: 30px" v-if="curChatInfo.uid != ''">
           <!--  用户信息、群聊列表  -->
           <div style="height: 340px;background-color: #323335;border-radius: 10px">
             用户信息
@@ -142,6 +142,7 @@
 
 <script>
 import chatApi from '@/api/chat'
+import headerApi from '@/api/header'
 import {Picker} from 'emoji-mart-vue'
 import 'emoji-mart-vue/css/emoji-mart.css'
 
@@ -152,33 +153,79 @@ export default {
 
   data() {
     return {
-      // 登录用户信息
-      loginUserInfo: {
-        userId: '3',
-        avatarUrl: require('@/assets/avatar/avatar.jpg'),
-        nickName: '徐志斌'
-      },
+      // 登录用户
+      loginUserInfo: null,
 
-      // 当前选中聊天用户
+      // 选中用户
       curChatInfo: {
-        userId: '',
-        nickName: '',
-        avatarUrl: ''
+        uid: '',
+        avatarUrl: '',
+        nickName: ''
       },
 
       // 聊天好友列表
       userList: [
         {
-          userId: '1',
+          uid: 1,
           avatarUrl: require('@/assets/avatar/zhangruonan.png'),
           nickName: '章若楠'
         },
         {
-          userId: '3',
+          uid: 3,
           avatarUrl: require('@/assets/avatar/avatar.jpg'),
           nickName: '小徐'
         },
       ],
+
+      // 聊天信息
+      chatContentList: {
+        '1': [
+          {
+            uid: '1',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
+            content: '哈哈哈哈哈，我真哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
+          },
+          {
+            uid: '1',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
+            content: '哈哈哈哈哈'
+          },
+          {
+            uid: '3',
+            avatarUrl: require('@/assets/avatar/avatar.jpg'),
+            nickName: '徐志斌',
+            content: '我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的'
+          }
+        ],
+        '3': [
+          {
+            uid: '1',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
+            content: '哈哈哈哈哈，我真的服了哈222222222了'
+          },
+          {
+            uid: '1',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
+            content: '哈哈哈哈哈22222222222'
+          },
+          {
+            uid: '1',
+            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
+            nickName: '章若楠',
+            content: '哈哈哈哈哈22222222222'
+          },
+          {
+            uid: '3',
+            avatarUrl: require('@/assets/avatar/avatar.jpg'),
+            nickName: '徐志斌',
+            content: '哈哈哈哈哈22222222222'
+          }
+        ]
+      },
 
       // vue-smart-emoji国际化
       i18n: {
@@ -188,57 +235,7 @@ export default {
       },
 
       // 聊天框消息
-      chatMsg: '',
-
-      // 聊天信息
-      chatContentList: {
-        '1': [
-          {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈，我真哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
-          },
-          {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈'
-          },
-          {
-            userId: '3',
-            avatarUrl: require('@/assets/avatar/avatar.jpg'),
-            nickName: '徐志斌',
-            content: '我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的'
-          }
-        ],
-        '3': [
-          {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈，我真的服了哈222222222了'
-          },
-          {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈22222222222'
-          },
-          {
-            userId: '1',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈22222222222'
-          },
-          {
-            userId: '3',
-            avatarUrl: require('@/assets/avatar/avatar.jpg'),
-            nickName: '徐志斌',
-            content: '哈哈哈哈哈22222222222'
-          }
-        ]
-      }
+      chatMsg: ''
     }
   },
 
@@ -249,6 +246,9 @@ export default {
       this.$router.push('/')
       this.$message.warning('您还未登录呢，讨厌~')
     }
+
+    // 查询登录用户信息
+    this.getLoginUserInfo(token)
 
     // 查询好友列表、聊天记录
     this.getChatList()
@@ -266,11 +266,11 @@ export default {
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
         // 创建WebSocket对象
-        const socket = new WebSocket('ws://localhost:10086/ws')
+        const socket = new WebSocket('ws://localhost:10086/')
 
         // 建立WebSocket连接
         socket.onopen = () => {
-          socket.send(this.userId)
+          socket.send(this.loginUserInfo.id)
         }
 
         // 监听WebSocket Server发送消息
@@ -288,12 +288,26 @@ export default {
     },
 
     /**
+     * 解析Token，查询用户信息
+     */
+    getLoginUserInfo(token) {
+      headerApi.resolveToken(token)
+        .then(res => {
+          this.loginUserInfo = res.data.data
+          console.log(this.loginUserInfo)
+        })
+        .catch(e => {
+
+        })
+    },
+
+    /**
      * 查询好友列表信息
      */
     getChatList() {
       chatApi.chatList()
         .then(res => {
-          console.log(res)
+          console.log(res.data.data)
         })
         .catch(e => {
           console.log(e)
@@ -309,17 +323,15 @@ export default {
 
     /**
      * 发送消息给指定用户
-     * 注意：这里使用调用接口方式，而不是直接通过Channel发送信息给 WebSocket Server
      */
     sendMessage() {
       // 登陆用户主动发送消息
-      const loginUserInfo = this.loginUserInfo
-      this.insertChatMessage(loginUserInfo.userId, loginUserInfo.avatarUrl, loginUserInfo.nickName, this.chatContent)
+      this.sendChatMessage(this.loginUserInfo.id, this.loginUserInfo.avatarUrl, this.loginUserInfo.nickName, this.chatMsg)
 
       // 封装消息信息
       const message = {
-        msg: this.chatContent,
-        userId: this.userId
+        // msg: this.chatMsg,
+        // uid: this.loginUserInfo.id
       }
 
       // 聊天框滚动到最底部
@@ -343,10 +355,10 @@ export default {
     /**
      * 点击好友
      */
-    clickFriend(userId, avatarUrl, nickName) {
-      this.curChatInfo.userId = userId
+    clickFriend(uid, avatarUrl, nickName) {
+      this.curChatInfo.uid = uid
       this.curChatInfo.avatarUrl = avatarUrl
-      this.curChatInfo.userName = nickName
+      this.curChatInfo.nickName = nickName
     },
 
     /**
@@ -363,14 +375,15 @@ export default {
     /**
      * 插入聊天信息
      */
-    insertChatMessage(userId, avatarUrl, nickName, content) {
+    sendChatMessage(uid, avatarUrl, nickName, content) {
       const newMessage = {
-        userId: userId,
+        uid: uid,
         avatarUrl: avatarUrl,
         nickName: nickName,
         content: content
       }
-      this.chatContentList[userId].push(newMessage)
+      this.chatContentList[uid].push(newMessage)
+      // TODO 聊天列表置顶部
     }
   }
 }
