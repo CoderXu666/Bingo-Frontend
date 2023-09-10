@@ -64,7 +64,7 @@
                   </div>
                 </div>
                 <!--  主动发送  -->
-                <div v-if="item.uid == loginUserInfo.uid"
+                <div v-if="item.uid === loginUserInfo.uid"
                      style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
                   <div
                     style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
@@ -86,7 +86,7 @@
               </svg>
               <!-- 输入框 -->
               <span style="width: 70%">
-                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatRecord.content"
+                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="content"
                           type="text"/>
               </span>
               <!-- emoji -->
@@ -170,12 +170,17 @@ export default {
         }
       },
 
-      // 聊天消息
-      chatRecord: {
+      // 输入框消息内容、类型
+      content: '',
+      type: '0',
+
+      // 接收聊天消息体
+      receiveRecord: {
         uid: '',
         goalId: '',
-        content: '',
-        type: ''
+        chatContent: '',
+        type: '',
+        createTime: ''
       }
     }
   },
@@ -204,6 +209,9 @@ export default {
      * 初始化WebSocket通信
      */
     initWebSocket() {
+      // 登录用户id
+      const uid = this.getUrlId()
+
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
         // 创建WebSocket对象
@@ -211,12 +219,24 @@ export default {
 
         // 建立WebSocket连接
         socket.onopen = () => {
-          socket.send(this.loginUserInfo.uid)
+          socket.send(uid)
         }
 
         // 监听WebSocket Server发送消息
-        socket.onmessage = (msg) => {
-          document.getElementById('content').append(msg.data)
+        socket.onmessage = res => {
+          // JSON字符串转成JS对象（主键id会精度丢失）
+          const content = JSON.parse(res.data)
+
+          console.log(content.uid)
+
+          const chatRecord = {
+            uid: content.uid,
+            goalId: content.goalId,
+            type: content.type,
+            chatContent: content.chatContent
+          }
+
+          this.chatRecordList[chatRecord.goalId].push(chatRecord)
         }
 
         // WebSocket连接异常
@@ -256,34 +276,39 @@ export default {
     },
 
     /**
+     * 获取url的?后第一个参数id
+     */
+    getUrlId() {
+      const url = window.location.href
+      const p = url.split('?')[1]
+      const params = new URLSearchParams(p)
+      return params.get('id')
+    },
+
+    /**
      * 选中emoji到输入框
      */
     addEmoji(e) {
-      this.chatRecord.content += e.native
+      this.content += e.native
     },
 
     /**
      * 发送消息给指定用户
      */
     sendMessage() {
-      // 登陆用户主动发送消息
-      this.packageChatRecord(this.loginUserInfo.uid, this.curChatInfo.uid)
-
-      // 聊天框滚动到最底部
-      const chatContentShow = document.getElementById('chat-content-show')
-      setTimeout(() => {
-        chatContentShow.scrollTop = chatContentShow.scrollHeight
-      }, 0)
-
-      // 清空输入框，聚焦输入框
-      const chatInput = document.getElementById('chat-input-id')
-      chatInput.innerText = null
-      chatInput.focus()
+      // 登陆用户主动发送消息（这里手动初始化，否则会用对象引用，一个很烦人的Bug）
+      const chatRecord = {
+        uid: this.loginUserInfo.uid,
+        goalId: this.curChatInfo.uid,
+        type: this.type,
+        chatContent: this.content
+      }
 
       // 调用服务端接口，发送消息
-      chatApi.sendChatRecord(this.chatRecord)
+      chatApi.sendChatRecord(chatRecord)
         .then(res => {
-          console.log(res)
+          this.chatRecordList[this.curChatInfo.uid].push(chatRecord)
+          this.content = null
         })
     },
 
@@ -305,15 +330,6 @@ export default {
       } else {
         event.currentTarget.classList.remove('hover')
       }
-    },
-
-    /**
-     * 主动发送聊天信息
-     */
-    packageChatRecord(uid, goalId) {
-      this.chatRecord.uid = uid
-      this.chatRecord.goalId = goalId
-      // this.chatRecordList[uid].push(this.chatRecord)
     }
   }
 }

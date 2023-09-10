@@ -191,7 +191,7 @@ export default {
 
       // 用户信息（完成登录）
       userInfo: {
-        id: '',
+        uid: '',
         avatarUrl: require('@/assets/avatar/default.png'),
         nickName: '',
         accountId: '',
@@ -235,7 +235,7 @@ export default {
      * 跳转到聊天页面
      */
     clickChat() {
-      window.open('http://localhost:9527/#/chat', '_blank');
+      window.open('http://localhost:9527/#/chat?id=' + this.userInfo.uid, '_blank');
     },
 
     /**
@@ -243,7 +243,7 @@ export default {
      */
     clickAvatar() {
       // 如果没有登录，弹出登录框
-      if (!this.userInfo.id) {
+      if (!this.userInfo.uid) {
         this.loginDialog = true
       }
       // 如果登录过了，鼠标点击给个下拉框
