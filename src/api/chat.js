@@ -9,8 +9,19 @@ export default {
    */
   chatList() {
     return axios({
-      url: `/im/conversation/list`,
+      url: `/im/show/list`,
       method: 'get'
+    })
+  },
+
+  /**
+   * 发送单聊消息
+   */
+  sendChatRecord(data) {
+    return axios({
+      url: `/im/chat/send_one`,
+      method: 'post',
+      data: data
     })
   },
 

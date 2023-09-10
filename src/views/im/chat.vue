@@ -19,7 +19,7 @@
         <!--  好友列表 -->
         <el-col :span="5" style="margin-top: 26px;margin-left: 3%">
           <div class="friend-item"
-               v-for="item in userList"
+               v-for="item in userShowList"
                style="background-color: #323335;margin-top: 5px;margin-bottom: 5px;border-radius: 10px"
                @mouseover="hoverEffect($event, true)"
                @mouseout="hoverEffect($event, false)"
@@ -50,30 +50,30 @@
 
             <!--  聊天内容展示  -->
             <div id="chat-content-show" style="height: 460px;border-radius: 10px;">
-              <div v-for="item in chatContentList[curChatInfo.uid]">
+              <div v-for="item in chatRecordList[curChatInfo.uid]">
                 <!--  接收信息  -->
-                <div v-if="item.uid !== loginUserInfo.id"
+                <div v-if="item.uid !== loginUserInfo.uid"
                      style="width: 90%;display: flex;align-items: center;margin-left: 1%;margin-top: 1%;">
                   <span style="margin-right: 6px">
-                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer"/>
+                    <el-avatar :src=curChatInfo.avatarUrl shape="square" style="cursor:pointer"/>
                   </span>
                   <div style="background-color: #34A8FF;border-radius: 10px;">
                     <div style="padding: 15px;font-size: 14px;word-break: break-all;">
-                      {{ item.content }}
+                      {{ item.chatContent }}
                     </div>
                   </div>
                 </div>
                 <!--  主动发送  -->
-                <div v-if="item.uid == loginUserInfo.id"
+                <div v-if="item.uid == loginUserInfo.uid"
                      style="float: right;width: 80%;margin-right: 1%;margin-top:1%;display: flex; align-items: center;justify-content: flex-end">
                   <div
                     style="margin-left: 1.6%;background-color: mediumspringgreen;border-radius: 10px;display: inline-block;">
                     <div style="padding: 15px;font-size: 14px;word-break: break-all">
-                      {{ item.content }}
+                      {{ item.chatContent }}
                     </div>
                   </div>
                   <span style="margin-left: 6px">
-                    <el-avatar :src=item.avatarUrl shape="square" style="cursor:pointer;"/>
+                    <el-avatar :src=loginUserInfo.avatarUrl shape="square" style="cursor:pointer;"/>
                   </span>
                 </div>
               </div>
@@ -86,7 +86,8 @@
               </svg>
               <!-- 输入框 -->
               <span style="width: 70%">
-                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatMsg" type="text"/>
+                <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="chatRecord.content"
+                          type="text"/>
               </span>
               <!-- emoji -->
               <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
@@ -105,7 +106,7 @@
                 <use xlink:href="#icon-wenjianjia"></use>
               </svg>
               <!-- 发送 -->
-              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
+              <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;" @click="this.sendMessage">
                 <use xlink:href="#icon-fasong"></use>
               </svg>
             </div>
@@ -158,47 +159,24 @@ export default {
       },
 
       // 聊天会话列表
-      userList: [
-        {
-          uid: '1695363601690537986',
-          avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-          nickName: '章若楠'
-        }
-      ],
-
-      // 聊天信息
-      chatContentList: {
-        '1695363601690537986': [
-          {
-            uid: '1695363601690537986',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈，我真哈哈哈哈哈，我真的服了哈哈哈哈哈哈'
-          },
-          {
-            uid: '1695363601690537986',
-            avatarUrl: require('@/assets/avatar/zhangruonan.png'),
-            nickName: '章若楠',
-            content: '哈哈哈哈哈'
-          },
-          {
-            uid: '1695363601690537985',
-            avatarUrl: require('@/assets/avatar/avatar.jpg'),
-            nickName: '徐志斌',
-            content: '我真服了！哈哈哈哈哈哈哈哈哈哈哈哈的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的我真服了！哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈，我真的'
-          }
-        ]
-      },
+      userShowList: null,
+      // 好友聊天记录信息
+      chatRecordList: null,
 
       // vue-smart-emoji国际化
       i18n: {
         categories: {
-          people: '',
+          people: ''
         }
       },
 
-      // 聊天框消息
-      chatMsg: ''
+      // 聊天消息
+      chatRecord: {
+        uid: '',
+        goalId: '',
+        content: '',
+        type: ''
+      }
     }
   },
 
@@ -233,7 +211,7 @@ export default {
 
         // 建立WebSocket连接
         socket.onopen = () => {
-          socket.send(this.loginUserInfo.id)
+          socket.send(this.loginUserInfo.uid)
         }
 
         // 监听WebSocket Server发送消息
@@ -257,10 +235,9 @@ export default {
       headerApi.resolveToken(token)
         .then(res => {
           this.loginUserInfo = res.data.data
-          console.log(this.loginUserInfo)
         })
         .catch(e => {
-
+          this.$message.error('用户身份信息异常，请重新登录~')
         })
     },
 
@@ -270,7 +247,8 @@ export default {
     getChatList() {
       chatApi.chatList()
         .then(res => {
-          console.log(res.data.data)
+          this.userShowList = res.data.data['chatShow']
+          this.chatRecordList = res.data.data['chatRecord']
         })
         .catch(e => {
           console.log(e)
@@ -281,7 +259,7 @@ export default {
      * 选中emoji到输入框
      */
     addEmoji(e) {
-      this.chatMsg += e.native
+      this.chatRecord.content += e.native
     },
 
     /**
@@ -289,13 +267,7 @@ export default {
      */
     sendMessage() {
       // 登陆用户主动发送消息
-      this.sendChatMessage()
-
-      // 封装消息信息
-      const message = {
-        // msg: this.chatMsg,
-        // uid: this.loginUserInfo.id
-      }
+      this.packageChatRecord(this.loginUserInfo.uid, this.curChatInfo.uid)
 
       // 聊天框滚动到最底部
       const chatContentShow = document.getElementById('chat-content-show')
@@ -309,10 +281,10 @@ export default {
       chatInput.focus()
 
       // 调用服务端接口，发送消息
-      // chatApi.sendMessage(message)
-      //   .then(res => {
-      //     this.chatContent = null
-      //   })
+      chatApi.sendChatRecord(this.chatRecord)
+        .then(res => {
+          console.log(res)
+        })
     },
 
     /**
@@ -336,18 +308,12 @@ export default {
     },
 
     /**
-     * 插入聊天信息
+     * 主动发送聊天信息
      */
-    sendChatMessage() {
-      const uid = this.loginUserInfo.id
-      const newMessage = {
-        uid: uid,
-        avatarUrl: this.loginUserInfo.avatarUrl,
-        nickName: this.loginUserInfo.nickName,
-        content: this.chatMsg
-      }
-      this.chatContentList[uid].push(newMessage)
-      // TODO 聊天列表置顶部
+    packageChatRecord(uid, goalId) {
+      this.chatRecord.uid = uid
+      this.chatRecord.goalId = goalId
+      // this.chatRecordList[uid].push(this.chatRecord)
     }
   }
 }
