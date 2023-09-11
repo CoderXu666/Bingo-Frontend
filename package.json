@@ -20,6 +20,7 @@
     "element-ui": "2.13.2",
     "emoji-mart-vue": "^2.6.6",
     "js-cookie": "2.2.0",
+    "json-bigint": "^1.0.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",

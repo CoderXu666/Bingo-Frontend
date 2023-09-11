@@ -209,9 +209,6 @@ export default {
      * 初始化WebSocket通信
      */
     initWebSocket() {
-      // 登录用户id
-      const uid = this.getUrlId()
-
       // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
         // 创建WebSocket对象
@@ -219,15 +216,14 @@ export default {
 
         // 建立WebSocket连接
         socket.onopen = () => {
-          socket.send(uid)
+          socket.send(this.getUrlId())
         }
 
         // 监听WebSocket Server发送消息
         socket.onmessage = res => {
-          // JSON字符串转成JS对象（主键id会精度丢失）
-          const content = JSON.parse(res.data)
-
-          console.log(content.uid)
+          // json-bigint第三方库
+          const jsonBigInt = require('json-bigint')
+          const content = new jsonBigInt({storeAsString: true}).parse(res.data)
 
           const chatRecord = {
             uid: content.uid,
@@ -236,7 +232,7 @@ export default {
             chatContent: content.chatContent
           }
 
-          this.chatRecordList[chatRecord.goalId].push(chatRecord)
+          this.chatRecordList[chatRecord.uid].push(chatRecord)
         }
 
         // WebSocket连接异常
