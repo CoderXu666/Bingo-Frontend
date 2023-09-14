@@ -298,7 +298,7 @@ export default {
           this.userInfo = res.data.data
         })
         .catch(e => {
-          if (e.data.code === 501) {
+          if (e.data.code === 50001) {
             this.logout()
             this.$message.warning('用户登录身份已失效，请重新登录')
           } else {
