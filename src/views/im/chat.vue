@@ -57,11 +57,16 @@
                   <span style="margin-right: 6px">
                     <el-avatar :src=curChatInfo.avatarUrl shape="square" style="cursor:pointer"/>
                   </span>
+                  <!--  文字消息  -->
                   <div style="background-color: #34A8FF;border-radius: 10px;">
                     <div style="padding: 15px;font-size: 14px;word-break: break-all;">
                       {{ item.chatContent }}
                     </div>
                   </div>
+                  <!--  图片消息  -->
+                  <!--  语音消息  -->
+                  <!--  文件消息  -->
+                  <!--  礼物消息  -->
                 </div>
                 <!--  主动发送  -->
                 <div v-if="item.uid === loginUserInfo.uid"
@@ -209,22 +214,19 @@ export default {
      * 初始化WebSocket通信
      */
     initWebSocket() {
-      // 判断当前浏览器是否支持WebSocket(老版本浏览器不支持)
       if (window.WebSocket) {
-        // 创建WebSocket对象
         const socket = new WebSocket('ws://localhost:10086/')
 
-        // 建立WebSocket连接
+        // 1.建立WebSocket连接
         socket.onopen = () => {
           socket.send(this.getUrlId())
         }
 
-        // 监听WebSocket Server发送消息
+        // 2.监听WebSocket Server发送消息
         socket.onmessage = res => {
           // json-bigint第三方库
           const jsonBigInt = require('json-bigint')
           const content = new jsonBigInt({storeAsString: true}).parse(res.data)
-
           const chatRecord = {
             uid: content.uid,
             goalId: content.goalId,
@@ -232,10 +234,14 @@ export default {
             chatContent: content.chatContent
           }
 
+          // 页面上插入元素
           this.chatRecordList[chatRecord.uid].push(chatRecord)
+
+          // 聊天框滚动到最底部
+          this.rollBottom()
         }
 
-        // WebSocket连接异常
+        // 3.WebSocket连接异常
         socket.onerror = () => {
           this.$message.error('连接聊天服务器出现异常信息')
         }
@@ -289,6 +295,16 @@ export default {
     },
 
     /**
+     * 聊天页面滚动到底部
+     */
+    rollBottom() {
+      const chatContentShow = document.getElementById('chat-content-show')
+      setTimeout(() => {
+        chatContentShow.scrollTop = chatContentShow.scrollHeight
+      }, 0)
+    },
+
+    /**
      * 发送消息给指定用户
      */
     sendMessage() {
@@ -305,6 +321,7 @@ export default {
         .then(res => {
           this.chatRecordList[this.curChatInfo.uid].push(chatRecord)
           this.content = null
+          this.rollBottom()
         })
     },
 

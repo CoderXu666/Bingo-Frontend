@@ -1,5 +1,5 @@
 {
-  "name": "Bingo-Frontend",
+  "name": "Bingo",
   "version": "4.4.0",
   "description": "Bingo社交开源项目",
   "scripts": {
@@ -15,7 +15,6 @@
   "dependencies": {
     "@icon-park/vue": "^1.4.2",
     "axios": "^0.18.1",
-    "big-integer": "^1.6.51",
     "core-js": "3.6.5",
     "element-ui": "2.13.2",
     "emoji-mart-vue": "^2.6.6",
