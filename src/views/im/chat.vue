@@ -90,9 +90,12 @@
                 <use xlink:href="#icon-yuyin"></use>
               </svg>
               <!-- 输入框 -->
-              <span style="width: 70%">
+              <span v-if="inputShow === 1" style="width: 70%">
                 <el-input id="chat-input-id" placeholder="请开始你的表演......" v-model="content"
                           type="text"/>
+              </span>
+              <span v-if="inputShow === 2" style="width: 70%">
+                <el-input id="chat-input-id" placeholder="请按住说话" v-model="content"/>
               </span>
               <!-- emoji -->
               <svg style="width: 1.8em;height: 1.8em;margin-left: 0.6%;cursor:pointer;">
@@ -142,18 +145,8 @@
     <div>
       <el-button type="button" @click="startRecordAudio">开始录音</el-button>
       <h3 style="color: white">录音时长：{{ recorder.duration.toFixed(4) }}</h3>
-      <el-button type="button" @click="stopRecordAudio">停止录音</el-button>
-      <el-button type="button" @click="getWAVRecordAudioData">获取WAV录音数据</el-button>
-      <el-button type="button" @click="downloadWAVRecordAudioData">下载WAV录音文件</el-button>
       <el-button type="button" @click="uploadWAVData">上传WAV录音数据</el-button>
       <br/>
-    </div>
-
-
-    <div>
-      <audio controls>
-        <source style="width: 5px" src="http://101.42.13.186:9000/avatar-bucket/badao%20(1).wav" type="audio/mpeg">
-      </audio>
     </div>
   </div>
 </template>
@@ -207,6 +200,8 @@ export default {
         createTime: ''
       },
 
+      inputShow: 1,
+
       // 语音消息
       recorder: new Recorder({
         sampleBits: 16, // 采样位数，支持 8 或 16，默认是16
@@ -235,7 +230,6 @@ export default {
   mounted() {
     // 连接WebSocket服务器
     this.initWebSocket()
-    // 获取麦克风权限
   },
 
   methods: {
@@ -245,50 +239,31 @@ export default {
     startRecordAudio() {
       Recorder.getPermission().then(
         () => {
-          console.log("开始录音");
-          this.recorder.start(); // 开始录音
+          this.recorder.start()
         },
-        (error) => {
+        error => {
           this.$message({
-            message: "请先允许该网页使用麦克风",
-            type: "info",
-          });
-          console.log(`${error.name} : ${error.message}`);
+            message: '请先开启网页麦克风使用权限',
+            type: 'warning'
+          })
+          console.log(`${error.name} : ${error.message}`)
         }
-      );
+      )
     },
+
     /**
-     * 停止录音
+     * 上传wav录音数据
      */
-    stopRecordAudio() {
-      this.recorder.stop();
-    },
-
-    // 获取WAV录音数据
-    getWAVRecordAudioData() {
-      var wavBlob = this.recorder.getWAVBlob()
-      console.log(wavBlob);
-    },
-
-    // 下载WAV录音文件
-    downloadWAVRecordAudioData() {
-      this.recorder.downloadWAV("badao")
-    },
-
-    // 上传wav录音数据
     uploadWAVData() {
       const wavBlob = this.recorder.getWAVBlob()
-      // 创建一个formData对象
       const formData = new FormData()
-      // 此处获取到blob对象后需要设置fileName满足当前项目上传需求，其它项目可直接传把blob作为file塞入formData
       const newBlob = new Blob([wavBlob], {type: 'audio/wav'})
-      // 获取当时时间戳作为文件名
-      const fileOfBlob = new File([newBlob], new Date().getTime() + '.wav')
-      formData.append('file', fileOfBlob)
+      const fileBlob = new File([newBlob], new Date().getTime() + '.wav')
+      formData.append('file', fileBlob)
       // 调用上传文件功能
-      uploadWavData(formData).then((response) => {
-        console.log(response);
-      });
+      // uploadWavData(formData).then((response) => {
+      //   console.log(response);
+      // });
     },
 
     /**

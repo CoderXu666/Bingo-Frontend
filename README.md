@@ -56,11 +56,11 @@
 - MyBatis-Plus
 - SpringBoot
 - SpringCloud
-    - Nacos
-    - Gateway
-    - Feign
-    - Sentinel
-    - Seata
+  - Nacos
+  - Gateway
+  - Feign
+  - Sentinel
+  - Seata
 - Lombok
 - Kafka
 - Netty + WebSocket + WebRTC
@@ -72,9 +72,9 @@
 - ip2region
 - HuTool
 - 设计模式
-    - 适配器模式
-    - 策略模式
-    - 工厂模式
+  - 适配器模式
+  - 策略模式
+  - 工厂模式
 
 #### 前端
 
